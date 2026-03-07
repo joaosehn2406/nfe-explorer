@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NfeExplorer-Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+665b92cc8f31e1de70b22c3902eefab3b6b5584e")]
 [assembly: System.Reflection.AssemblyProductAttribute("NfeExplorer-Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NfeExplorer-Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
