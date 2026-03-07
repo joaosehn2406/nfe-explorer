@@ -1,10 +1,18 @@
 ﻿namespace NfeExplorer_Api.Models;
 
-public class Emitente : Empresa
+public class Emitente
 {
-    public required string CNPJ { get; set; }
+    public Guid Id { get; set; }
+    public required string RazaoSocial { get; set; }
     public string? NomeFantasia { get; set; }
+    public required string CNPJ { get; set; }
     public string? InscricaoEstadual { get; set; }
+    public required string Logradouro { get; set; }
+    public required string Numero { get; set; }
+    public required string Bairro { get; set; }
+    public required string Municipio { get; set; }
+    public required string UF { get; set; }
+    public required string CEP { get; set; }
 
-    public ICollection<NotaFiscal> NotasFicais { get; set; } = new List<NotaFiscal>();
+    public ICollection<NotaFiscal> NotasFiscais { get; set; } = new List<NotaFiscal>();
 }
