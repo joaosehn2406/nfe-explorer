@@ -1,4 +1,6 @@
-﻿namespace NfeExplorer_Api.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace NfeExplorer_Api.Models;
 
 public class NotaFiscal
 {
@@ -12,4 +14,11 @@ public class NotaFiscal
     public required Guid IdDestinatario { get; set; }
     public required Guid IdTipoNota { get; set; }
     public Guid? IdTransportadora { get; set; }
+    
+    [ForeignKey("IdEmitente")]
+    public required Emitente Emitente { get; set; }
+    
+    [ForeignKey("IdDestinatario")]
+    public required Destinatario Destinatario { get; set; }
+    
 }
