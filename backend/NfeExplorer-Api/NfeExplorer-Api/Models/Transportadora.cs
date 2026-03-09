@@ -1,4 +1,6 @@
-﻿namespace NfeExplorer_Api.Models;
+﻿using NfeExplorer_Api.Models.Enums;
+
+namespace NfeExplorer_Api.Models;
 
 public class Transportadora
 {

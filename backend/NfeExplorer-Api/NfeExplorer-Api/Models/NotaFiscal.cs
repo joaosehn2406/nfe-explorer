@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using NfeExplorer_Api.Models.Enums;
 
 namespace NfeExplorer_Api.Models;
 
@@ -13,6 +14,8 @@ public class NotaFiscal
     public FormaPagamento FormaPagamento { get; set; }
     public required string NumeroNota { get; set; }   
     public required string Serie { get; set; }        
+    public TipoNota TipoNota { get; set; }
+    public decimal ValorPago { get; set; }
     
     public required Guid IdEmitente { get; set; }
     public required Guid IdDestinatario { get; set; }
@@ -25,9 +28,6 @@ public class NotaFiscal
     
     [ForeignKey("IdDestinatario")]
     public required Destinatario Destinatario { get; set; }
-    
-    [ForeignKey("IdTipoNota")]
-    public required TipoNota TipoNota { get; set; }
     
     [ForeignKey("IdTransportadora")]
     public Transportadora? Transportadora { get; set; }
