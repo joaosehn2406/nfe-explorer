@@ -10,10 +10,15 @@ public class NotaFiscal
     public required DateTime DataImportacao { get; set; }
     public required string NaturezaOperacao { get; set; }
     public required decimal ValorTotal { get; set; }
+    public FormaPagamento FormaPagamento { get; set; }
+    public required string NumeroNota { get; set; }   
+    public required string Serie { get; set; }        
+    
     public required Guid IdEmitente { get; set; }
     public required Guid IdDestinatario { get; set; }
     public required Guid IdTipoNota { get; set; }
     public Guid? IdTransportadora { get; set; }
+    public ImpostosNfe? ImpostosNfe { get; set; }
     
     [ForeignKey("IdEmitente")]
     public required Emitente Emitente { get; set; }
@@ -21,4 +26,11 @@ public class NotaFiscal
     [ForeignKey("IdDestinatario")]
     public required Destinatario Destinatario { get; set; }
     
+    [ForeignKey("IdTipoNota")]
+    public required TipoNota TipoNota { get; set; }
+    
+    [ForeignKey("IdTransportadora")]
+    public Transportadora? Transportadora { get; set; }
+
+    public ICollection<Produto> Produtos { get; set; } = new List<Produto>();
 }
