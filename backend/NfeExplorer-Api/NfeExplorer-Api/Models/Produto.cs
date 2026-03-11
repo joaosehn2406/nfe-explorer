@@ -6,8 +6,6 @@ public class Produto
     public required string CodigoProduto { get; set; }
     public required string Descricao { get; set; }
     public required string NCM { get; set; }
-    public required string CFOP { get; set; }
-    public required string Unidade { get; set; }
     public decimal Quantidade { get; set; }
     public decimal ValorUnitario { get; set; }
     public decimal ValorTotal { get; set; }

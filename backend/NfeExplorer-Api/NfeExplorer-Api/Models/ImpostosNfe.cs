@@ -18,6 +18,7 @@ public class ImpostosNfe
     
     public decimal ValorTotalTributos { get; set; }
     public decimal ValorNota { get; set; }
+    public decimal AliquotaIcms { get; set; }
     
     [ForeignKey("IdNotaFiscal")]
     public NotaFiscal NotaFiscal { get; set; }
