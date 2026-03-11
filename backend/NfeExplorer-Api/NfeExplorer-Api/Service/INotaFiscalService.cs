@@ -5,5 +5,7 @@ namespace NfeExplorer_Api.Service;
 
 public interface INotaFiscalService
 {
-    Task<NotaFiscal> Save(ParseNfeRequest request);
+    Task<ImportNfeResponse> AddAsync(ParseNfeRequest request);
+    Task<ImportNfeResponse?> GetByIdAsync(Guid id);
+    Task<ImportNfeResponse?> GetByChaveAsync(string chave);
 }
