@@ -10,8 +10,8 @@ public class Produto
     public decimal ValorUnitario { get; set; }
     public decimal ValorTotal { get; set; }
     
-    public required Guid IdNotaFiscal { get; set; }
-    public required NotaFiscal NotaFiscal { get; set; }
+    public Guid IdNotaFiscal { get; set; }
+    public NotaFiscal NotaFiscal { get; set; }
     
     
 }

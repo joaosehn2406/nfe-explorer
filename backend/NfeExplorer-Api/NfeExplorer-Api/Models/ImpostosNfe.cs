@@ -5,7 +5,7 @@ namespace NfeExplorer_Api.Models;
 public class ImpostosNfe
 {
     public Guid Id { get; set; }
-    public required Guid IdNotaFiscal { get; set; }
+    public Guid IdNotaFiscal { get; set; }
     
     public decimal ValorProdutos { get; set; }
     

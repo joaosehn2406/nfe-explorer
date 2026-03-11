@@ -17,15 +17,15 @@ public class NotaFiscal
     public FormaPagamento FormaPagamento { get; set; }
     public TipoNota TipoNota { get; set; }
 
-    public required Guid IdEmitente { get; set; }
-    public required Guid IdDestinatario { get; set; }
+    public Guid IdEmitente { get; set; }
+    public Guid IdDestinatario { get; set; }
     public Guid? IdTransportadora { get; set; }
 
     [ForeignKey("IdEmitente")]
-    public required Emitente Emitente { get; set; }
+    public Emitente Emitente { get; set; }
 
     [ForeignKey("IdDestinatario")]
-    public required Destinatario Destinatario { get; set; }
+    public Destinatario Destinatario { get; set; }
 
     [ForeignKey("IdTransportadora")]
     public Transportadora? Transportadora { get; set; }
