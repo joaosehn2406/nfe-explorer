@@ -1,5 +1,4 @@
-﻿using NfeExplorer_Api.Models;
-using NfeExplorer_Api.Models.Enums;
+﻿using NfeExplorer_Api.Domain.Enums;
 
 namespace NfeExplorer_Api.Dto;
 

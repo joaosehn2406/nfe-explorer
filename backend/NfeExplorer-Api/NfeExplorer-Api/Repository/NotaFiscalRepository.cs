@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NfeExplorer_Api.Data;
-using NfeExplorer_Api.Models;
+using NfeExplorer_Api.Domain.Model;
 
 namespace NfeExplorer_Api.Repository;
 
@@ -15,7 +15,13 @@ public class NotaFiscalRepository : INotaFiscalRepository
 
     public async Task<NotaFiscal?> GetByIdAsync(Guid id)
     {
-        return await _context.NotaFiscais.FindAsync(id);
+        return await _context.NotaFiscais
+            .Include(nota => nota.Emitente)
+            .Include(nota => nota.Destinatario)
+            .Include(nota => nota.Transportadora)
+            .Include(nota => nota.Produtos)
+            .Include(nota => nota.ImpostosNfe)
+            .FirstOrDefaultAsync(nota => nota.Id == id);
     }
 
     public async Task<NotaFiscal?> GetByChaveAsync(string chave)

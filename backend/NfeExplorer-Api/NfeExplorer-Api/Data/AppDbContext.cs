@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NfeExplorer_Api.Models;
+using NfeExplorer_Api.Domain.Model;
 
 namespace NfeExplorer_Api.Data;
 

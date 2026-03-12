@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
-using NfeExplorer_Api.Models;
-using NfeExplorer_Api.Models.Enums;
+using NfeExplorer_Api.Domain.Enums;
+using NfeExplorer_Api.Domain.Model;
 
 namespace NfeExplorer_Api.Parser;
 
