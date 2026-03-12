@@ -1,6 +1,6 @@
 ﻿using NfeExplorer_Api.Domain.Enums;
 
-namespace NfeExplorer_Api.Dto;
+namespace NfeExplorer_Api.Application.DTOs.Responses;
 
 public class ImportNfeResponse
 {

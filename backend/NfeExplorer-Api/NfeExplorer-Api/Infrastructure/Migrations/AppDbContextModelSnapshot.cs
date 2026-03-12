@@ -2,9 +2,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NfeExplorer_Api.Data;
+using NfeExplorer_Api.Infrastructure.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -12,11 +11,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NfeExplorer_Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260311022844_AddNomeDestinatario")]
-    partial class AddNomeDestinatario
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,6 +128,9 @@ namespace NfeExplorer_Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<decimal>("AliquotaIcms")
+                        .HasColumnType("numeric");
+
                     b.Property<decimal>("BaseCalculoICMS")
                         .HasColumnType("numeric");
 
@@ -229,10 +229,6 @@ namespace NfeExplorer_Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CFOP")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("CodigoProduto")
                         .IsRequired()
                         .HasColumnType("text");
@@ -250,10 +246,6 @@ namespace NfeExplorer_Api.Migrations
 
                     b.Property<decimal>("Quantidade")
                         .HasColumnType("numeric");
-
-                    b.Property<string>("Unidade")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<decimal>("ValorTotal")
                         .HasColumnType("numeric");

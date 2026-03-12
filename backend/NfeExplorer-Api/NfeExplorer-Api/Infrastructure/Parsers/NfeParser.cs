@@ -1,8 +1,8 @@
 ﻿using System.Xml.Linq;
+using NfeExplorer_Api.Domain.Entities;
 using NfeExplorer_Api.Domain.Enums;
-using NfeExplorer_Api.Domain.Model;
 
-namespace NfeExplorer_Api.Parser;
+namespace NfeExplorer_Api.Infrastructure.Parsers;
 
 public static class NfeParser
 {

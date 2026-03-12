@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NfeExplorer_Api.Domain.Model;
+namespace NfeExplorer_Api.Domain.Entities;
 
 public class ImpostosNfe
 {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using NfeExplorer_Api.Domain.Enums;
 
-namespace NfeExplorer_Api.Domain.Model;
+namespace NfeExplorer_Api.Domain.Entities;
 
 public class NotaFiscal
 {

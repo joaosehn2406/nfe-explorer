@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NfeExplorer_Api.Data;
+using NfeExplorer_Api.Infrastructure.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NfeExplorer_Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260309041408_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260311022844_AddNomeDestinatario")]
+    partial class AddNomeDestinatario
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,6 +54,9 @@ namespace NfeExplorer_Api.Migrations
 
                     b.Property<string>("Municipio")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NomePessoa")
                         .HasColumnType("text");
 
                     b.Property<string>("Numero")

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NfeExplorer_Api.Domain.Model;
+using NfeExplorer_Api.Domain.Entities;
 
-namespace NfeExplorer_Api.Data;
+namespace NfeExplorer_Api.Infrastructure.Data;
 
 public class AppDbContext : DbContext
 {

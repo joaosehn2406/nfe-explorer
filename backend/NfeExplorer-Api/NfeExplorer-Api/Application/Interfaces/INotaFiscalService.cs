@@ -1,6 +1,7 @@
-﻿using NfeExplorer_Api.Dto;
+﻿using NfeExplorer_Api.Application.DTOs.Requests;
+using NfeExplorer_Api.Application.DTOs.Responses;
 
-namespace NfeExplorer_Api.Application.Service;
+namespace NfeExplorer_Api.Application.Interfaces;
 
 public interface INotaFiscalService
 {

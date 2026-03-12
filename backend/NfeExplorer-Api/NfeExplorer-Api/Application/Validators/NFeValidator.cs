@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
-using NfeExplorer_Api.Dto;
+using NfeExplorer_Api.Application.DTOs.Requests;
 
-namespace NfeExplorer_Api.Validator;
+namespace NfeExplorer_Api.Application.Validators;
 
 public static class NFeValidator
 {

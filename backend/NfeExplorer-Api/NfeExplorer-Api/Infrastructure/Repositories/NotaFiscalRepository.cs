@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NfeExplorer_Api.Data;
-using NfeExplorer_Api.Domain.Model;
+using NfeExplorer_Api.Domain.Entities;
+using NfeExplorer_Api.Domain.Interfaces;
+using NfeExplorer_Api.Infrastructure.Data;
 
-namespace NfeExplorer_Api.Repository;
+namespace NfeExplorer_Api.Infrastructure.Repositories;
 
 public class NotaFiscalRepository : INotaFiscalRepository
 {

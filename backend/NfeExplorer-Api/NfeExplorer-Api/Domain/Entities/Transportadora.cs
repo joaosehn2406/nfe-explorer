@@ -1,6 +1,6 @@
 ﻿using NfeExplorer_Api.Domain.Enums;
 
-namespace NfeExplorer_Api.Domain.Model;
+namespace NfeExplorer_Api.Domain.Entities;
 
 public class Transportadora
 {

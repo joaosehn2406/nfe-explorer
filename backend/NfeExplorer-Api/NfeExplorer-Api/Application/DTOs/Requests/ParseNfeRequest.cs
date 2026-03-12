@@ -1,4 +1,4 @@
-﻿namespace NfeExplorer_Api.Dto;
+﻿namespace NfeExplorer_Api.Application.DTOs.Requests;
 
 public class ParseNfeRequest
 {

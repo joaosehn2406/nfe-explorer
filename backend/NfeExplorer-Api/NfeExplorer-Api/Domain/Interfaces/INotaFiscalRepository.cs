@@ -1,6 +1,6 @@
-﻿using NfeExplorer_Api.Domain.Model;
+﻿using NfeExplorer_Api.Domain.Entities;
 
-namespace NfeExplorer_Api.Repository;
+namespace NfeExplorer_Api.Domain.Interfaces;
 
 public interface INotaFiscalRepository
 {

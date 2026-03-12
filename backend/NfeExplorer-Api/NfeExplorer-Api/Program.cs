@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using NfeExplorer_Api.Data;
+using NfeExplorer_Api.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
