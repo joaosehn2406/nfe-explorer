@@ -27,6 +27,11 @@ public class NotaFiscalRepository : INotaFiscalRepository
     public async Task<NotaFiscal?> GetByChaveAsync(string chave)
     {
         return await _context.NotaFiscais
+            .Include(nota => nota.Emitente)
+            .Include(nota => nota.Destinatario)
+            .Include(nota => nota.Transportadora)
+            .Include(nota => nota.Produtos)
+            .Include(nota => nota.ImpostosNfe)
             .FirstOrDefaultAsync(nota => nota.ChaveAcesso == chave);
     }
 
