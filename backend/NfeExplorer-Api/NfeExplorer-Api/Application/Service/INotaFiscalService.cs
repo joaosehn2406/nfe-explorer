@@ -1,7 +1,6 @@
 ﻿using NfeExplorer_Api.Dto;
-using NfeExplorer_Api.Models;
 
-namespace NfeExplorer_Api.Service;
+namespace NfeExplorer_Api.Application.Service;
 
 public interface INotaFiscalService
 {

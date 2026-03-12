@@ -1,4 +1,4 @@
-﻿namespace NfeExplorer_Api.Models;
+﻿namespace NfeExplorer_Api.Domain.Model;
 
 public class Produto
 {

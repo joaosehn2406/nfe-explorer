@@ -1,4 +1,4 @@
-﻿namespace NfeExplorer_Api.Models.Enums;
+﻿namespace NfeExplorer_Api.Domain.Enums;
 
 public enum ModalidadeFrete
 {
