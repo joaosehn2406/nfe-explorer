@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: "Nunito Sans", sans-serif;
+  background: #05130b;
+  color: #efefef;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
