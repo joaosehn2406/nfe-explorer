@@ -2,6 +2,6 @@
 
 public class ParseNfeRequest
 {
-    public IFormFile? File { get; set; }
-    public string? XmlText { get; set; }
+    public IFormFile? File { get; }
+    public string? XmlText { get; }
 }
