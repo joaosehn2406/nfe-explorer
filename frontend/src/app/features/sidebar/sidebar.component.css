@@ -1,7 +1,8 @@
 .sidebar-container {
   height: 100%;
-  max-width: 256px;
-  background: #851e1e;
+  max-width: 228px;
+  background: #ffffff;
+  border-right: 1px solid #e2ddd6;
   display: flex;
   flex-shrink: 0;
 }
@@ -16,25 +17,90 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.6rem;
   margin: 0;
-  padding: 1.6rem 1.5rem;
+  padding: 1.3rem 1.2rem;
 }
 
 .logo-icon {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 6px;
-  background: black;
-  font-size: 13px;
-  font-weight: 700;
+  background: #1c1916;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
   flex-shrink: 0;
 }
 
 .logo-text {
   font-family: 'Instrument Serif', Georgia, serif;
-  font-size: 1.0rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  transform: scaleY(1.5);
+  color: #1c1916;
+}
+
+.logo-text span {
+  color: #2d6a4f;
+}
+
+.custom-divider {
+  border: none;
+  border-top: 1px solid #e2ddd6;
+  margin: 0;
+}
+
+.sidebar-nav {
+  padding: 0.8rem 0.6rem;
+  margin: 0;
+}
+
+.nav-section-title {
+  display: block;
+  padding: 0.8rem 0.6rem 0.3rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #8a8178;
+  font-family: 'Geist', system-ui, sans-serif;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 0.6rem;
+  align-items: center;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 450;
+  font-family: 'Geist', system-ui, sans-serif;
+  text-align: left;
+  padding: 0.55rem 0.75rem;
+  border-radius: 7px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-item span {
+  color: #3d3730;
+}
+
+.nav-item:hover {
+  background: #f0ede7;
+}
+
+.nav-item:active {
+  background: #e8f4ee;
+  color: #2d6a4f;
 }
