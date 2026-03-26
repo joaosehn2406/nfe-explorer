@@ -20,6 +20,7 @@
   gap: 0.6rem;
   margin: 0;
   padding: 1.3rem 1.2rem;
+  border-bottom: 1px solid #e2ddd6;
 }
 
 .logo-icon {
@@ -46,12 +47,6 @@
 
 .logo-text span {
   color: #2d6a4f;
-}
-
-.custom-divider {
-  border: none;
-  border-top: 1px solid #e2ddd6;
-  margin: 0;
 }
 
 .sidebar-nav {
@@ -103,4 +98,15 @@
 .nav-item:active {
   background: #e8f4ee;
   color: #2d6a4f;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 1rem 1.2rem;
+  border-top: 1px solid #e2ddd6;
+}
+
+.project-description {
+  font-size: 11px;
+  color: #8a8178;
 }
