@@ -1,16 +1,27 @@
 .upload-card {
+  background: white;
+  border: 1px solid #e2ddd6;
+  border-radius: 10px;
+  padding: 1.8rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  background: white;
-  padding: 10rem;
+  gap: 1rem;
 }
 
-.title-container {
+.card-label {
   display: flex;
-  flex-direction: row;
-  background: red;
-  margin: 0;
-  padding: 0;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.70rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8a8178;
+}
+
+.card-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e2ddd6;
 }

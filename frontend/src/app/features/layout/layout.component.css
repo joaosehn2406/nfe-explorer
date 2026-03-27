@@ -11,10 +11,8 @@
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  padding: 2.4rem 9.6rem;
-  background: #f7f5f1;
-  min-width: 0;
   flex: 1;
+  min-width: 0;
+  padding: 2rem;
+  background: #f7f5f1;
 }

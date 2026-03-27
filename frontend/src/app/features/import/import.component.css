@@ -4,12 +4,11 @@
 }
 
 .import-container {
-  box-sizing: border-box;
   width: 100%;
-  height: 100%;
+  max-width: 900px;
   display: flex;
   flex-direction: column;
-  margin: 0;
+  gap: 1.5rem;
 }
 
 .import-header {
