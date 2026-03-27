@@ -1,0 +1,37 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.import-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  margin: 0.4rem 6.0rem auto;
+}
+
+.import-title {
+  font-size: 1.3rem;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 100;
+  transform: scaleY(1.5);
+  letter-spacing: -0.06em;
+  color: black;
+  margin: 0;
+}
+
+.import-strong-title {
+  font-style: italic;
+  color: #2d6a4f;
+}
+
+.import-title,
+.import-strong-title {
+  letter-spacing: 0.01rem;
+}
+
+.import-description {
+  font-size: 0.85rem;
+  color: #8a8178;
+  letter-spacing: 0.04em;
+}
