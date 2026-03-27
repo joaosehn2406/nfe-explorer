@@ -1,0 +1,16 @@
+.upload-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background: white;
+  padding: 10rem;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+  background: red;
+  margin: 0;
+  padding: 0;
+}
