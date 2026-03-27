@@ -6,8 +6,8 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', redirectTo: 'importNFe', pathMatch: 'full' },
-      //{ path: 'importNFe', component: ImportNFeComponent }
+      { path: '', redirectTo: 'importar', pathMatch: 'full' },
+      { path: 'importar', data: { title: 'Importar NF-e' } }
     ]
   },
 ];
