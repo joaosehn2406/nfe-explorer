@@ -56,7 +56,7 @@
 
 .nav-section-title {
   display: block;
-  padding: 0.8rem 0.6rem 0.3rem;
+  padding: 0.8rem 0.6rem 0;
   font-size: 0.62rem;
   font-weight: 600;
   text-transform: uppercase;
