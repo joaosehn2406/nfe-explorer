@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31a7058b-6d9d-4f4c-a31f-d9a07a98d474" name="Changes" comment="Created footer for lateral tab bar">
+    <list default="true" id="31a7058b-6d9d-4f4c-a31f-d9a07a98d474" name="Changes" comment="Adjusted sidebar and header styling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/header/header.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/header/header.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/layout/layout.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/layout/layout.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/layout/layout.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/layout/layout.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/layout/layout.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/layout/layout.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +118,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774544085452</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Adjusted sidebar and header styling">
+      <option name="closed" value="true" />
+      <created>1774648026249</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1774648026250</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,6 +137,7 @@
     <MESSAGE value="Adjusted config files" />
     <MESSAGE value="Created import nfe lateral tab" />
     <MESSAGE value="Created footer for lateral tab bar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created footer for lateral tab bar" />
+    <MESSAGE value="Adjusted sidebar and header styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adjusted sidebar and header styling" />
   </component>
 </project>

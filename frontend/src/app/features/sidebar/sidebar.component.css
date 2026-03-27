@@ -57,7 +57,7 @@
 .nav-section-title {
   display: block;
   padding: 0.8rem 0.6rem 0;
-  font-size: 0.62rem;
+  font-size: 0.70rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -95,7 +95,8 @@
   background: #f0ede7;
 }
 
-.nav-item:active {
+.nav-item.active,
+.nav-item.active span {
   background: #e8f4ee;
   color: #2d6a4f;
 }

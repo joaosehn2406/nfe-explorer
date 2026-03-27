@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './features/layout/layout.component';
+import { ImportComponent } from './features/import/import.component';
 
 export const routes: Routes = [
   {
@@ -7,7 +8,7 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: 'importar', pathMatch: 'full' },
-      { path: 'importar', data: { title: 'Importar NF-e' } }
+      { path: 'importar', component: ImportComponent, data: { title: 'Importar NF-e' } }
     ]
   },
 ];
