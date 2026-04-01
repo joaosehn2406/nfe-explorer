@@ -72,3 +72,27 @@
   background: #e8f4ee;
   border-color: #2d6a4f;
 }
+
+.card-divider {
+  display: flex;
+  align-items: center;
+  color: #8a8178;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  gap: 0.75rem;
+}
+
+.card-divider:after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: #e2ddd6;
+}
+
+.card-divider:before {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: #e2ddd6;
+}

@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31a7058b-6d9d-4f4c-a31f-d9a07a98d474" name="Changes" comment="Adjusted paddings in the project">
+    <list default="true" id="31a7058b-6d9d-4f4c-a31f-d9a07a98d474" name="Changes" comment="Created dropzone input">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +79,7 @@
       <workItem from="1773396992459" duration="2474000" />
       <workItem from="1774481866129" duration="3773000" />
       <workItem from="1774550777614" duration="372000" />
-      <workItem from="1774980673835" duration="5133000" />
+      <workItem from="1774980673835" duration="5814000" />
     </task>
     <task id="LOCAL-00001" summary="Started creating components">
       <option name="closed" value="true" />
@@ -164,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774655865796</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Created dropzone input">
+      <option name="closed" value="true" />
+      <created>1775052679710</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1775052679710</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +186,7 @@
     <MESSAGE value="Created import card component" />
     <MESSAGE value="Implemented first line of the card" />
     <MESSAGE value="Adjusted paddings in the project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adjusted paddings in the project" />
+    <MESSAGE value="Created dropzone input" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created dropzone input" />
   </component>
 </project>
