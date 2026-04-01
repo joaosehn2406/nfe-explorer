@@ -112,3 +112,41 @@
   outline: none;
   border-color: #2d6a4f;
 }
+
+.actions-row {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  height: 2.3rem;
+  border: none;
+}
+
+.analyse-import-bt {
+  background: black;
+  width: 100%;
+  color: white;
+  align-items: center;
+}
+
+.analyse-import-bt,
+.example-bt,
+.clean-bt {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.example-bt,
+.clean-bt {
+  background: #f0ede7;
+  color: #3d3730;
+  border: 1px solid #e2ddd6;
+  width: 10%;
+  font-weight: 530;
+}
+
+.example-bt:hover,
+.clean-bt:hover {
+  border-color: #cec8be;
+  background: #e2ddd6;
+}
