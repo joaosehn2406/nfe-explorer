@@ -7,14 +7,14 @@
   width: 100%;
   max-width: 1140px;
   margin: 0 auto;
-  padding-top: 1.2rem;
+  padding-top: 0.2rem;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
 
 .import-title {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 100;
   transform: scaleY(1.5);
@@ -34,7 +34,7 @@
 }
 
 .import-description {
-  font-size: 0.85rem;
+  font-size: 0.80rem;
   color: #8a8178;
   letter-spacing: 0.04em;
 }
