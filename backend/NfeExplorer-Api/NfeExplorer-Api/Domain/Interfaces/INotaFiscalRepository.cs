@@ -1,4 +1,5 @@
-﻿using NfeExplorer_Api.Domain.Entities;
+﻿using NfeExplorer_Api.Application.DTOs.Responses;
+using NfeExplorer_Api.Domain.Entities;
 
 namespace NfeExplorer_Api.Domain.Interfaces;
 

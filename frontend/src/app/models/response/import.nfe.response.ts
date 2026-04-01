@@ -1,5 +1,9 @@
-import {NfeResponse} from './nfe.response';
+import {TipoNota} from '../enums/tipo.nota';
 
 export interface ImportNfeResponse {
-  nfe: NfeResponse
+  id: string;
+  numeroNota: string;
+  emitente: string;
+  valorTotal: number;
+  tipoNota: TipoNota;
 }

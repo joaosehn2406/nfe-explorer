@@ -6,6 +6,6 @@ namespace NfeExplorer_Api.Application.Interfaces;
 public interface INotaFiscalService
 {
     Task<ImportNfeResponse> AddAsync(ParseNfeRequest request);
-    Task<ImportNfeResponse?> GetByIdAsync(Guid id);
-    Task<ImportNfeResponse?> GetByChaveAsync(string chave);
+    Task<NfeDetailsResponse?> GetByIdAsync(Guid id);
+    Task<NfeDetailsResponse?> GetByChaveAsync(string chave);
 }

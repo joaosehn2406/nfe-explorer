@@ -44,26 +44,26 @@ public class NotaFiscalService : INotaFiscalService
 
         await _repository.AddAsync(notaFiscal);
 
-        return NotaFiscalMapper.ToResponse(notaFiscal);
+        return ImportNfeMapper.ToImportNfeResponse(notaFiscal);
     }
 
-    public async Task<ImportNfeResponse?> GetByIdAsync(Guid id)
+    public async Task<NfeDetailsResponse?> GetByIdAsync(Guid id)
     {
         var notaFiscal = await _repository.GetByIdAsync(id);
 
         if (notaFiscal == null)
             return null;
 
-        return NotaFiscalMapper.ToResponse(notaFiscal);
+        return NfeDetailsMapper.ToResponse(notaFiscal);
     }
 
-    public async Task<ImportNfeResponse?> GetByChaveAsync(string chave)
+    public async Task<NfeDetailsResponse?> GetByChaveAsync(string chave)
     {
         var notaFiscal = await _repository.GetByChaveAsync(chave);
 
         if (notaFiscal == null)
             return null;
 
-        return NotaFiscalMapper.ToResponse(notaFiscal);
+        return NfeDetailsMapper.ToResponse(notaFiscal);
     }
 }

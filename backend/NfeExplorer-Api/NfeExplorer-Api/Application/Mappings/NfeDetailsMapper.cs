@@ -3,11 +3,11 @@ using NfeExplorer_Api.Domain.Entities;
 
 namespace NfeExplorer_Api.Application.Mappings;
 
-public static class NotaFiscalMapper
+public static class NfeDetailsMapper
 {
-    public static ImportNfeResponse ToResponse(NotaFiscal notaFiscal)
+    public static NfeDetailsResponse ToResponse(NotaFiscal notaFiscal)
     {
-        return new ImportNfeResponse
+        return new NfeDetailsResponse
         {
             Nfe = new NfeResponse
             {
