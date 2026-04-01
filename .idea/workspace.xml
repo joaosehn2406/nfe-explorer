@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31a7058b-6d9d-4f4c-a31f-d9a07a98d474" name="Changes" comment="Created visually action buttons">
+    <list default="true" id="31a7058b-6d9d-4f4c-a31f-d9a07a98d474" name="Changes" comment="Adjusted layout to be smaller">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/header/header.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/header/header.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/layout/layout.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/layout/layout.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +78,7 @@
       <workItem from="1773396992459" duration="2474000" />
       <workItem from="1774481866129" duration="3773000" />
       <workItem from="1774550777614" duration="372000" />
-      <workItem from="1774980673835" duration="10571000" />
+      <workItem from="1774980673835" duration="11668000" />
     </task>
     <task id="LOCAL-00001" summary="Started creating components">
       <option name="closed" value="true" />
@@ -196,7 +192,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775055914707</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Adjusted layout to be smaller">
+      <option name="closed" value="true" />
+      <created>1775061733564</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1775061733564</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,6 +221,7 @@
     <MESSAGE value="Created card divider" />
     <MESSAGE value="Created xml textarea" />
     <MESSAGE value="Created visually action buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created visually action buttons" />
+    <MESSAGE value="Adjusted layout to be smaller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adjusted layout to be smaller" />
   </component>
 </project>
