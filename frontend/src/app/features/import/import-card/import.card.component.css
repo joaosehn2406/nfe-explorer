@@ -25,3 +25,50 @@
   height: 1px;
   background: #e2ddd6;
 }
+
+.dropzone {
+  display: block;
+  justify-content: center;
+  padding: 2.5rem;
+  border: 1.5px dashed #cec8be;
+  border-radius: 8px;
+  background: #f7f5f1;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dropzone-icon {
+  width: 40px;
+  height: 40px;
+  background: #f0ede7;
+  border: 1px solid #e2ddd6;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.8rem;
+  font-size: 1.3rem;
+}
+
+.dropzone p {
+  color: #3d3730;
+  font-size: 0.9rem;
+  padding-bottom: 0.6rem;
+  margin: 0;
+}
+
+.dropzone small {
+  color: #8a8178;
+  font-size: 0.82rem;
+}
+
+.dropzone:hover {
+  border-color: #2d6a4f;
+  background: #e8f4ee;
+}
+
+.dropzone:hover .dropzone-icon {
+  background: #e8f4ee;
+  border-color: #2d6a4f;
+}
