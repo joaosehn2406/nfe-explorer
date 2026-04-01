@@ -17,7 +17,7 @@ public class NotaFiscalController : ControllerBase
     }
 
     [HttpPost("import")]
-    public async Task<IActionResult> ImportNFe([FromBody] ParseNfeRequest request)
+    public async Task<IActionResult> ImportNFe([FromForm] ParseNfeRequest request)
     {
         var result = await _notaFiscalService.AddAsync(request);
         return CreatedAtAction(nameof(GetById), new { id = result.Nfe.Id }, result);

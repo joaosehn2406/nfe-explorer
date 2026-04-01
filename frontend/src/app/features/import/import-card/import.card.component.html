@@ -10,11 +10,12 @@
 
   <span class="card-divider">Ou cole o xml</span>
 
-  <textarea class="xml-textarea" placeholder='<?xml version="1.0" encoding="UTF-8"?>'></textarea>
+  <textarea class="xml-textarea" placeholder='<?xml version="1.0" encoding="UTF-8"? >'
+            [(ngModel)]="xmlTextAreaContent"></textarea>
 
   <div class="actions-row">
     <button class="analyse-import-bt"><span>🔍</span> Analisar e Importar</button>
-    <button class="example-bt">Exemplo</button>
-    <button class="clean-bt">Limpar</button>
+    <button class="example-bt" (click)="fillTextAreaWithExample()">Exemplo</button>
+    <button class="clean-bt" (click)="removeTextFromTextArea()">Limpar</button>
   </div>
 </section>
