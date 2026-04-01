@@ -96,3 +96,19 @@
   height: 2px;
   background: #e2ddd6;
 }
+
+.xml-textarea {
+  height: 120px;
+  padding: 1.2rem;
+  background: #f7f5f1;
+  border: 1px solid #e2ddd6;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.xml-textarea:focus {
+  outline: none;
+  border-color: #2d6a4f;
+}
