@@ -6,6 +6,12 @@ namespace NfeExplorer_Api.Infrastructure.Parsers;
 
 public static class NfeParser
 {
+    private static string? Get(XElement? element, string localName)
+    {
+        return element?.Elements()
+            .FirstOrDefault(e => e.Name.LocalName == localName)?.Value;
+    }
+
     public static NotaFiscal Parse(string xml)
     {
         var document = XDocument.Parse(xml);
@@ -21,16 +27,16 @@ public static class NfeParser
         return new NotaFiscal
         {
             ChaveAcesso = infNfe?.Attribute("Id")?.Value?.Replace("NFe", ""),
-            DataEmissao = DateTime.Parse(ide?.Element("dhEmi")?.Value),
+            DataEmissao = DateTime.Parse(Get(ide, "dhEmi") ?? throw new ArgumentException("dhEmi ausente no XML.")),
             DataImportacao = DateTime.UtcNow,
-            NaturezaOperacao = ide?.Element("natOp")?.Value,
-            NumeroNota = ide?.Element("nNF")?.Value,
-            Serie = ide?.Element("serie")?.Value,
+            NaturezaOperacao = Get(ide, "natOp"),
+            NumeroNota = Get(ide, "nNF"),
+            Serie = Get(ide, "serie"),
             ValorTotal = decimal.Parse(document.Descendants()
                 .FirstOrDefault(e => e.Name.LocalName == "vNF")?.Value ?? "0"),
-            ValorPago = decimal.Parse(pag?.Element("vPag")?.Value ?? "0"),
-            FormaPagamento = (FormaPagamento)int.Parse(pag?.Element("tPag")?.Value ?? "99"),
-            TipoNota = ide?.Element("tpNF")?.Value == "1" ? TipoNota.Saida : TipoNota.Entrada,
+            ValorPago = decimal.Parse(Get(pag, "vPag") ?? "0"),
+            FormaPagamento = (FormaPagamento)int.Parse(Get(pag, "tPag") ?? "99"),
+            TipoNota = Get(ide, "tpNF") == "1" ? TipoNota.Saida : TipoNota.Entrada,
             Emitente = ParseEmitente(infNfe),
             Destinatario = ParseDestinatario(infNfe),
             Transportadora = ParseTransportadora(infNfe),
@@ -49,16 +55,16 @@ public static class NfeParser
 
         return new Emitente
         {
-            RazaoSocial = emit?.Elements().FirstOrDefault(e => e.Name.LocalName == "xNome")?.Value,
-            NomeFantasia = emit?.Element("xFant")?.Value,
-            CNPJ = emit?.Element("CNPJ")?.Value,
-            InscricaoEstadual = emit?.Element("IE")?.Value,
-            Logradouro = enderEmit?.Element("xLgr")?.Value,
-            Numero = enderEmit?.Element("nro")?.Value,
-            Bairro = enderEmit?.Element("xBairro")?.Value,
-            Municipio = enderEmit?.Element("xMun")?.Value,
-            UF = enderEmit?.Element("UF")?.Value,
-            CEP = enderEmit?.Element("CEP")?.Value
+            RazaoSocial = Get(emit, "xNome"),
+            NomeFantasia = Get(emit, "xFant"),
+            CNPJ = Get(emit, "CNPJ"),
+            InscricaoEstadual = Get(emit, "IE"),
+            Logradouro = Get(enderEmit, "xLgr"),
+            Numero = Get(enderEmit, "nro"),
+            Bairro = Get(enderEmit, "xBairro"),
+            Municipio = Get(enderEmit, "xMun"),
+            UF = Get(enderEmit, "UF"),
+            CEP = Get(enderEmit, "CEP")
         };
     }
 
@@ -72,16 +78,16 @@ public static class NfeParser
 
         return new Destinatario
         {
-            RazaoSocial = dest?.Element("xNome")?.Value,
-            CNPJ = dest?.Element("CNPJ")?.Value,
-            CPF = dest?.Element("CPF")?.Value,
-            InscricaoEstadual = dest?.Element("IE")?.Value,
-            Logradouro = enderDest?.Element("xLgr")?.Value,
-            Numero = enderDest?.Element("nro")?.Value,
-            Bairro = enderDest?.Element("xBairro")?.Value,
-            Municipio = enderDest?.Element("xMun")?.Value,
-            UF = enderDest?.Element("UF")?.Value,
-            CEP = enderDest?.Element("CEP")?.Value
+            RazaoSocial = Get(dest, "xNome"),
+            CNPJ = Get(dest, "CNPJ"),
+            CPF = Get(dest, "CPF"),
+            InscricaoEstadual = Get(dest, "IE"),
+            Logradouro = Get(enderDest, "xLgr"),
+            Numero = Get(enderDest, "nro"),
+            Bairro = Get(enderDest, "xBairro"),
+            Municipio = Get(enderDest, "xMun"),
+            UF = Get(enderDest, "UF"),
+            CEP = Get(enderDest, "CEP")
         };
     }
 
@@ -93,18 +99,17 @@ public static class NfeParser
         if (transp == null) return null;
 
         var modFrete = infNFe.Descendants()
-            .FirstOrDefault(t => t.Name.LocalName == "transp")
-            ?.Element("modFrete")?.Value;
+            .FirstOrDefault(t => t.Name.LocalName == "transp");
 
         return new Transportadora
         {
-            RazaoSocial = transp?.Element("xNome")?.Value,
-            CNPJ = transp?.Element("CNPJ")?.Value,
-            CPF = transp?.Element("CPF")?.Value,
-            InscricaoEstadual = transp?.Element("IE")?.Value,
-            Municipio = transp?.Element("xMun")?.Value,
-            UF = transp?.Element("UF")?.Value,
-            ModalidadeFrete = (ModalidadeFrete)int.Parse(modFrete ?? "9")
+            RazaoSocial = Get(transp, "xNome"),
+            CNPJ = Get(transp, "CNPJ"),
+            CPF = Get(transp, "CPF"),
+            InscricaoEstadual = Get(transp, "IE"),
+            Municipio = Get(transp, "xMun"),
+            UF = Get(transp, "UF"),
+            ModalidadeFrete = (ModalidadeFrete)int.Parse(Get(modFrete, "modFrete") ?? "9")
         };
     }
 
@@ -112,20 +117,20 @@ public static class NfeParser
     {
         var icmsTot = infNFe.Descendants()
             .FirstOrDefault(e => e.Name.LocalName == "ICMSTot");
-        
-        var valorICMS = decimal.Parse(icmsTot?.Element("vICMS")?.Value ?? "0");
-        var baseCalculo = decimal.Parse(icmsTot?.Element("vBC")?.Value ?? "1");
+
+        var valorICMS = decimal.Parse(Get(icmsTot, "vICMS") ?? "0");
+        var baseCalculo = decimal.Parse(Get(icmsTot, "vBC") ?? "1");
 
         return new ImpostosNfe
         {
-            ValorProdutos = decimal.Parse(icmsTot?.Element("vProd")?.Value ?? "0"),
-            BaseCalculoICMS = decimal.Parse(icmsTot?.Element("vBC")?.Value ?? "0"),
-            ValorICMS = decimal.Parse(icmsTot?.Element("vICMS")?.Value ?? "0"),
-            ValorPIS = decimal.Parse(icmsTot?.Element("vPIS")?.Value ?? "0"),
-            ValorCOFINS = decimal.Parse(icmsTot?.Element("vCOFINS")?.Value ?? "0"),
+            ValorProdutos = decimal.Parse(Get(icmsTot, "vProd") ?? "0"),
+            BaseCalculoICMS = decimal.Parse(Get(icmsTot, "vBC") ?? "0"),
+            ValorICMS = decimal.Parse(Get(icmsTot, "vICMS") ?? "0"),
+            ValorPIS = decimal.Parse(Get(icmsTot, "vPIS") ?? "0"),
+            ValorCOFINS = decimal.Parse(Get(icmsTot, "vCOFINS") ?? "0"),
             AliquotaIcms = baseCalculo != 0 ? (valorICMS / baseCalculo) * 100 : 0,
-            ValorTotalTributos = decimal.Parse(icmsTot?.Element("vTribFed")?.Value ?? "0"),
-            ValorNota = decimal.Parse(icmsTot?.Element("vNF")?.Value ?? "0")
+            ValorTotalTributos = decimal.Parse(Get(icmsTot, "vTribFed") ?? "0"),
+            ValorNota = decimal.Parse(Get(icmsTot, "vNF") ?? "0")
         };
     }
 
@@ -140,12 +145,12 @@ public static class NfeParser
 
                 return new Produto
                 {
-                    CodigoProduto = prod?.Element("cProd")?.Value,
-                    Descricao = prod?.Element("xProd")?.Value,
-                    NCM = prod?.Element("NCM")?.Value,
-                    Quantidade = decimal.Parse(prod?.Element("qCom")?.Value ?? "0"),
-                    ValorUnitario = decimal.Parse(prod?.Element("vUnCom")?.Value ?? "0"),
-                    ValorTotal = decimal.Parse(prod?.Element("vProd")?.Value ?? "0")
+                    CodigoProduto = Get(prod, "cProd"),
+                    Descricao = Get(prod, "xProd"),
+                    NCM = Get(prod, "NCM"),
+                    Quantidade = decimal.Parse(Get(prod, "qCom") ?? "0"),
+                    ValorUnitario = decimal.Parse(Get(prod, "vUnCom") ?? "0"),
+                    ValorTotal = decimal.Parse(Get(prod, "vProd") ?? "0")
                 };
             })
             .ToList();
