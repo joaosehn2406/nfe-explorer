@@ -49,7 +49,7 @@ public static class NfeParser
 
         return new Emitente
         {
-            RazaoSocial = emit?.Element("xNome")?.Value,
+            RazaoSocial = emit?.Elements().FirstOrDefault(e => e.Name.LocalName == "xNome")?.Value,
             NomeFantasia = emit?.Element("xFant")?.Value,
             CNPJ = emit?.Element("CNPJ")?.Value,
             InscricaoEstadual = emit?.Element("IE")?.Value,

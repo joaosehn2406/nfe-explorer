@@ -15,6 +15,16 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<INotaFiscalService, NotaFiscalService>();
 builder.Services.AddScoped<INotaFiscalRepository, NotaFiscalRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -24,5 +34,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors();
 app.MapControllers();
 app.Run();
