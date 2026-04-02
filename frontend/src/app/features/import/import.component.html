@@ -6,7 +6,7 @@
 
   <app-import-card (onClickAnalyse)="onXmlSubmitted($event)" />
 
-  @if (importResult() !== null) {
+  @if (errorMessage() === null && importResult() !== null) {
     <div class="import-status-card">
       <span class="import-message"><strong>✓ NF-e #{{ importResult()?.numeroNota }}
         importada!</strong>{{ importResult()?.emitente }} · {{
@@ -17,6 +17,10 @@
         }}</span>
 
       <button class="details-bt">Ver detalhes →</button>
+    </div>
+  } @else if (errorMessage() !== null){
+    <div class="import-status-card error-import">
+      <span class="import-message error-import-message">⚠ {{ errorMessage()?.message }}</span>
     </div>
   }
 </section>

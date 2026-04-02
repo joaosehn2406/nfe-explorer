@@ -43,7 +43,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 60px;
+  height: 55px;
   background: #e8f4ee;
   border:1px solid #b7dfc9;
   border-radius: 8px;
@@ -78,4 +78,17 @@
 
 .details-bt:hover {
   background: #245a42;
+}
+
+.error-import {
+  background: #fceae8;
+  border-color: #f0b0a8;
+  margin: 0;
+}
+
+.error-import-message {
+  font-weight: 500;
+  font-size: 16px;
+  padding-right: 0.4rem;
+  color: #c0392b;
 }

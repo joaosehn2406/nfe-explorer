@@ -14,7 +14,7 @@ import { ImportNfeResponse } from '../../models/response/import.nfe.response';
 export class ImportComponent {
 
   importResult = signal<ImportNfeResponse | null>(null);
-  errorMessage: Error | null = null
+  errorMessage = signal<Error | null>(null);
 
   constructor(private nfeService: NfeService) {
   }
@@ -27,9 +27,10 @@ export class ImportComponent {
     request$.subscribe({
       next: (result) => {
         this.importResult.set(result)
+        this.errorMessage.set(null)
       },
       error: (err: Error) => {
-        this.errorMessage = err
+        this.errorMessage.set(err)
       }
     })
   }
