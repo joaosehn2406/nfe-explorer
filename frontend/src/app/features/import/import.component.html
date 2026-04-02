@@ -4,5 +4,11 @@
     <p class="import-description">Envie um arquivo XML ou cole o conteúdo para processar a nota fiscal.</p>
   </header>
 
-  <app-import-card/>
+  <app-import-card (onClickAnalyse)="onXmlSubmitted($event)"/>
+
+  @if (importResult !== null) {
+    <div class="import-status-card">
+      <span class="import-message">NF-e #{{ importResult?.numeroNota }} importada! {{ importResult?.emitente }} {{ importResult?.valorTotal }}</span>
+    </div>
+  }
 </section>
