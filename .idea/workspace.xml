@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31a7058b-6d9d-4f4c-a31f-d9a07a98d474" name="Changes" comment="Now the topbar and lateralbar does not scroll with the content!">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_04_2026_15_46_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_04_2026_15_46__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

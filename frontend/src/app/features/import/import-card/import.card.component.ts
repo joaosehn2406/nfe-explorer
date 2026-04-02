@@ -27,6 +27,8 @@ export class ImportCardComponent {
       this.onClickAnalyse.emit(this.selectedFile);
     } else if (this.xmlTextAreaContent.trim()) {
       this.onClickAnalyse.emit(this.xmlTextAreaContent.trim());
+    } else {
+      this.onClickAnalyse.emit('')
     }
   }
 
