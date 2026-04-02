@@ -4,11 +4,19 @@
     <p class="import-description">Envie um arquivo XML ou cole o conteúdo para processar a nota fiscal.</p>
   </header>
 
-  <app-import-card (onClickAnalyse)="onXmlSubmitted($event)"/>
+  <app-import-card (onClickAnalyse)="onXmlSubmitted($event)" />
 
   @if (importResult() !== null) {
     <div class="import-status-card">
-      <span class="import-message">NF-e #{{ importResult?.numeroNota }} importada! {{ importResult?.emitente }} {{ importResult?.valorTotal }}</span>
+      <span class="import-message"><strong>✓ NF-e #{{ importResult()?.numeroNota }}
+        importada!</strong>{{ importResult()?.emitente }} · {{
+          importResult()?.valorTotal?.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          })
+        }}</span>
+
+      <button class="details-bt">Ver detalhes →</button>
     </div>
   }
 </section>
