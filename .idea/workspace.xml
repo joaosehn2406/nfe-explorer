@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31a7058b-6d9d-4f4c-a31f-d9a07a98d474" name="Changes" comment="Adjusted layout to be smaller">
+    <list default="true" id="31a7058b-6d9d-4f4c-a31f-d9a07a98d474" name="Changes" comment="Adjusted components to implement the API response">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/layout/layout.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/layout/layout.component.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +80,7 @@
       <workItem from="1774550777614" duration="372000" />
       <workItem from="1774980673835" duration="11668000" />
       <workItem from="1775079221128" duration="2759000" />
-      <workItem from="1775089110154" duration="3449000" />
+      <workItem from="1775089110154" duration="4943000" />
     </task>
     <task id="LOCAL-00001" summary="Started creating components">
       <option name="closed" value="true" />
@@ -207,7 +202,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775061733564</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Adjusted components to implement the API response">
+      <option name="closed" value="true" />
+      <created>1775098834915</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1775098834915</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,6 +232,7 @@
     <MESSAGE value="Created xml textarea" />
     <MESSAGE value="Created visually action buttons" />
     <MESSAGE value="Adjusted layout to be smaller" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adjusted layout to be smaller" />
+    <MESSAGE value="Adjusted components to implement the API response" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adjusted components to implement the API response" />
   </component>
 </project>
