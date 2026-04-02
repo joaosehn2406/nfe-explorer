@@ -40,7 +40,7 @@ public class NotaFiscalService : INotaFiscalService
 
         var notaExistente = await _repository.GetByChaveAsync(notaFiscal.ChaveAcesso);
         if (notaExistente != null)
-            throw new ArgumentException("Nota fiscal já importada. Chave de acesso duplicada.");
+            throw new ArgumentException("Nota fiscal importada anteriormente. Chave de acesso duplicada.");
 
         await _repository.AddAsync(notaFiscal);
 

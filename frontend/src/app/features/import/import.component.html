@@ -6,7 +6,7 @@
 
   <app-import-card (onClickAnalyse)="onXmlSubmitted($event)"/>
 
-  @if (importResult !== null) {
+  @if (importResult() !== null) {
     <div class="import-status-card">
       <span class="import-message">NF-e #{{ importResult?.numeroNota }} importada! {{ importResult?.emitente }} {{ importResult?.valorTotal }}</span>
     </div>

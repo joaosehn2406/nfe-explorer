@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using NfeExplorer_Api.Application.Exception;
 using NfeExplorer_Api.Application.Interfaces;
 using NfeExplorer_Api.Application.Services;
 using NfeExplorer_Api.Domain.Interfaces;
@@ -27,6 +28,8 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+app.UseMiddleware<GlobalExceptionHandler>();
 
 if (app.Environment.IsDevelopment())
 {

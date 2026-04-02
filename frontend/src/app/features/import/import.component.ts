@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, signal} from '@angular/core';
 import { ImportCardComponent } from './import-card/import.card.component';
 import { NfeService } from '../../services/nfe.service';
 import { ImportNfeResponse } from '../../models/response/import.nfe.response';
@@ -13,7 +13,7 @@ import { ImportNfeResponse } from '../../models/response/import.nfe.response';
 })
 export class ImportComponent {
 
-  importResult: ImportNfeResponse | null = null
+  importResult = signal<ImportNfeResponse | null>(null);
   errorMessage: Error | null = null
 
   constructor(private nfeService: NfeService) {
@@ -26,7 +26,7 @@ export class ImportComponent {
 
     request$.subscribe({
       next: (result) => {
-        this.importResult = result
+        this.importResult.set(result)
       },
       error: (err: Error) => {
         this.errorMessage = err

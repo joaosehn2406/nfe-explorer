@@ -2,6 +2,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
 import {ImportNfeResponse} from '../models/response/import.nfe.response';
 import {Injectable} from '@angular/core';
+import {ApiErrorResponse} from '../models/response/api.error.response';
 
 @Injectable({
   providedIn: 'root',
@@ -32,20 +33,8 @@ export class NfeService {
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    let message = 'Erro desconhecido ao processar a requisição.';
+    const apiError = error.error as ApiErrorResponse
 
-    if (error.status === 0) {
-      message = 'Não foi possível conectar ao servidor. Verifique se o backend está rodando.';
-    } else if (error.status === 400) {
-      message = typeof error.error === 'string'
-        ? error.error
-        : error.error?.title || error.error?.message || 'Dados inválidos.';
-    } else if (error.status === 404) {
-      message = 'Nota fiscal não encontrada.';
-    } else if (error.status >= 500) {
-      message = 'Erro interno no servidor.';
-    }
-
-    return throwError(() => new Error(message));
+    return throwError(() => apiError);
   }
 }
