@@ -16,3 +16,9 @@ body {
   height: 100%;
   display: flex;
 }
+
+mat-progress-bar {
+  --mdc-linear-progress-active-indicator-color: #2d6a4f;
+  --mdc-linear-progress-track-color: #b7dfc9;
+  height: 5px;
+}
