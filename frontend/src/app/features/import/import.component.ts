@@ -1,9 +1,10 @@
-import { Component, signal } from '@angular/core';
-import { ImportCardComponent } from './import-card/import.card.component';
-import { NfeService, UploadProgress } from '../../services/nfe.service';
-import { ImportNfeResponse } from '../../models/response/import.nfe.response';
-import { ApiErrorResponse } from '../../models/response/api.error.response';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {Component, signal} from '@angular/core';
+import {ImportCardComponent} from './import-card/import.card.component';
+import {NfeService} from '../../services/nfe.service';
+import {ImportNfeResponse} from '../../models/response/import.nfe.response';
+import {ApiErrorResponse} from '../../models/response/api.error.response';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {finalize} from 'rxjs';
 
 @Component({
   selector: 'app-import',
@@ -16,7 +17,6 @@ export class ImportComponent {
   importResult = signal<ImportNfeResponse | null>(null);
   errorMessage = signal<string | null>(null);
   isLoading = signal<boolean>(false);
-  uploadProgress = signal<number>(0);
 
   constructor(private nfeService: NfeService) {
   }
@@ -24,20 +24,16 @@ export class ImportComponent {
   onXmlSubmitted(payload: string | File) {
     this.errorMessage.set(null);
     this.importResult.set(null);
-    this.uploadProgress.set(0);
     this.isLoading.set(true);
 
-    this.nfeService.importNfe(payload).subscribe({
-      next: ({ progress, result }: UploadProgress) => {
-        this.uploadProgress.set(progress);
-        if (result) {
-          this.importResult.set(result);
-          this.isLoading.set(false);
-        }
+    this.nfeService.importNfe(payload).pipe(
+      finalize(() => this.isLoading.set(false))
+    ).subscribe({
+      next: (result) => {
+        this.importResult.set(result);
       },
       error: (err: ApiErrorResponse) => {
         this.errorMessage.set(err.message);
-        this.isLoading.set(false);
       }
     });
   }

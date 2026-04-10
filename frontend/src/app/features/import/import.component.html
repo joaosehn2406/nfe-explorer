@@ -7,10 +7,7 @@
   <app-import-card (onClickAnalyse)="onXmlSubmitted($event)" />
 
   @if (isLoading()) {
-    <mat-progress-bar
-      mode="determinate"
-      [value]="uploadProgress()"
-    />
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   }
 
   @if (errorMessage() === null && importResult() !== null) {

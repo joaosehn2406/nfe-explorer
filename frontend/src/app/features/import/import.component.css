@@ -92,3 +92,9 @@
   padding-right: 0.4rem;
   color: #c0392b;
 }
+
+mat-progress-bar {
+  --mat-progress-bar-active-indicator-color: #2d6a4f;
+  --mat-progress-bar-track-color: #b7dfc9;
+  height: 6px;
+}

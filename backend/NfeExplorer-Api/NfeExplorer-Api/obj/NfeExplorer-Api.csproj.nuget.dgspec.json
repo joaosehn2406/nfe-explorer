@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\joaopedro\\Documents\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj": {}
+    "C:\\Users\\joaopedro\\RiderProjects\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\joaopedro\\Documents\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj": {
+    "C:\\Users\\joaopedro\\RiderProjects\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joaopedro\\Documents\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj",
+        "projectUniqueName": "C:\\Users\\joaopedro\\RiderProjects\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj",
         "projectName": "NfeExplorer-Api",
-        "projectPath": "C:\\Users\\joaopedro\\Documents\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj",
+        "projectPath": "C:\\Users\\joaopedro\\RiderProjects\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj",
         "packagesPath": "C:\\Users\\joaopedro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joaopedro\\Documents\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\obj\\",
+        "outputPath": "C:\\Users\\joaopedro\\RiderProjects\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\joaopedro\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -85,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\joaopedro\\.dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\joaopedro\\.dotnet\\sdk\\8.0.419/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
