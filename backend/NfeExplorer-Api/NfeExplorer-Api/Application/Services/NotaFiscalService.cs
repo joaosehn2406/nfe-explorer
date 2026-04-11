@@ -38,6 +38,9 @@ public class NotaFiscalService : INotaFiscalService
 
         var notaFiscal = NfeParser.Parse(xml);
 
+        if (notaFiscal.ChaveAcesso.Length > 44)
+            throw new ArgumentException("Chave de nota ultrapassa 44 dígitos.");
+
         var notaExistente = await _repository.GetByChaveAsync(notaFiscal.ChaveAcesso);
         if (notaExistente != null)
             throw new ArgumentException("Nota #" + notaExistente.ChaveAcesso + " já importada (chave duplicada).");
