@@ -1,15 +1,19 @@
-import {Component, signal} from '@angular/core';
-import {ImportCardComponent} from './import-card/import.card.component';
-import {NfeService} from '../../services/nfe.service';
-import {ImportNfeResponse} from '../../models/response/import.nfe.response';
-import {ApiErrorResponse} from '../../models/response/api.error.response';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {finalize} from 'rxjs';
+import { Component, signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { NfeService } from '../../services/nfe.service';
+import { ImportNfeResponse } from '../../models/response/import.nfe.response';
+import { ApiErrorResponse } from '../../models/response/api.error.response';
+import { finalize } from 'rxjs';
+import { ImportCardComponent } from './import-card/import.card.component';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-import',
-  imports: [ImportCardComponent, MatProgressBarModule],
   templateUrl: './import.component.html',
+  imports: [
+    ImportCardComponent,
+    MatProgressBar
+  ],
   styleUrl: './import.component.css'
 })
 export class ImportComponent {
@@ -18,7 +22,10 @@ export class ImportComponent {
   errorMessage = signal<string | null>(null);
   isLoading = signal<boolean>(false);
 
-  constructor(private nfeService: NfeService) {
+  constructor(
+    private nfeService: NfeService,
+    private router: Router
+  ) {
   }
 
   onXmlSubmitted(payload: string | File) {
@@ -26,7 +33,7 @@ export class ImportComponent {
     this.importResult.set(null);
     this.isLoading.set(true);
 
-    this.nfeService.importNfe(payload).pipe(
+    this.nfeService.importNfeRequest(payload).pipe(
       finalize(() => this.isLoading.set(false))
     ).subscribe({
       next: (result) => {
@@ -36,5 +43,15 @@ export class ImportComponent {
         this.errorMessage.set(err.message);
       }
     });
+  }
+
+  goToDetails(): void {
+    const id = this.importResult()?.id;
+
+    if (!id) {
+      return;
+    }
+
+    this.router.navigate(['/import-details', id]);
   }
 }

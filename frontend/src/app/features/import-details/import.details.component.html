@@ -1,0 +1,16 @@
+@if (importDetails()) {
+  <section class="import-details-container">
+    <header class="import-details-header">
+      <button class="details-back" (click)="goBack()">← Voltar para lista</button>
+
+      <h1 class="import-details-title">
+        Nota Fiscal #{{ importDetails()?.nfe?.numeroNota }}
+      </h1>
+
+      <p class="import-details-description">
+        {{ importDetails()?.nfe?.naturezaOperacao }}
+        · {{ importDetails()?.nfe?.dataEmissao | date: 'dd/MM/yyyy' }}
+      </p>
+    </header>
+  </section>
+}

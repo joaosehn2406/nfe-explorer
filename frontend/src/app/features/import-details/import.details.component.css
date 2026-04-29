@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.import-details-container {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding-top: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.import-details-title {
+  font-size: 1.1rem;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 100;
+  transform: scaleY(1.5);
+  letter-spacing: -0.06em;
+  color: black;
+  margin: 0;
+}
+
+.import-details-description {
+  font-size: 0.80rem;
+  color: #8a8178;
+  letter-spacing: 0.04em;
+}

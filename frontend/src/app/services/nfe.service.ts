@@ -3,6 +3,7 @@ import {catchError, filter, map, Observable, throwError} from 'rxjs';
 import {ImportNfeResponse} from '../models/response/import.nfe.response';
 import {Injectable} from '@angular/core';
 import {ApiErrorResponse} from '../models/response/api.error.response';
+import { NfeDetailsResponse } from '../models/response/nfe.details.response';
 
 @Injectable({providedIn: 'root'})
 export class NfeService {
@@ -12,7 +13,7 @@ export class NfeService {
   constructor(private http: HttpClient) {
   }
 
-  importNfe(payload: File | string): Observable<ImportNfeResponse> {
+  importNfeRequest(payload: File | string): Observable<ImportNfeResponse> {
     const formData = new FormData();
 
     if (payload instanceof File) {
@@ -28,6 +29,12 @@ export class NfeService {
       map(event => (event as any).body as ImportNfeResponse),
       catchError(this.handleError)
     );
+  }
+
+  getNfeDetails(id: string): Observable<NfeDetailsResponse> {
+    return this.http
+      .get<NfeDetailsResponse>(`${this.baseUrl}/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
