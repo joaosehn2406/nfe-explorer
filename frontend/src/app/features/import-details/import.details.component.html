@@ -1,8 +1,10 @@
 @if (importDetails()) {
   <section class="import-details-container">
-    <header class="import-details-header">
-      <button class="details-back" (click)="goBack()">← Voltar para lista</button>
+    <button class="details-back" (click)="goBack()">
+      ← Voltar para lista
+    </button>
 
+    <header class="import-details-header">
       <h1 class="import-details-title">
         Nota Fiscal #{{ importDetails()?.nfe?.numeroNota }}
       </h1>
@@ -12,5 +14,14 @@
         · {{ importDetails()?.nfe?.dataEmissao | date: 'dd/MM/yyyy' }}
       </p>
     </header>
+
+  <div class="import-details-key">
+    <div class="text-container">
+      <h3 class="key-access-title">Chave de acesso</h3>
+      <h4 class="key-number">{{ importDetails()?.nfe?.chaveAcesso }}</h4>
+    </div>
+
+    <button class="bt-copy">Copiar</button>
+  </div>
   </section>
 }
