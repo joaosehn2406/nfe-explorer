@@ -18,6 +18,7 @@ export class ImportDetailsComponent implements OnInit {
   importDetails = signal<NfeDetailsResponse | null>(null);
   errorMessage = signal<string | null>(null);
   isLoading = signal<boolean>(false);
+  copySuccess = signal<boolean>(false);
 
   constructor(
     private route: ActivatedRoute,
@@ -51,6 +52,24 @@ export class ImportDetailsComponent implements OnInit {
         this.errorMessage.set(err.message ?? 'Erro ao carregar detalhes da NF-e.');
       }
     });
+  }
+
+  copyAccessKey(): void {
+    const chaveAcesso = this.importDetails()?.nfe?.chaveAcesso;
+
+    if (!chaveAcesso) {
+      this.errorMessage.set('Chave de acesso não encontrada.');
+      return;
+    }
+
+    navigator.clipboard.writeText(chaveAcesso)
+      .then(() => {
+        this.copySuccess.set(true)
+
+        setTimeout(() => {
+          this.copySuccess.set(false)
+        }, 2000)
+      })
   }
 
   goBack(): void {

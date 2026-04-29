@@ -1,5 +1,12 @@
 @if (importDetails()) {
   <section class="import-details-container">
+
+    @if (copySuccess()) {
+      <div class="copy-success">
+        ✓ Copiado!
+      </div>
+    }
+
     <button class="details-back" (click)="goBack()">
       ← Voltar para lista
     </button>
@@ -15,13 +22,13 @@
       </p>
     </header>
 
-  <div class="import-details-key">
-    <div class="text-container">
-      <h3 class="key-access-title">Chave de acesso</h3>
-      <h4 class="key-number">{{ importDetails()?.nfe?.chaveAcesso }}</h4>
-    </div>
+    <div class="import-details-key">
+      <div class="text-container">
+        <h3 class="key-access-title">Chave de acesso</h3>
+        <h4 class="key-number">{{ importDetails()?.nfe?.chaveAcesso }}</h4>
+      </div>
 
-    <button class="bt-copy">Copiar</button>
-  </div>
+      <button class="bt-copy" (click)="copyAccessKey()">Copiar</button>
+    </div>
   </section>
 }

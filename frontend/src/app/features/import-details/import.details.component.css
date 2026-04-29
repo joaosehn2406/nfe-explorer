@@ -3,6 +3,34 @@
   width: 100%;
 }
 
+.copy-success {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: #e8f4ee;
+  border: 1px solid #b7dfc9;
+  border-radius: 8px;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  font-size: 14px;
+  color: #2d6a4f;
+  margin-bottom: 1.2rem;
+  animation: copySuccessFadeIn 0.25s ease;
+}
+
+@keyframes copySuccessFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .import-details-container {
   width: 100%;
   max-width: 1050px;

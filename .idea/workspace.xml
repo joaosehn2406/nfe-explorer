@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31a7058b-6d9d-4f4c-a31f-d9a07a98d474" name="Changes" comment="Implemented details component, as well as the navigation to it">
+    <list default="true" id="31a7058b-6d9d-4f4c-a31f-d9a07a98d474" name="Changes" comment="Created chave de acesso div with button">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import-details/import.details.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import-details/import.details.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import-details/import.details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import-details/import.details.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import-details/import.details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import-details/import.details.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +99,7 @@
       <workItem from="1776464903249" duration="2000" />
       <workItem from="1777068113216" duration="451000" />
       <workItem from="1777434476332" duration="350000" />
-      <workItem from="1777480281640" duration="7166000" />
+      <workItem from="1777480281640" duration="8889000" />
     </task>
     <task id="LOCAL-00001" summary="Started creating components">
       <option name="closed" value="true" />
@@ -276,7 +277,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777484599417</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Created chave de acesso div with button">
+      <option name="closed" value="true" />
+      <created>1777488040372</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1777488040372</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,6 +325,7 @@
     <MESSAGE value="Adjusted service to deal with the responses" />
     <MESSAGE value="Implemented loading bar" />
     <MESSAGE value="Implemented details component, as well as the navigation to it" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented details component, as well as the navigation to it" />
+    <MESSAGE value="Created chave de acesso div with button" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created chave de acesso div with button" />
   </component>
 </project>
