@@ -12,11 +12,15 @@
   border-radius: 8px;
   font-family: 'Geist', system-ui, sans-serif;
   font-weight: 500;
-  padding: 0.4rem 0.8rem;
+  padding: 0.65rem 0.8rem;
   font-size: 14px;
   color: #2d6a4f;
   margin-bottom: 1.2rem;
-  animation: copySuccessFadeIn 0.25s ease;
+  animation: copySuccessFadeIn 0.25s ease forwards;
+}
+
+.copy-success-leaving {
+  animation: copySuccessFadeOut 0.25s ease forwards;
 }
 
 @keyframes copySuccessFadeIn {
@@ -28,6 +32,18 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes copySuccessFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
   }
 }
 
@@ -59,8 +75,10 @@
 
 .import-details-header {
   display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
 }
 
 .import-details-title {
@@ -69,20 +87,27 @@
   font-weight: 100;
   transform: scaleY(1.5);
   letter-spacing: 0.01rem;
+  overflow: visible;
   color: black;
   margin: 0;
   line-height: 1.2;
+  white-space: nowrap;
+}
+
+.import-details-badges {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.3rem;
+  width: auto;
+  flex-wrap: nowrap;
 }
 
 .import-details-description {
-  font-size: 0.80rem;
+  font-size: 0.8rem;
   color: #8a8178;
   letter-spacing: 0.04em;
-  margin: 0;
-}
-
-.text-container {
-
+  margin: 0.55rem 0 0;
 }
 
 .import-details-key {
@@ -139,4 +164,17 @@
 .bt-copy:hover {
   border-color: #2d6a4f;
   color: #2d6a4f;
+}
+
+::ng-deep .mat-mdc-tab.mdc-tab--active .mdc-tab-indicator__content--underline {
+  border-color: #1c1916;
+}
+
+::ng-deep .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+  color: #1c1916;
+}
+
+::ng-deep .mat-mdc-tab .mdc-tab__text-label {
+  color: #8a8178;
+  font-size: 0.78rem;
 }
