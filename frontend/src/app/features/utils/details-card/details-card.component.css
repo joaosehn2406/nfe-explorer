@@ -1,0 +1,16 @@
+.details-card {
+  background: #ffffff;
+  border: 1px solid #e2ddd6;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.details-card-header {
+  padding: 0.65rem 1.1rem;
+  background: #f0ede7;
+  border-bottom: 1px solid #e2ddd6;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #3d3730;
+  font-family: 'Geist', system-ui, sans-serif;
+}
