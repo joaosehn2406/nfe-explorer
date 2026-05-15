@@ -1,0 +1,16 @@
+<span
+  class="custom-badge"
+  [ngStyle]="{
+    'background-color': backgroundColor,
+    color: textColor,
+    'border-color': borderColor
+  }"
+>
+  <span class="custom-badge-icon">
+    <ng-content select="[badge-icon]" />
+  </span>
+
+  <span class="custom-badge-text">
+    {{ text }}
+  </span>
+</span>

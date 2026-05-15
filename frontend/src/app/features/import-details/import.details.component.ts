@@ -4,12 +4,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NfeService } from '../../services/nfe.service';
 import { ApiErrorResponse } from '../../models/response/api.error.response';
 import { finalize } from 'rxjs';
-import { DatePipe, formatDate } from '@angular/common';
+import { DatePipe } from '@angular/common';
+import { tipoNotaResolver } from '../../models/enums/tipo.nota';
+import { BadgeComponent } from '../utils/badge/badge.component';
+import { MatTab, MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-import-details',
   imports: [
-    DatePipe
+    DatePipe,
+    BadgeComponent,
+    MatTab,
+    MatTabGroup
   ],
   templateUrl: './import.details.component.html',
   styleUrl: './import.details.component.css'
@@ -19,6 +25,7 @@ export class ImportDetailsComponent implements OnInit {
   errorMessage = signal<string | null>(null);
   isLoading = signal<boolean>(false);
   copySuccess = signal<boolean>(false);
+  copySuccessLeaving = signal(false);
 
   constructor(
     private route: ActivatedRoute,
@@ -55,26 +62,28 @@ export class ImportDetailsComponent implements OnInit {
   }
 
   copyAccessKey(): void {
-    const chaveAcesso = this.importDetails()?.nfe?.chaveAcesso;
+    const accessKey = this.importDetails()?.nfe?.chaveAcesso;
 
-    if (!chaveAcesso) {
-      this.errorMessage.set('Chave de acesso não encontrada.');
-      return;
-    }
+    if (!accessKey) return;
 
-    navigator.clipboard.writeText(chaveAcesso)
-      .then(() => {
-        this.copySuccess.set(true)
+    navigator.clipboard.writeText(accessKey);
 
-        setTimeout(() => {
-          this.copySuccess.set(false)
-        }, 2000)
-      })
+    this.copySuccess.set(true);
+    this.copySuccessLeaving.set(false);
+
+    setTimeout(() => {
+      this.copySuccessLeaving.set(true);
+    }, 1800);
+
+    setTimeout(() => {
+      this.copySuccess.set(false);
+      this.copySuccessLeaving.set(false);
+    }, 2100);
   }
 
   goBack(): void {
     void this.router.navigate(['/importar']);
   }
 
-  protected readonly formatDate = formatDate;
+  protected readonly tipoNotaResolver = tipoNotaResolver;
 }
