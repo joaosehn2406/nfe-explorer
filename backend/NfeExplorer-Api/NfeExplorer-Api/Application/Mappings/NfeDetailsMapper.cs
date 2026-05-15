@@ -40,17 +40,19 @@ public static class NfeDetailsMapper
                     Municipio = notaFiscal.Destinatario.Municipio,
                     CEP = notaFiscal.Destinatario.CEP
                 },
-                Transportadora = new TransportadoraResponse
-                {
-                    Id = notaFiscal.Transportadora.Id,
-                    RazaoSocial = notaFiscal.Transportadora.RazaoSocial,
-                    CNPJ = notaFiscal.Transportadora.CNPJ,
-                    CPF = notaFiscal.Transportadora.CPF,
-                    InscricaoEstadual = notaFiscal.Transportadora.InscricaoEstadual,
-                    Municipio = notaFiscal.Transportadora.Municipio,
-                    UF = notaFiscal.Transportadora.UF,
-                    ModalidadeFrete = notaFiscal.Transportadora.ModalidadeFrete
-                },
+                Transportadora = notaFiscal.Transportadora == null
+                    ? null
+                    : new TransportadoraResponse
+                    {
+                        Id = notaFiscal.Transportadora.Id,
+                        RazaoSocial = notaFiscal.Transportadora.RazaoSocial,
+                        CNPJ = notaFiscal.Transportadora.CNPJ,
+                        CPF = notaFiscal.Transportadora.CPF,
+                        InscricaoEstadual = notaFiscal.Transportadora.InscricaoEstadual,
+                        Municipio = notaFiscal.Transportadora.Municipio,
+                        UF = notaFiscal.Transportadora.UF,
+                        ModalidadeFrete = notaFiscal.Transportadora.ModalidadeFrete
+                    },
                 Impostos = new ImpostosNfeResponse
                 {
                     ValorProdutos = notaFiscal.ImpostosNfe.ValorProdutos,

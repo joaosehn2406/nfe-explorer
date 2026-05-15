@@ -40,7 +40,7 @@ export class ImportComponent {
         this.importResult.set(result);
       },
       error: (err: ApiErrorResponse) => {
-        this.errorMessage.set(err.message);
+        this.errorMessage.set(err.message ?? 'Erro inesperado. Tente novamente.');
       }
     });
   }

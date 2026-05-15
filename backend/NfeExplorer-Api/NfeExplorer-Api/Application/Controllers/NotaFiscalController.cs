@@ -27,13 +27,13 @@ public class NotaFiscalController : ControllerBase
     public async Task<IActionResult> GetById(Guid id)
     {
         var result = await _notaFiscalService.GetByIdAsync(id);
-        return result is not null ? Ok(result) : NotFound();
+        return result is not null ? Ok(result) : NotFound(new { code = 404, message = "NF-e não encontrada." });
     }
 
     [HttpGet("chave/{chave}")]
     public async Task<IActionResult> GetByChave(string chave)
     {
         var result = await _notaFiscalService.GetByChaveAsync(chave);
-        return result is not null ? Ok(result) : NotFound();
+        return result is not null ? Ok(result) : NotFound(new { code = 404, message = "NF-e não encontrada." });
     }
 }

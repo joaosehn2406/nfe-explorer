@@ -25,7 +25,7 @@ public class NfeResponse
     public DestinatarioResponse Destinatario { get; set; }
     public IEnumerable<ProdutoResponse> Produtos { get; set; }
     public ImpostosNfeResponse Impostos { get; set; }
-    public TransportadoraResponse Transportadora { get; set; }
+    public TransportadoraResponse? Transportadora { get; set; }
 }
 
 public class EmitenteResponse
