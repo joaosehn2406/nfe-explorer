@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Globalization;
+using System.Xml.Linq;
 using NfeExplorer_Api.Domain.Entities;
 using NfeExplorer_Api.Domain.Enums;
 
@@ -6,36 +7,37 @@ namespace NfeExplorer_Api.Infrastructure.Parsers;
 
 public static class NfeParser
 {
-    private static string? Get(XElement? element, string localName)
-    {
-        return element?.Elements()
-            .FirstOrDefault(e => e.Name.LocalName == localName)?.Value;
-    }
+    private static XElement? Find(XContainer? container, string localName) =>
+        container?.Descendants().FirstOrDefault(e => e.Name.LocalName == localName);
+
+    private static string? Get(XElement? element, string localName) =>
+        element?.Elements().FirstOrDefault(e => e.Name.LocalName == localName)?.Value;
+
+    private static decimal ParseDecimal(string? value, decimal fallback = 0m) =>
+        decimal.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var result) ? result : fallback;
+
+    private static int ParseInt(string? value, int fallback) =>
+        int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var result) ? result : fallback;
 
     public static NotaFiscal Parse(string xml)
     {
         var document = XDocument.Parse(xml);
-        var infNfe = document.Descendants()
-            .FirstOrDefault(info => info.Name.LocalName == "infNFe");
-
-        var ide = document.Descendants()
-            .FirstOrDefault(info => info.Name.LocalName == "ide");
-
-        var pag = document.Descendants()
-            .FirstOrDefault(info => info.Name.LocalName == "detPag");
+        var infNfe = Find(document, "infNFe");
+        var ide = Find(document, "ide");
+        var pag = Find(document, "detPag");
 
         return new NotaFiscal
         {
             ChaveAcesso = infNfe?.Attribute("Id")?.Value?.Replace("NFe", ""),
-            DataEmissao = DateTime.Parse(Get(ide, "dhEmi") ?? throw new ArgumentException("dhEmi ausente no XML.")),
+            DataEmissao = DateTime.Parse(Get(ide, "dhEmi") ?? throw new ArgumentException("dhEmi ausente no XML."),
+                CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind),
             DataImportacao = DateTime.UtcNow,
             NaturezaOperacao = Get(ide, "natOp"),
             NumeroNota = Get(ide, "nNF"),
             Serie = Get(ide, "serie"),
-            ValorTotal = decimal.Parse(document.Descendants()
-                .FirstOrDefault(e => e.Name.LocalName == "vNF")?.Value ?? "0"),
-            ValorPago = decimal.Parse(Get(pag, "vPag") ?? "0"),
-            FormaPagamento = (FormaPagamento)int.Parse(Get(pag, "tPag") ?? "99"),
+            ValorTotal = ParseDecimal(Find(document, "vNF")?.Value),
+            ValorPago = ParseDecimal(Get(pag, "vPag")),
+            FormaPagamento = (FormaPagamento)ParseInt(Get(pag, "tPag"), 99),
             TipoNota = Get(ide, "tpNF") == "1" ? TipoNota.Saida : TipoNota.Entrada,
             Emitente = ParseEmitente(infNfe),
             Destinatario = ParseDestinatario(infNfe),
@@ -47,11 +49,8 @@ public static class NfeParser
 
     private static Emitente ParseEmitente(XElement infNFe)
     {
-        var emit = infNFe.Descendants()
-            .FirstOrDefault(emit => emit.Name.LocalName == "emit");
-
-        var enderEmit = emit?.Descendants()
-            .FirstOrDefault(enderEmit => enderEmit.Name.LocalName == "enderEmit");
+        var emit = Find(infNFe, "emit");
+        var enderEmit = Find(emit, "enderEmit");
 
         return new Emitente
         {
@@ -70,11 +69,8 @@ public static class NfeParser
 
     private static Destinatario ParseDestinatario(XElement infNFe)
     {
-        var dest = infNFe.Descendants()
-            .FirstOrDefault(dest => dest.Name.LocalName == "dest");
-
-        var enderDest = dest?.Descendants()
-            .FirstOrDefault(enderDest => enderDest.Name.LocalName == "enderDest");
+        var dest = Find(infNFe, "dest");
+        var enderDest = Find(dest, "enderDest");
 
         return new Destinatario
         {
@@ -93,13 +89,11 @@ public static class NfeParser
 
     private static Transportadora? ParseTransportadora(XElement infNFe)
     {
-        var transp = infNFe.Descendants()
-            .FirstOrDefault(t => t.Name.LocalName == "transporta");
+        var transp = Find(infNFe, "transporta");
 
         if (transp == null) return null;
 
-        var modFrete = infNFe.Descendants()
-            .FirstOrDefault(t => t.Name.LocalName == "transp");
+        var modFrete = Find(infNFe, "transp");
 
         return new Transportadora
         {
@@ -109,28 +103,27 @@ public static class NfeParser
             InscricaoEstadual = Get(transp, "IE"),
             Municipio = Get(transp, "xMun"),
             UF = Get(transp, "UF"),
-            ModalidadeFrete = (ModalidadeFrete)int.Parse(Get(modFrete, "modFrete") ?? "9")
+            ModalidadeFrete = (ModalidadeFrete)ParseInt(Get(modFrete, "modFrete"), 9)
         };
     }
 
     private static ImpostosNfe ParseImpostos(XElement infNFe)
     {
-        var icmsTot = infNFe.Descendants()
-            .FirstOrDefault(e => e.Name.LocalName == "ICMSTot");
+        var icmsTot = Find(infNFe, "ICMSTot");
 
-        var valorICMS = decimal.Parse(Get(icmsTot, "vICMS") ?? "0");
-        var baseCalculo = decimal.Parse(Get(icmsTot, "vBC") ?? "1");
+        var valorICMS = ParseDecimal(Get(icmsTot, "vICMS"));
+        var baseCalculo = ParseDecimal(Get(icmsTot, "vBC"));
 
         return new ImpostosNfe
         {
-            ValorProdutos = decimal.Parse(Get(icmsTot, "vProd") ?? "0"),
-            BaseCalculoICMS = decimal.Parse(Get(icmsTot, "vBC") ?? "0"),
-            ValorICMS = decimal.Parse(Get(icmsTot, "vICMS") ?? "0"),
-            ValorPIS = decimal.Parse(Get(icmsTot, "vPIS") ?? "0"),
-            ValorCOFINS = decimal.Parse(Get(icmsTot, "vCOFINS") ?? "0"),
+            ValorProdutos = ParseDecimal(Get(icmsTot, "vProd")),
+            BaseCalculoICMS = baseCalculo,
+            ValorICMS = valorICMS,
+            ValorPIS = ParseDecimal(Get(icmsTot, "vPIS")),
+            ValorCOFINS = ParseDecimal(Get(icmsTot, "vCOFINS")),
             AliquotaIcms = baseCalculo != 0 ? (valorICMS / baseCalculo) * 100 : 0,
-            ValorTotalTributos = decimal.Parse(Get(icmsTot, "vTribFed") ?? "0"),
-            ValorNota = decimal.Parse(Get(icmsTot, "vNF") ?? "0")
+            ValorTotalTributos = ParseDecimal(Get(icmsTot, "vTribFed")),
+            ValorNota = ParseDecimal(Get(icmsTot, "vNF"))
         };
     }
 
@@ -140,17 +133,16 @@ public static class NfeParser
             .Where(e => e.Name.LocalName == "det")
             .Select(det =>
             {
-                var prod = det.Descendants()
-                    .FirstOrDefault(e => e.Name.LocalName == "prod");
+                var prod = Find(det, "prod");
 
                 return new Produto
                 {
                     CodigoProduto = Get(prod, "cProd"),
                     Descricao = Get(prod, "xProd"),
                     NCM = Get(prod, "NCM"),
-                    Quantidade = decimal.Parse(Get(prod, "qCom") ?? "0"),
-                    ValorUnitario = decimal.Parse(Get(prod, "vUnCom") ?? "0"),
-                    ValorTotal = decimal.Parse(Get(prod, "vProd") ?? "0")
+                    Quantidade = ParseDecimal(Get(prod, "qCom")),
+                    ValorUnitario = ParseDecimal(Get(prod, "vUnCom")),
+                    ValorTotal = ParseDecimal(Get(prod, "vProd"))
                 };
             })
             .ToList();
