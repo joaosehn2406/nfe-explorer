@@ -33,6 +33,7 @@ public class GlobalExceptionHandler
 
             var (statusCode, message) = ex switch
             {
+                DuplicataNfeException => (409, ex.Message),
                 ArgumentException => (400, ex.Message),
                 KeyNotFoundException => (404, ex.Message),
                 UnauthorizedAccessException => (401, ex.Message),

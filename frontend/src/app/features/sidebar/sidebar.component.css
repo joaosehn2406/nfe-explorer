@@ -1,121 +1,113 @@
 :host {
   display: block;
-  width: 230px;
-  flex-shrink: 0;
-}
-
-.sidebar-container {
-  height: 100%;
-  width: 230px;
-  background: #ffffff;
-  border-right: 1px solid #e2ddd6;
-  display: flex;
+  width: 232px;
   flex-shrink: 0;
 }
 
 .sidebar {
+  height: 100%;
+  width: 232px;
+  background: var(--nav-bg);
+  border-right: 1px solid var(--nav-bg-2);
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
 
 .sidebar-header {
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 0.6rem;
-  margin: 0;
-  padding: 1.3rem 1.2rem;
-  border-bottom: 1px solid #e2ddd6;
+  padding: 1.15rem 1.15rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.logo-icon {
+.logo-mark {
   width: 30px;
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
-  background: #1c1916;
-  color: white;
-  font-size: 0.77rem;
-  font-weight: 550;
+  border-radius: var(--r);
+  background: var(--nav-accent);
+  color: #04101f;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   flex-shrink: 0;
 }
 
 .logo-text {
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.5px;
-  transform: scaleY(1.5);
-  color: #1c1916;
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--nav-ink-strong);
 }
-
-.logo-text span {
-  color: #2d6a4f;
-}
+.logo-text span { color: var(--nav-accent); }
 
 .sidebar-nav {
-  padding: 0.8rem 0.6rem;
-  margin: 0;
-}
-
-.nav-section-title {
-  display: block;
-  padding: 0.8rem 0.6rem 0;
-  font-size: 0.65rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #8a8178;
-  font-family: 'Geist', system-ui, sans-serif;
-}
-
-.nav-list {
+  flex: 1;
+  padding: 0.7rem 0.55rem;
   display: flex;
   flex-direction: column;
-  padding: 0;
+  gap: 1px;
+}
+
+.nav-section {
+  padding: 0.95rem 0.65rem 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #5d6b80;
 }
 
 .nav-item {
   display: flex;
-  flex-direction: row;
-  list-style: none;
-  gap: 0.6rem;
   align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: var(--r);
+  border-left: 2px solid transparent;
+  color: var(--nav-ink);
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
   cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  font-family: 'Geist', system-ui, sans-serif;
-  text-align: left;
-  padding: 0.55rem 0.75rem;
-  border-radius: 7px;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.14s, color 0.14s, border-color 0.14s;
 }
 
-.nav-item span {
-  color: #3d3730;
-}
+.nav-item svg { color: #6b7996; transition: color 0.14s; flex-shrink: 0; }
+.nav-item:hover { background: var(--nav-hover); color: var(--nav-ink-strong); }
+.nav-item:hover svg { color: var(--nav-ink); }
 
-.nav-item:hover {
-  background: #f0ede7;
+.nav-item.active {
+  background: var(--nav-active);
+  border-left-color: var(--nav-accent);
+  color: #fff;
 }
+.nav-item.active svg { color: var(--nav-accent); }
 
-.nav-item.active,
-.nav-item.active span {
-  background: #e8f4ee;
-  color: #2d6a4f;
+.nav-badge {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  color: var(--nav-ink);
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: var(--r-sm);
+  padding: 0.05rem 0.4rem;
 }
+.nav-item.active .nav-badge { color: #fff; background: rgba(76, 141, 255, 0.25); }
 
 .sidebar-footer {
-  margin-top: auto;
-  padding: 1rem 1.2rem;
-  border-top: 1px solid #e2ddd6;
+  padding: 0.95rem 1.15rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
-
-.project-description {
-  font-size: 10px;
-  font-weight: 450;
-  letter-spacing: 0.03rem;
-  color: #8a8178;
-}
+.footer-line { font-size: 0.72rem; color: var(--nav-ink); font-weight: 500; }
+.footer-ver { color: #5d6b80; }
+.footer-stack { font-family: var(--mono); font-size: 0.62rem; color: #5d6b80; letter-spacing: 0.02em; }

@@ -1,0 +1,109 @@
+<section class="dash">
+  <div class="page-head">
+    <span class="page-eyebrow">Panorama</span>
+    <h1 class="page-title">Visão geral</h1>
+    <p class="page-sub">Resumo das notas fiscais eletrônicas armazenadas no sistema.</p>
+  </div>
+
+  @if (error()) {
+    <div class="panel"><div class="empty">{{ error() }}</div></div>
+  } @else if (loading() && !stats()) {
+    <div class="panel"><div class="empty">Carregando painel…</div></div>
+  } @else if (stats(); as s) {
+
+    @if (s.totalNotas === 0) {
+      <div class="panel">
+        <div class="empty">
+          Nenhuma nota importada ainda.
+          <div style="margin-top:0.8rem">
+            <a class="btn btn--primary btn--sm" routerLink="/importar">Importar a primeira NF-e</a>
+          </div>
+        </div>
+      </div>
+    } @else {
+      <div class="stat-grid">
+        <div class="stat">
+          <span class="stat-label">Total de notas</span>
+          <span class="stat-value">{{ s.totalNotas }}</span>
+          <span class="stat-sub">média {{ media() | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}/nota</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Valor acumulado</span>
+          <span class="stat-value stat-value--accent">{{ s.valorTotal | currency: 'BRL':'symbol':'1.0-0':'pt-BR' }}</span>
+          <span class="stat-sub">soma de todas as notas</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Saídas</span>
+          <span class="stat-value">{{ s.totalSaidas }}</span>
+          <span class="stat-sub stat-sub--saida">{{ pctSaidas() }}% do total</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Entradas</span>
+          <span class="stat-value">{{ s.totalEntradas }}</span>
+          <span class="stat-sub stat-sub--entrada">{{ pctEntradas() }}% do total</span>
+        </div>
+      </div>
+
+      <div class="dash-row">
+        <div class="panel">
+          <div class="panel__head">Distribuição por tipo</div>
+          <div class="panel__body donut-body">
+            <svg class="donut" viewBox="0 0 36 36" role="img" aria-label="Distribuição saída e entrada">
+              <circle class="donut-track" cx="18" cy="18" r="15.915" fill="none" stroke-width="3.4"/>
+              <circle cx="18" cy="18" r="15.915" fill="none" stroke="var(--saida)" stroke-width="3.4"
+                      [attr.stroke-dasharray]="donut().saida + ' ' + donut().entrada"
+                      stroke-dashoffset="25"/>
+              <circle cx="18" cy="18" r="15.915" fill="none" stroke="var(--entrada)" stroke-width="3.4"
+                      [attr.stroke-dasharray]="donut().entrada + ' ' + donut().saida"
+                      [attr.stroke-dashoffset]="25 - donut().saida"/>
+            </svg>
+            <div class="donut-legend">
+              <div class="legend-item">
+                <span class="legend-dot" style="background:var(--saida)"></span>
+                Saída <b>{{ s.totalSaidas }}</b>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot" style="background:var(--entrada)"></span>
+                Entrada <b>{{ s.totalEntradas }}</b>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel__head">Top emitentes por valor</div>
+          <div class="panel__body">
+            <div class="emit-bars">
+              @for (e of topEmitentes(); track e.nome) {
+                <div class="emit-bar">
+                  <div class="emit-bar__head">
+                    <span class="emit-bar__name">{{ e.nome }}</span>
+                    <span class="emit-bar__val">{{ e.valor | currency: 'BRL':'symbol':'1.0-0':'pt-BR' }}</span>
+                  </div>
+                  <div class="emit-bar__track">
+                    <div class="emit-bar__fill" [style.width.%]="e.pct" [style.background]="e.color"></div>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel__head">Valor emitido por mês</div>
+        <div class="panel__body">
+          <div class="bars">
+            @for (m of meses(); track $index) {
+              <div class="bar-col">
+                <span class="bar-val">{{ m.valor > 0 ? (m.valor / 1000).toFixed(1) + 'k' : '' }}</span>
+                <div class="bar" [style.height.%]="m.heightPct"></div>
+                <span class="bar-label">{{ m.label }}<em>/{{ m.ano }}</em></span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  }
+</section>

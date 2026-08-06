@@ -7,22 +7,15 @@ import { finalize } from 'rxjs';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { tipoNotaResolver } from '../../models/enums/tipo.nota';
 import { FormaPagamento } from '../../models/enums/forma.pagamento';
-import { BadgeComponent } from '../utils/badge/badge.component';
 import { DetailsCardComponent } from '../utils/details-card/details-card.component';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
+import { formatCnpj, formatCpf, groupChave, isSaida, tipoNotaLabel } from '../../shared/format';
 
 @Component({
   selector: 'app-import-details',
-  imports: [
-    DatePipe,
-    CurrencyPipe,
-    BadgeComponent,
-    DetailsCardComponent,
-    MatTab,
-    MatTabGroup
-  ],
+  imports: [DatePipe, CurrencyPipe, DetailsCardComponent, MatTab, MatTabGroup],
   templateUrl: './import.details.component.html',
-  styleUrl: './import.details.component.css'
+  styleUrl: './import.details.component.css',
 })
 export class ImportDetailsComponent implements OnInit {
   importDetails = signal<NfeDetailsResponse | null>(null);
@@ -30,15 +23,17 @@ export class ImportDetailsComponent implements OnInit {
   isLoading = signal<boolean>(false);
   copySuccess = signal<boolean>(false);
   copySuccessLeaving = signal(false);
+  showDeleteModal = signal(false);
+  deleting = signal(false);
 
   impostosRows = computed(() => {
     const imp = this.importDetails()?.nfe?.impostos;
     if (!imp) return [];
     const max = Math.max(imp.valorICMS, imp.valorPIS, imp.valorCOFINS, 1);
     return [
-      { label: 'ICMS', valor: imp.valorICMS, color: '#2d6a4f', pct: (imp.valorICMS / max) * 100 },
-      { label: 'PIS', valor: imp.valorPIS, color: '#2563a8', pct: (imp.valorPIS / max) * 100 },
-      { label: 'COFINS', valor: imp.valorCOFINS, color: '#c08b2a', pct: (imp.valorCOFINS / max) * 100 },
+      { label: 'ICMS', valor: imp.valorICMS, color: 'var(--accent)', pct: (imp.valorICMS / max) * 100 },
+      { label: 'PIS', valor: imp.valorPIS, color: 'var(--entrada)', pct: (imp.valorPIS / max) * 100 },
+      { label: 'COFINS', valor: imp.valorCOFINS, color: 'var(--saida)', pct: (imp.valorCOFINS / max) * 100 },
     ];
   });
 
@@ -92,18 +87,27 @@ export class ImportDetailsComponent implements OnInit {
     }, 2100);
   }
 
+  confirmDelete(): void {
+    const id = this.importDetails()?.nfe?.id;
+    if (!id) return;
+
+    this.deleting.set(true);
+    this.nfeService.deleteNfe(id).pipe(
+      finalize(() => this.deleting.set(false))
+    ).subscribe({
+      next: () => {
+        this.showDeleteModal.set(false);
+        void this.router.navigate(['/notas']);
+      },
+      error: (err: ApiErrorResponse) => {
+        this.showDeleteModal.set(false);
+        this.errorMessage.set(err.message ?? 'Não foi possível excluir a nota.');
+      }
+    });
+  }
+
   goBack(): void {
-    void this.router.navigate(['/importar']);
-  }
-
-  formatCnpj(cnpj: string | null | undefined): string {
-    if (!cnpj) return '—';
-    return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
-  }
-
-  formatCpf(cpf: string | null | undefined): string {
-    if (!cpf) return '—';
-    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    void this.router.navigate(['/notas']);
   }
 
   formatPagamento(forma: FormaPagamento | undefined): string {
@@ -117,4 +121,9 @@ export class ImportDetailsComponent implements OnInit {
   }
 
   protected readonly tipoNotaResolver = tipoNotaResolver;
+  protected readonly formatCnpj = formatCnpj;
+  protected readonly formatCpf = formatCpf;
+  protected readonly groupChave = groupChave;
+  protected readonly isSaida = isSaida;
+  protected readonly tipoNotaLabel = tipoNotaLabel;
 }

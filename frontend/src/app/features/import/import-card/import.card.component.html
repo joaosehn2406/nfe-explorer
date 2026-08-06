@@ -3,19 +3,36 @@
 
   <div class="dropzone" (click)="fileInput.click()">
     <input #fileInput type="file" accept=".xml" hidden (change)="onFileChange($event)">
-    <div class="dropzone-icon">📄</div>
-    <p>Arraste o arquivo XML aqui</p>
-    <small>ou clique para selecionar · máx. 2MB · .xml</small>
+    <div class="dropzone-icon">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+           stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/>
+        <path d="M14 2v6h6"/><path d="M12 18v-6"/><path d="m9 15 3-3 3 3"/>
+      </svg>
+    </div>
+    @if (selectedFile) {
+      <p>{{ selectedFile.name }}</p>
+      <small>arquivo selecionado · clique para trocar</small>
+    } @else {
+      <p>Selecione o arquivo XML</p>
+      <small>clique para escolher · máx. 5 MB · .xml</small>
+    }
   </div>
 
-  <span class="card-divider">Ou cole o xml</span>
+  <span class="card-divider">ou cole o XML</span>
 
-  <textarea class="xml-textarea" placeholder='<?xml version="1.0" encoding="UTF-8"? >'
+  <textarea class="xml-textarea" placeholder='<?xml version="1.0" encoding="UTF-8"?>'
             [(ngModel)]="xmlTextAreaContent"></textarea>
 
   <div class="actions-row">
-    <button class="analyse-import-bt" (click)="emitValue()"><span>🔍</span> Analisar e Importar</button>
-    <button class="example-bt" (click)="fillTextAreaWithExample()">Exemplo</button>
-    <button class="clean-bt" (click)="removeTextFromTextArea()">Limpar</button>
+    <button class="btn btn--primary analyse" (click)="emitValue()">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+      </svg>
+      Analisar e importar
+    </button>
+    <button class="btn btn--ghost" (click)="fillTextAreaWithExample()">Exemplo</button>
+    <button class="btn btn--ghost" (click)="removeTextFromTextArea()">Limpar</button>
   </div>
 </section>

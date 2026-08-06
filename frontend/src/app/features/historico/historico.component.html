@@ -1,0 +1,56 @@
+<section class="hist">
+  <div class="page-head">
+    <span class="page-eyebrow">Auditoria</span>
+    <h1 class="page-title">Histórico de importações</h1>
+    <p class="page-sub">Registro de cada tentativa de importação, incluindo falhas e duplicatas.</p>
+  </div>
+
+  <div class="toolbar">
+    <select class="select" [(ngModel)]="statusFilter" (change)="load()">
+      <option value="">Todos os status</option>
+      <option value="0">Sucesso</option>
+      <option value="1">Falha</option>
+      <option value="2">Duplicada</option>
+    </select>
+  </div>
+
+  <div class="panel">
+    <div class="panel__body">
+      @if (loading()) {
+        <div class="empty">Carregando…</div>
+      } @else if (error()) {
+        <div class="empty">{{ error() }}</div>
+      } @else if (logs().length === 0) {
+        <div class="empty">Nenhum registro de importação encontrado.</div>
+      } @else {
+        <ol class="timeline">
+          @for (log of logs(); track log.id) {
+            <li class="tl-item">
+              <span class="tl-dot" [class]="'tl-dot--' + statusClass(log.status)"></span>
+              <div class="tl-card">
+                <div class="tl-top">
+                  <span class="tag" [class]="'tag--' + statusClass(log.status)">{{ statusLabel(log.status) }}</span>
+                  <span class="tl-time">{{ log.dataHora | date: 'dd/MM/yyyy · HH:mm' }}</span>
+                </div>
+                <div class="tl-body">
+                  <span class="tl-file">{{ log.nomeArquivo }}</span>
+                  @if (log.status === Status.Sucesso) {
+                    @if (log.numeroNota) { <span class="tl-sep">·</span> <span>Nota <b>#{{ log.numeroNota }}</b></span> }
+                    @if (log.emitente) { <span class="tl-sep">·</span> <span>{{ log.emitente }}</span> }
+                    @if (log.valor != null) {
+                      <span class="tl-sep">·</span>
+                      <b class="tl-val">{{ log.valor | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</b>
+                    }
+                  } @else {
+                    @if (log.numeroNota) { <span class="tl-sep">·</span> <span>Nota <b>#{{ log.numeroNota }}</b></span> }
+                    @if (log.mensagem) { <span class="tl-sep">·</span> <span class="tl-msg">{{ log.mensagem }}</span> }
+                  }
+                </div>
+              </div>
+            </li>
+          }
+        </ol>
+      }
+    </div>
+  </div>
+</section>

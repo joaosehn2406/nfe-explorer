@@ -73,6 +73,39 @@ namespace NfeExplorer_Api.Migrations
                     b.ToTable("Destinatarios");
                 });
 
+            modelBuilder.Entity("NfeExplorer_Api.Domain.Entities.ImportLog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DataHora")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Emitente")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Mensagem")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NomeArquivo")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NumeroNota")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal?>("Valor")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ImportLogs");
+                });
+
             modelBuilder.Entity("NfeExplorer_Api.Models.Emitente", b =>
                 {
                     b.Property<Guid>("Id")

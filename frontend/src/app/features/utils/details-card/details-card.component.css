@@ -1,16 +1,18 @@
 .details-card {
-  background: #ffffff;
-  border: 1px solid #e2ddd6;
-  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
   overflow: hidden;
 }
 
 .details-card-header {
-  padding: 0.65rem 1.1rem;
-  background: #f0ede7;
-  border-bottom: 1px solid #e2ddd6;
-  font-size: 0.72rem;
+  padding: 0.55rem 0.95rem;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.68rem;
   font-weight: 600;
-  color: #3d3730;
-  font-family: 'Geist', system-ui, sans-serif;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-2);
 }

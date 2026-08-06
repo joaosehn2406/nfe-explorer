@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\joaopedro\\Documents\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj": {}
+    "C:\\Users\\joaopedro\\WebstormProjects\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\joaopedro\\Documents\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj": {
+    "C:\\Users\\joaopedro\\WebstormProjects\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joaopedro\\Documents\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj",
+        "projectUniqueName": "C:\\Users\\joaopedro\\WebstormProjects\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj",
         "projectName": "NfeExplorer-Api",
-        "projectPath": "C:\\Users\\joaopedro\\Documents\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj",
+        "projectPath": "C:\\Users\\joaopedro\\WebstormProjects\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj",
         "packagesPath": "C:\\Users\\joaopedro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joaopedro\\Documents\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\obj\\",
+        "outputPath": "C:\\Users\\joaopedro\\WebstormProjects\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\joaopedro\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -37,7 +37,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -77,6 +78,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.24, 8.0.24]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.24, 8.0.24]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.24, 8.0.24]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.24, 8.0.24]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -85,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\joaopedro\\.dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

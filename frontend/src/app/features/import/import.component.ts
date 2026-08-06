@@ -52,6 +52,6 @@ export class ImportComponent {
       return;
     }
 
-    this.router.navigate(['/import-details', id]);
+    this.router.navigate(['/notas', id]);
   }
 }

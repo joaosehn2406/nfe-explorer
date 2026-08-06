@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "m3dryJtxFz4=",
+  "dgSpecHash": "DOlsmE99nGw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\joaopedro\\Documents\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj",
+  "projectFilePath": "C:\\Users\\joaopedro\\WebstormProjects\\nfe-explorer\\backend\\NfeExplorer-Api\\NfeExplorer-Api\\NfeExplorer-Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joaopedro\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\joaopedro\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.24\\microsoft.aspnetcore.openapi.8.0.24.nupkg.sha512",
@@ -49,7 +49,11 @@
     "C:\\Users\\joaopedro\\.nuget\\packages\\system.reflection.metadata\\6.0.1\\system.reflection.metadata.6.0.1.nupkg.sha512",
     "C:\\Users\\joaopedro\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\joaopedro\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
-    "C:\\Users\\joaopedro\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512"
+    "C:\\Users\\joaopedro\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512",
+    "C:\\Users\\joaopedro\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.24\\microsoft.netcore.app.ref.8.0.24.nupkg.sha512",
+    "C:\\Users\\joaopedro\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.24\\microsoft.windowsdesktop.app.ref.8.0.24.nupkg.sha512",
+    "C:\\Users\\joaopedro\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.24\\microsoft.aspnetcore.app.ref.8.0.24.nupkg.sha512",
+    "C:\\Users\\joaopedro\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.24\\microsoft.netcore.app.host.win-x64.8.0.24.nupkg.sha512"
   ],
   "logs": []
 }
