@@ -4,48 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31a7058b-6d9d-4f4c-a31f-d9a07a98d474" name="Changes" comment="Created badge components, as well as the import details component">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Application/Controllers/NotaFiscalController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Application/Controllers/NotaFiscalController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Application/Exception/GlobalExceptionHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Application/Exception/GlobalExceptionHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Application/Interfaces/INotaFiscalService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Application/Interfaces/INotaFiscalService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Application/Services/NotaFiscalService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Application/Services/NotaFiscalService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Domain/Interfaces/INotaFiscalRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Domain/Interfaces/INotaFiscalRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Infrastructure/Data/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Infrastructure/Data/AppDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Infrastructure/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Infrastructure/Migrations/AppDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Infrastructure/Repositories/NotaFiscalRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/Infrastructure/Repositories/NotaFiscalRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/Debug/net8.0/NfeExplorer-Api.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/Debug/net8.0/NfeExplorer-Api.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/Debug/net8.0/NfeExplorer-Api.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/Debug/net8.0/NfeExplorer-Api.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/Debug/net8.0/NfeExplorer-Api.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/Debug/net8.0/NfeExplorer-Api.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/Debug/net8.0/NfeExplorer-Api.GlobalUsings.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/Debug/net8.0/NfeExplorer-Api.GlobalUsings.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/Debug/net8.0/NfeExplorer-Api.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/Debug/net8.0/NfeExplorer-Api.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/NfeExplorer-Api.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/NfeExplorer-Api.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/NfeExplorer-Api/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/NfeExplorer-Api/global.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/NfeExplorer-Api/global.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/header/header.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/header/header.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/header/header.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/header/header.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import-details/import.details.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import-details/import.details.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import-details/import.details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import-details/import.details.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import-details/import.details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import-details/import.details.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import-card/import.card.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/import/import.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/layout/layout.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/layout/layout.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/sidebar/sidebar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/utils/details-card/details-card.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/utils/details-card/details-card.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/nfe.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/nfe.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.css" afterDir="false" />
-    </list>
+    <list default="true" id="31a7058b-6d9d-4f4c-a31f-d9a07a98d474" name="Changes" comment="feat: implemented new modules, files, and styling" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -142,6 +101,7 @@
       <workItem from="1782323783406" duration="7000" />
       <workItem from="1783387383847" duration="621000" />
       <workItem from="1783604267540" duration="1825000" />
+      <workItem from="1786033727125" duration="306000" />
     </task>
     <task id="LOCAL-00001" summary="Started creating components">
       <option name="closed" value="true" />
@@ -343,7 +303,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778886480008</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="feat: implemented new modules, files, and styling">
+      <option name="closed" value="true" />
+      <created>1786034021016</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1786034021016</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -361,7 +329,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Started creating components" />
     <MESSAGE value="Adjusted config files" />
     <MESSAGE value="Created import nfe lateral tab" />
     <MESSAGE value="Created footer for lateral tab bar" />
@@ -386,6 +353,7 @@
     <MESSAGE value="Created chave de acesso div with button" />
     <MESSAGE value="Added animation to onCopySuccess" />
     <MESSAGE value="Created badge components, as well as the import details component" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created badge components, as well as the import details component" />
+    <MESSAGE value="feat: implemented new modules, files, and styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: implemented new modules, files, and styling" />
   </component>
 </project>
