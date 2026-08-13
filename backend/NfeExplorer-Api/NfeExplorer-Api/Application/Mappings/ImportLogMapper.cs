@@ -6,40 +6,42 @@ namespace NfeExplorer_Api.Application.Mappings;
 
 public static class ImportLogMapper
 {
-    public static ImportLog Sucesso(string nomeArquivo, NotaFiscal nota)
+    public static ImportLog Success(string fileName, Invoice invoice)
     {
         return new ImportLog
         {
-            DataHora = DateTime.UtcNow,
-            Status = StatusImportacao.Sucesso,
-            NomeArquivo = nomeArquivo,
-            NumeroNota = nota.NumeroNota,
-            Emitente = nota.Emitente.NomeFantasia ?? nota.Emitente.RazaoSocial,
-            Valor = nota.ValorTotal
+            Timestamp = DateTime.UtcNow,
+            Status = ImportStatus.Success,
+            FileName = fileName,
+            InvoiceNumber = invoice.InvoiceNumber,
+            Issuer = invoice.Issuer.TradeName ?? invoice.Issuer.LegalName,
+            Amount = invoice.TotalAmount,
+            Message = "Imported successfully."
         };
     }
 
-    public static ImportLog Duplicada(string nomeArquivo, NotaFiscal? nota, string mensagem)
+    public static ImportLog Duplicate(string fileName, Invoice? invoice, string message)
     {
         return new ImportLog
         {
-            DataHora = DateTime.UtcNow,
-            Status = StatusImportacao.Duplicada,
-            NomeArquivo = nomeArquivo,
-            NumeroNota = nota?.NumeroNota,
-            Emitente = nota is null ? null : nota.Emitente.NomeFantasia ?? nota.Emitente.RazaoSocial,
-            Mensagem = mensagem
+            Timestamp = DateTime.UtcNow,
+            Status = ImportStatus.Duplicate,
+            FileName = fileName,
+            InvoiceNumber = invoice?.InvoiceNumber,
+            Issuer = invoice is null ? null : invoice.Issuer.TradeName ?? invoice.Issuer.LegalName,
+            Amount = invoice?.TotalAmount,
+            Message = message
         };
     }
 
-    public static ImportLog Erro(string nomeArquivo, string mensagem)
+    public static ImportLog Error(string fileName, string message)
     {
         return new ImportLog
         {
-            DataHora = DateTime.UtcNow,
-            Status = StatusImportacao.Erro,
-            NomeArquivo = nomeArquivo,
-            Mensagem = mensagem
+            Timestamp = DateTime.UtcNow,
+            Status = ImportStatus.Error,
+            FileName = fileName,
+            Message = message
         };
     }
 
@@ -48,13 +50,13 @@ public static class ImportLogMapper
         return new ImportLogResponse
         {
             Id = log.Id,
-            DataHora = log.DataHora,
+            Timestamp = log.Timestamp,
             Status = log.Status,
-            NomeArquivo = log.NomeArquivo,
-            NumeroNota = log.NumeroNota,
-            Emitente = log.Emitente,
-            Valor = log.Valor,
-            Mensagem = log.Mensagem
+            FileName = log.FileName,
+            InvoiceNumber = log.InvoiceNumber,
+            Issuer = log.Issuer,
+            Amount = log.Amount,
+            Message = log.Message
         };
     }
 }

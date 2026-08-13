@@ -5,20 +5,20 @@ namespace NfeExplorer_Api.Application.Mappings;
 
 public static class NfeListMapper
 {
-    public static NfeListItemResponse ToListItem(NotaFiscal nota)
+    public static NfeListItemResponse ToListItem(Invoice invoice)
     {
         return new NfeListItemResponse
         {
-            Id = nota.Id,
-            NumeroNota = nota.NumeroNota,
-            Serie = nota.Serie,
-            ChaveAcesso = nota.ChaveAcesso,
-            TipoNota = nota.TipoNota,
-            DataEmissao = nota.DataEmissao,
-            ValorTotal = nota.ValorTotal,
-            EmitenteNome = nota.Emitente.NomeFantasia ?? nota.Emitente.RazaoSocial,
-            EmitenteCnpj = nota.Emitente.CNPJ,
-            DestinatarioNome = nota.Destinatario.RazaoSocial
+            Id = invoice.Id,
+            InvoiceNumber = invoice.InvoiceNumber,
+            Series = invoice.Series,
+            AccessKey = invoice.AccessKey,
+            InvoiceType = invoice.InvoiceType,
+            IssuedAt = invoice.IssuedAt,
+            TotalAmount = invoice.TotalAmount,
+            IssuerName = invoice.Issuer.TradeName ?? invoice.Issuer.LegalName,
+            IssuerCnpj = invoice.Issuer.CNPJ,
+            RecipientName = invoice.Recipient.LegalName
         };
     }
 }

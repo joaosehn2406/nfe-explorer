@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Xml.Linq;
 using NfeExplorer_Api.Domain.Entities;
 using NfeExplorer_Api.Domain.Enums;
@@ -8,10 +8,15 @@ namespace NfeExplorer_Api.Infrastructure.Parsers;
 public static class NfeParser
 {
     private static XElement? Find(XContainer? container, string localName) =>
-        container?.Descendants().FirstOrDefault(e => e.Name.LocalName == localName);
+        container?.Descendants().FirstOrDefault(element => element.Name.LocalName == localName);
 
     private static string? Get(XElement? element, string localName) =>
-        element?.Elements().FirstOrDefault(e => e.Name.LocalName == localName)?.Value;
+        element?.Elements().FirstOrDefault(child => child.Name.LocalName == localName)?.Value;
+
+    private static string RequiredGet(XElement? element, string localName)
+    {
+        return Get(element, localName) ?? throw new ArgumentException($"{localName} is missing from XML.");
+    }
 
     private static decimal ParseDecimal(string? value, decimal fallback = 0m) =>
         decimal.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var result) ? result : fallback;
@@ -19,130 +24,139 @@ public static class NfeParser
     private static int ParseInt(string? value, int fallback) =>
         int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var result) ? result : fallback;
 
-    public static NotaFiscal Parse(string xml)
+    public static Invoice Parse(string xml)
     {
         var document = XDocument.Parse(xml);
         var infNfe = Find(document, "infNFe");
         var ide = Find(document, "ide");
-        var pag = Find(document, "detPag");
+        var payment = Find(document, "detPag");
 
-        return new NotaFiscal
+        if (infNfe == null)
         {
-            ChaveAcesso = infNfe?.Attribute("Id")?.Value?.Replace("NFe", ""),
-            DataEmissao = DateTime.Parse(Get(ide, "dhEmi") ?? throw new ArgumentException("dhEmi ausente no XML."),
+            throw new ArgumentException("infNFe is missing from XML.");
+        }
+
+        return new Invoice
+        {
+            AccessKey = infNfe.Attribute("Id")?.Value?.Replace("NFe", "")
+                ?? throw new ArgumentException("NF-e access key is missing from XML."),
+            IssuedAt = DateTime.Parse(RequiredGet(ide, "dhEmi"),
                 CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind),
-            DataImportacao = DateTime.UtcNow,
-            NaturezaOperacao = Get(ide, "natOp"),
-            NumeroNota = Get(ide, "nNF"),
-            Serie = Get(ide, "serie"),
-            ValorTotal = ParseDecimal(Find(document, "vNF")?.Value),
-            ValorPago = ParseDecimal(Get(pag, "vPag")),
-            FormaPagamento = (FormaPagamento)ParseInt(Get(pag, "tPag"), 99),
-            TipoNota = Get(ide, "tpNF") == "1" ? TipoNota.Saida : TipoNota.Entrada,
-            Emitente = ParseEmitente(infNfe),
-            Destinatario = ParseDestinatario(infNfe),
-            Transportadora = ParseTransportadora(infNfe),
-            ImpostosNfe = ParseImpostos(infNfe),
-            Produtos = ParseProdutos(infNfe)
+            ImportedAt = DateTime.UtcNow,
+            OperationNature = RequiredGet(ide, "natOp"),
+            InvoiceNumber = RequiredGet(ide, "nNF"),
+            Series = RequiredGet(ide, "serie"),
+            TotalAmount = ParseDecimal(Find(document, "vNF")?.Value),
+            PaidAmount = ParseDecimal(Get(payment, "vPag")),
+            PaymentMethod = (PaymentMethod)ParseInt(Get(payment, "tPag"), 99),
+            InvoiceType = Get(ide, "tpNF") == "1" ? InvoiceType.Outbound : InvoiceType.Inbound,
+            Issuer = ParseIssuer(infNfe),
+            Recipient = ParseRecipient(infNfe),
+            Carrier = ParseCarrier(infNfe),
+            Taxes = ParseTaxes(infNfe),
+            Products = ParseProducts(infNfe)
         };
     }
 
-    private static Emitente ParseEmitente(XElement infNFe)
+    private static Issuer ParseIssuer(XElement infNFe)
     {
-        var emit = Find(infNFe, "emit");
-        var enderEmit = Find(emit, "enderEmit");
+        var issuer = Find(infNFe, "emit");
+        var issuerAddress = Find(issuer, "enderEmit");
 
-        return new Emitente
+        return new Issuer
         {
-            RazaoSocial = Get(emit, "xNome"),
-            NomeFantasia = Get(emit, "xFant"),
-            CNPJ = Get(emit, "CNPJ"),
-            InscricaoEstadual = Get(emit, "IE"),
-            Logradouro = Get(enderEmit, "xLgr"),
-            Numero = Get(enderEmit, "nro"),
-            Bairro = Get(enderEmit, "xBairro"),
-            Municipio = Get(enderEmit, "xMun"),
-            UF = Get(enderEmit, "UF"),
-            CEP = Get(enderEmit, "CEP")
+            LegalName = RequiredGet(issuer, "xNome"),
+            TradeName = Get(issuer, "xFant"),
+            CNPJ = RequiredGet(issuer, "CNPJ"),
+            StateRegistration = Get(issuer, "IE"),
+            Street = RequiredGet(issuerAddress, "xLgr"),
+            Number = RequiredGet(issuerAddress, "nro"),
+            District = RequiredGet(issuerAddress, "xBairro"),
+            City = RequiredGet(issuerAddress, "xMun"),
+            UF = RequiredGet(issuerAddress, "UF"),
+            ZipCode = RequiredGet(issuerAddress, "CEP")
         };
     }
 
-    private static Destinatario ParseDestinatario(XElement infNFe)
+    private static Recipient ParseRecipient(XElement infNFe)
     {
-        var dest = Find(infNFe, "dest");
-        var enderDest = Find(dest, "enderDest");
+        var recipient = Find(infNFe, "dest");
+        var recipientAddress = Find(recipient, "enderDest");
 
-        return new Destinatario
+        return new Recipient
         {
-            RazaoSocial = Get(dest, "xNome"),
-            CNPJ = Get(dest, "CNPJ"),
-            CPF = Get(dest, "CPF"),
-            InscricaoEstadual = Get(dest, "IE"),
-            Logradouro = Get(enderDest, "xLgr"),
-            Numero = Get(enderDest, "nro"),
-            Bairro = Get(enderDest, "xBairro"),
-            Municipio = Get(enderDest, "xMun"),
-            UF = Get(enderDest, "UF"),
-            CEP = Get(enderDest, "CEP")
+            LegalName = RequiredGet(recipient, "xNome"),
+            CNPJ = Get(recipient, "CNPJ"),
+            CPF = Get(recipient, "CPF"),
+            StateRegistration = Get(recipient, "IE"),
+            Street = RequiredGet(recipientAddress, "xLgr"),
+            Number = RequiredGet(recipientAddress, "nro"),
+            District = RequiredGet(recipientAddress, "xBairro"),
+            City = RequiredGet(recipientAddress, "xMun"),
+            UF = RequiredGet(recipientAddress, "UF"),
+            ZipCode = RequiredGet(recipientAddress, "CEP")
         };
     }
 
-    private static Transportadora? ParseTransportadora(XElement infNFe)
+    private static Carrier? ParseCarrier(XElement infNFe)
     {
-        var transp = Find(infNFe, "transporta");
+        var carrier = Find(infNFe, "transporta");
 
-        if (transp == null) return null;
-
-        var modFrete = Find(infNFe, "transp");
-
-        return new Transportadora
+        if (carrier == null)
         {
-            RazaoSocial = Get(transp, "xNome"),
-            CNPJ = Get(transp, "CNPJ"),
-            CPF = Get(transp, "CPF"),
-            InscricaoEstadual = Get(transp, "IE"),
-            Municipio = Get(transp, "xMun"),
-            UF = Get(transp, "UF"),
-            ModalidadeFrete = (ModalidadeFrete)ParseInt(Get(modFrete, "modFrete"), 9)
+            return null;
+        }
+
+        var shipping = Find(infNFe, "transp");
+
+        return new Carrier
+        {
+            LegalName = RequiredGet(carrier, "xNome"),
+            CNPJ = Get(carrier, "CNPJ"),
+            CPF = Get(carrier, "CPF"),
+            StateRegistration = Get(carrier, "IE"),
+            City = Get(carrier, "xMun"),
+            UF = Get(carrier, "UF"),
+            FreightMode = (FreightMode)ParseInt(Get(shipping, "modFrete"), 9)
         };
     }
 
-    private static ImpostosNfe ParseImpostos(XElement infNFe)
+    private static NfeTaxes ParseTaxes(XElement infNFe)
     {
-        var icmsTot = Find(infNFe, "ICMSTot");
+        var icmsTotal = Find(infNFe, "ICMSTot");
 
-        var valorICMS = ParseDecimal(Get(icmsTot, "vICMS"));
-        var baseCalculo = ParseDecimal(Get(icmsTot, "vBC"));
+        var icmsAmount = ParseDecimal(Get(icmsTotal, "vICMS"));
+        var icmsTaxBase = ParseDecimal(Get(icmsTotal, "vBC"));
 
-        return new ImpostosNfe
+        return new NfeTaxes
         {
-            ValorProdutos = ParseDecimal(Get(icmsTot, "vProd")),
-            BaseCalculoICMS = baseCalculo,
-            ValorICMS = valorICMS,
-            ValorPIS = ParseDecimal(Get(icmsTot, "vPIS")),
-            ValorCOFINS = ParseDecimal(Get(icmsTot, "vCOFINS")),
-            AliquotaIcms = baseCalculo != 0 ? (valorICMS / baseCalculo) * 100 : 0,
-            ValorTotalTributos = ParseDecimal(Get(icmsTot, "vTribFed")),
-            ValorNota = ParseDecimal(Get(icmsTot, "vNF"))
+            ProductAmount = ParseDecimal(Get(icmsTotal, "vProd")),
+            IcmsTaxBase = icmsTaxBase,
+            IcmsAmount = icmsAmount,
+            PisAmount = ParseDecimal(Get(icmsTotal, "vPIS")),
+            CofinsAmount = ParseDecimal(Get(icmsTotal, "vCOFINS")),
+            IcmsRate = icmsTaxBase != 0 ? (icmsAmount / icmsTaxBase) * 100 : 0,
+            TotalTaxesAmount = ParseDecimal(Get(icmsTotal, "vTribFed")),
+            InvoiceAmount = ParseDecimal(Get(icmsTotal, "vNF"))
         };
     }
 
-    private static List<Produto> ParseProdutos(XElement infNFe)
+    private static List<Product> ParseProducts(XElement infNFe)
     {
         return infNFe.Descendants()
-            .Where(e => e.Name.LocalName == "det")
-            .Select(det =>
+            .Where(element => element.Name.LocalName == "det")
+            .Select(detail =>
             {
-                var prod = Find(det, "prod");
+                var product = Find(detail, "prod");
 
-                return new Produto
+                return new Product
                 {
-                    CodigoProduto = Get(prod, "cProd"),
-                    Descricao = Get(prod, "xProd"),
-                    NCM = Get(prod, "NCM"),
-                    Quantidade = ParseDecimal(Get(prod, "qCom")),
-                    ValorUnitario = ParseDecimal(Get(prod, "vUnCom")),
-                    ValorTotal = ParseDecimal(Get(prod, "vProd"))
+                    ProductCode = RequiredGet(product, "cProd"),
+                    Description = RequiredGet(product, "xProd"),
+                    NCM = RequiredGet(product, "NCM"),
+                    Quantity = ParseDecimal(Get(product, "qCom")),
+                    UnitAmount = ParseDecimal(Get(product, "vUnCom")),
+                    TotalAmount = ParseDecimal(Get(product, "vProd"))
                 };
             })
             .ToList();

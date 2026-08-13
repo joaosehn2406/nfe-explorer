@@ -1,4 +1,4 @@
-﻿using System.Xml.Linq;
+using System.Xml.Linq;
 using NfeExplorer_Api.Application.DTOs.Requests;
 
 namespace NfeExplorer_Api.Application.Validators;
@@ -7,29 +7,37 @@ public static class NFeValidator
 {
     private const long MaxFileSize = 5 * 1024 * 1024;
 
-    public static void ValidarRequest(ParseNfeRequest request)
+    public static void ValidateRequest(ParseNfeRequest request)
     {
         if (request == null)
-            throw new ArgumentException("Requisição inválida.");
+        {
+            throw new ArgumentException("Invalid request.");
+        }
 
-        ValidarPresencaDeXmlOuArquivo(request);
+        ValidateXmlSource(request);
 
         if (request.File != null)
         {
             if (request.File.Length == 0)
-                throw new ArgumentException("Arquivo vazio.");
+            {
+                throw new ArgumentException("Empty file.");
+            }
 
             if (request.File.Length > MaxFileSize)
-                throw new ArgumentException("Arquivo excede o tamanho máximo permitido.");
+            {
+                throw new ArgumentException("File exceeds the maximum allowed size.");
+            }
 
-            ValidarExtensaoArquivo(request);
+            ValidateFileExtension(request);
         }
     }
 
-    public static void ValidarXml(string xml)
+    public static void ValidateXml(string xml)
     {
         if (string.IsNullOrWhiteSpace(xml))
-            throw new ArgumentException("XML vazio.");
+        {
+            throw new ArgumentException("Empty XML.");
+        }
 
         XDocument document;
 
@@ -39,36 +47,44 @@ public static class NFeValidator
         }
         catch
         {
-            throw new ArgumentException("XML inválido.");
+            throw new ArgumentException("Invalid XML.");
         }
 
-        ValidarEstruturaNFe(document);
+        ValidateNFeStructure(document);
     }
 
-    private static void ValidarPresencaDeXmlOuArquivo(ParseNfeRequest request)
+    private static void ValidateXmlSource(ParseNfeRequest request)
     {
         if (request.File == null && string.IsNullOrWhiteSpace(request.XmlText))
-            throw new ArgumentException("Para prosseguir, insira um XML ou arquivo.");
+        {
+            throw new ArgumentException("Provide an XML file or paste XML content to continue.");
+        }
     }
 
-    private static void ValidarExtensaoArquivo(ParseNfeRequest request)
+    private static void ValidateFileExtension(ParseNfeRequest request)
     {
         if (request.File == null)
+        {
             return;
+        }
 
         var extension = Path.GetExtension(request.File.FileName);
 
         if (!extension.Equals(".xml", StringComparison.OrdinalIgnoreCase))
-            throw new ArgumentException("Importação permitida apenas para arquivos XML.");
+        {
+            throw new ArgumentException("Only XML files can be imported.");
+        }
     }
 
-    private static void ValidarEstruturaNFe(XDocument document)
+    private static void ValidateNFeStructure(XDocument document)
     {
         var infNfe = document.Descendants()
             .FirstOrDefault(e => e.Name.LocalName == "infNFe");
 
         if (infNfe == null)
-            throw new ArgumentException("XML não contém uma NF-e válida.");
+        {
+            throw new ArgumentException("XML does not contain a valid NF-e.");
+        }
 
         var ide = infNfe.Descendants()
             .FirstOrDefault(e => e.Name.LocalName == "ide");
@@ -83,15 +99,23 @@ public static class NFeValidator
             .FirstOrDefault(e => e.Name.LocalName == "total");
 
         if (ide == null)
-            throw new ArgumentException("Estrutura da NF-e inválida: ide não encontrado.");
+        {
+            throw new ArgumentException("Invalid NF-e structure: ide was not found.");
+        }
 
         if (emit == null)
-            throw new ArgumentException("Estrutura da NF-e inválida: emit não encontrado.");
+        {
+            throw new ArgumentException("Invalid NF-e structure: emit was not found.");
+        }
 
         if (dest == null)
-            throw new ArgumentException("Estrutura da NF-e inválida: dest não encontrado.");
+        {
+            throw new ArgumentException("Invalid NF-e structure: dest was not found.");
+        }
 
         if (total == null)
-            throw new ArgumentException("Estrutura da NF-e inválida: total não encontrado.");
+        {
+            throw new ArgumentException("Invalid NF-e structure: total was not found.");
+        }
     }
 }

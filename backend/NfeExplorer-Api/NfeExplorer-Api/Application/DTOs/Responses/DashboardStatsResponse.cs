@@ -2,23 +2,23 @@ namespace NfeExplorer_Api.Application.DTOs.Responses;
 
 public class DashboardStatsResponse
 {
-    public int TotalNotas { get; set; }
-    public decimal ValorTotal { get; set; }
-    public int TotalSaidas { get; set; }
-    public int TotalEntradas { get; set; }
-    public IEnumerable<TopEmitenteResponse> TopEmitentes { get; set; } = new List<TopEmitenteResponse>();
-    public IEnumerable<NotasPorMesResponse> NotasPorMes { get; set; } = new List<NotasPorMesResponse>();
+    public int TotalInvoices { get; set; }
+    public decimal TotalAmount { get; set; }
+    public int TotalOutbound { get; set; }
+    public int TotalInbound { get; set; }
+    public IEnumerable<TopIssuerResponse> TopIssuers { get; set; } = new List<TopIssuerResponse>();
+    public IEnumerable<MonthlyInvoicesResponse> MonthlyInvoices { get; set; } = new List<MonthlyInvoicesResponse>();
 }
 
-public class TopEmitenteResponse
+public class TopIssuerResponse
 {
-    public string Nome { get; set; }
-    public decimal Valor { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public decimal Amount { get; set; }
 }
 
-public class NotasPorMesResponse
+public class MonthlyInvoicesResponse
 {
-    public int Ano { get; set; }
-    public int Mes { get; set; }
-    public decimal Valor { get; set; }
+    public int Year { get; set; }
+    public int Month { get; set; }
+    public decimal Amount { get; set; }
 }

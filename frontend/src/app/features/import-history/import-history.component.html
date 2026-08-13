@@ -1,0 +1,56 @@
+<section class="hist">
+  <div class="page-head">
+    <span class="page-eyebrow">Audit</span>
+    <h1 class="page-title">Import history</h1>
+    <p class="page-sub">Every import attempt, including failures and duplicates.</p>
+  </div>
+
+  <div class="toolbar">
+    <select class="select" [(ngModel)]="statusFilter" (change)="load()">
+      <option value="">All statuses</option>
+      <option value="0">Success</option>
+      <option value="1">Failed</option>
+      <option value="2">Duplicate</option>
+    </select>
+  </div>
+
+  <div class="panel">
+    <div class="panel__body">
+      @if (loading()) {
+        <div class="empty">Loading...</div>
+      } @else if (error()) {
+        <div class="empty">{{ error() }}</div>
+      } @else if (logs().length === 0) {
+        <div class="empty">No import records found.</div>
+      } @else {
+        <ol class="timeline">
+          @for (log of logs(); track log.id) {
+            <li class="tl-item">
+              <span class="tl-dot" [class]="'tl-dot--' + statusClass(log.status)"></span>
+              <div class="tl-card">
+                <div class="tl-top">
+                  <span class="tag" [class]="'tag--' + statusClass(log.status)">{{ statusLabel(log.status) }}</span>
+                  <span class="tl-time">{{ log.timestamp | date: 'dd/MM/yyyy · HH:mm' }}</span>
+                </div>
+                <div class="tl-body">
+                  <span class="tl-file">{{ log.fileName }}</span>
+                  @if (log.status === Status.Success) {
+                    @if (log.invoiceNumber) { <span class="tl-sep">·</span> <span>Invoice <b>#{{ log.invoiceNumber }}</b></span> }
+                    @if (log.issuer) { <span class="tl-sep">·</span> <span>{{ log.issuer }}</span> }
+                    @if (log.amount != null) {
+                      <span class="tl-sep">·</span>
+                      <b class="tl-val">{{ log.amount | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</b>
+                    }
+                  } @else {
+                    @if (log.invoiceNumber) { <span class="tl-sep">·</span> <span>Invoice <b>#{{ log.invoiceNumber }}</b></span> }
+                    @if (log.message) { <span class="tl-sep">·</span> <span class="tl-msg">{{ log.message }}</span> }
+                  }
+                </div>
+              </div>
+            </li>
+          }
+        </ol>
+      }
+    </div>
+  </div>
+</section>

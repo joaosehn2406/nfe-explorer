@@ -1,0 +1,31 @@
+:host { display: block; }
+
+.invoice-list { max-width: 1120px; }
+
+.search-field {
+  flex: 1;
+  min-width: 240px;
+}
+.search-input { width: 100%; }
+
+.invoice-list-table td { font-size: 0.83rem; }
+
+.series { color: var(--muted); font-weight: 400; }
+
+.issuer-name { font-weight: 600; color: var(--ink); }
+.issuer-doc {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 0.1rem;
+}
+
+.recipient { color: var(--ink-3); }
+
+.chevron {
+  text-align: right;
+  color: var(--border-2);
+  font-size: 1rem;
+  width: 1px;
+}
+.is-clickable:hover .chevron { color: var(--accent); }

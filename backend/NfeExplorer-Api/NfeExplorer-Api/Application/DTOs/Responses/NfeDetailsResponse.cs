@@ -1,84 +1,83 @@
-﻿using NfeExplorer_Api.Domain.Enums;
+using NfeExplorer_Api.Domain.Enums;
 
 namespace NfeExplorer_Api.Application.DTOs.Responses;
 
 public class NfeDetailsResponse
 {
-    public NfeResponse Nfe { get; set; }
+    public NfeResponse Nfe { get; set; } = default!;
 }
 
 public class NfeResponse
 {
     public Guid Id { get; set; }
-    public string ChaveAcesso { get; set; }
-    public string NaturezaOperacao { get; set; }
-    public string NumeroNota { get; set; }
-    public string Serie { get; set; }
-    public decimal ValorTotal { get; set; }
-    public decimal ValorPago { get; set; }
-    public FormaPagamento FormaPagamento { get; set; }
-    public TipoNota TipoNota { get; set; }
-    
-    public DateTime DataEmissao { get; set; }
-    
-    public EmitenteResponse Emitente { get; set; }
-    public DestinatarioResponse Destinatario { get; set; }
-    public IEnumerable<ProdutoResponse> Produtos { get; set; }
-    public ImpostosNfeResponse Impostos { get; set; }
-    public TransportadoraResponse? Transportadora { get; set; }
+    public string AccessKey { get; set; } = string.Empty;
+    public string OperationNature { get; set; } = string.Empty;
+    public string InvoiceNumber { get; set; } = string.Empty;
+    public string Series { get; set; } = string.Empty;
+    public decimal TotalAmount { get; set; }
+    public decimal PaidAmount { get; set; }
+    public PaymentMethod PaymentMethod { get; set; }
+    public InvoiceType InvoiceType { get; set; }
+    public DateTime IssuedAt { get; set; }
+
+    public IssuerResponse Issuer { get; set; } = default!;
+    public RecipientResponse Recipient { get; set; } = default!;
+    public IEnumerable<ProductResponse> Products { get; set; } = new List<ProductResponse>();
+    public NfeTaxesResponse Taxes { get; set; } = default!;
+    public CarrierResponse? Carrier { get; set; }
 }
 
-public class EmitenteResponse
+public class IssuerResponse
 {
-    public string RazaoSocial { get; set; }
-    public string? NomeFantasia { get; set; }
-    public string CNPJ { get; set; }
-    public string? InscricaoEstadual { get; set; }
-    public required string Municipio { get; set; }
+    public string LegalName { get; set; } = string.Empty;
+    public string? TradeName { get; set; }
+    public string CNPJ { get; set; } = string.Empty;
+    public string? StateRegistration { get; set; }
+    public required string City { get; set; }
     public required string UF { get; set; }
-    public required string CEP { get; set; }
+    public required string ZipCode { get; set; }
 }
 
-public class DestinatarioResponse
+public class RecipientResponse
 {
-    public required string RazaoSocial { get; set; }
+    public required string LegalName { get; set; }
     public string? CNPJ { get; set; }
     public string? CPF { get; set; }
-    public string? InscricaoEstadual { get; set; }
-    public required string Municipio { get; set; }
-    public required string CEP { get; set; }
+    public string? StateRegistration { get; set; }
+    public required string City { get; set; }
+    public required string ZipCode { get; set; }
 }
 
-public class ProdutoResponse
+public class ProductResponse
 {
     public Guid Id { get; set; }
-    public required string Descricao { get; set; }
+    public required string Description { get; set; }
     public required string NCM { get; set; }
-    public decimal Quantidade { get; set; }
-    public decimal ValorUnitario { get; set; }
-    public decimal ValorTotal { get; set; }
+    public decimal Quantity { get; set; }
+    public decimal UnitAmount { get; set; }
+    public decimal TotalAmount { get; set; }
 }
 
-public class ImpostosNfeResponse
+public class NfeTaxesResponse
 {
-    public decimal ValorProdutos { get; set; }
-    public decimal BaseCalculoICMS { get; set; }
-    public decimal ValorICMS { get; set; }
-    public decimal ValorPIS { get; set; }
-    public decimal ValorCOFINS { get; set; }
-    public decimal ValorTotalTributos { get; set; }
-    public decimal ValorNota { get; set; }
-    public decimal AliquotaIcms { get; set; }
+    public decimal ProductAmount { get; set; }
+    public decimal IcmsTaxBase { get; set; }
+    public decimal IcmsAmount { get; set; }
+    public decimal PisAmount { get; set; }
+    public decimal CofinsAmount { get; set; }
+    public decimal TotalTaxesAmount { get; set; }
+    public decimal InvoiceAmount { get; set; }
+    public decimal IcmsRate { get; set; }
 }
 
-public class TransportadoraResponse
+public class CarrierResponse
 {
     public Guid Id { get; set; }
-    public required string RazaoSocial { get; set; }
+    public required string LegalName { get; set; }
     public string? CNPJ { get; set; }
     public string? CPF { get; set; }
-    public string? InscricaoEstadual { get; set; }
-    public string? Municipio { get; set; }
+    public string? StateRegistration { get; set; }
+    public string? City { get; set; }
     public string? UF { get; set; }
-    public ModalidadeFrete ModalidadeFrete { get; set; }
+    public FreightMode FreightMode { get; set; }
 }

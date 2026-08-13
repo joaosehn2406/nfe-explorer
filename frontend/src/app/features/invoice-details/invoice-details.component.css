@@ -1,0 +1,117 @@
+:host { display: block; width: 100%; }
+
+.import-details-container {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.copy-toast {
+  position: fixed;
+  top: 62px;
+  right: 2.5rem;
+  z-index: 60;
+  background: var(--ink);
+  color: var(--surface);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--r);
+  box-shadow: 0 12px 28px rgba(32, 33, 36, 0.18);
+  animation: toastIn 0.2s ease forwards;
+}
+.copy-toast.leaving { animation: toastOut 0.2s ease forwards; }
+@keyframes toastIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes toastOut { from { opacity: 1; } to { opacity: 0; transform: translateY(-6px); } }
+
+.details-back { margin-bottom: 1rem; }
+
+.import-details-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.1rem;
+}
+.dt-title { font-size: 1.26rem; font-weight: 600; letter-spacing: 0; color: var(--ink); margin: 0; }
+.dt-sub { font-size: 0.8rem; color: var(--muted); margin: 0.3rem 0 0; }
+.dt-actions { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+
+.access-key { margin-bottom: 1.2rem; }
+.access-key__copy {
+  background: #fff;
+  border: 1px solid var(--border-2);
+  color: var(--accent);
+}
+.access-key__copy:hover { background: var(--accent-weak); }
+
+/* ── overrides mat-tab-group ── */
+::ng-deep .details-tabs .mat-mdc-tab-header {
+  --mdc-secondary-navigation-tab-container-height: 38px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.85rem;
+}
+::ng-deep .details-tabs .mat-mdc-tab .mdc-tab__text-label {
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+::ng-deep .details-tabs .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label { color: var(--ink); }
+::ng-deep .details-tabs .mat-mdc-tab.mdc-tab--active .mdc-tab-indicator__content--underline { border-color: var(--accent); }
+
+.tab-content { display: flex; flex-direction: column; gap: 0.65rem; }
+
+.details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
+
+.details-card-body { padding: 0.55rem 0.95rem; }
+.details-card-body-2col { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2rem; }
+
+.field-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.38rem 0;
+  border-bottom: 1px solid var(--surface-3);
+}
+.field-row:last-child { border-bottom: none; }
+.field-label { font-size: 0.74rem; color: var(--muted); flex-shrink: 0; }
+.field-value { font-size: 0.8rem; color: var(--ink); font-weight: 500; text-align: right; }
+.field-value.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 0.77rem; }
+
+.field-row-highlight { margin-top: 0.3rem; padding-top: 0.55rem; border-top: 1px solid var(--border-2); border-bottom: none; }
+.field-value-accent { font-family: var(--mono); font-size: 0.95rem; color: var(--accent); font-weight: 600; }
+
+/* ── totais ── */
+.totais-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.total-item {
+  padding: 0.72rem 0.7rem;
+  border-right: 1px solid var(--border);
+  background: var(--surface-2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.total-item:last-child { border-right: none; }
+.total-num { font-family: var(--mono); font-size: 1rem; font-weight: 500; color: var(--ink); }
+.total-num-accent { color: var(--accent); }
+.total-label { font-size: 0.74rem; color: var(--muted); text-transform: none; letter-spacing: 0; }
+
+.tax-row { display: flex; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--surface-3); }
+.tax-row:last-child { border-bottom: none; }
+.tax-name { display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; color: var(--ink-2); min-width: 62px; }
+.tax-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+.tax-bar-wrap { flex: 1; margin: 0 0.8rem; height: 5px; background: var(--surface-3); border-radius: 2px; overflow: hidden; }
+.tax-bar { height: 100%; border-radius: 2px; transition: width 0.4s ease; }
+.tax-val { font-family: var(--mono); font-size: 0.78rem; font-weight: 500; color: var(--ink); min-width: 92px; text-align: right; }
+
+@media (max-width: 720px) {
+  .details-grid, .details-card-body-2col { grid-template-columns: 1fr; }
+  .totais-grid { grid-template-columns: 1fr 1fr; }
+  .copy-toast { right: 1rem; }
+}

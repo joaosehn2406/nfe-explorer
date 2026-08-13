@@ -1,78 +1,78 @@
-﻿using NfeExplorer_Api.Application.DTOs.Responses;
+using NfeExplorer_Api.Application.DTOs.Responses;
 using NfeExplorer_Api.Domain.Entities;
 
 namespace NfeExplorer_Api.Application.Mappings;
 
 public static class NfeDetailsMapper
 {
-    public static NfeDetailsResponse ToResponse(NotaFiscal notaFiscal)
+    public static NfeDetailsResponse ToResponse(Invoice invoice)
     {
         return new NfeDetailsResponse
         {
             Nfe = new NfeResponse
             {
-                Id = notaFiscal.Id,
-                ChaveAcesso = notaFiscal.ChaveAcesso,
-                NaturezaOperacao = notaFiscal.NaturezaOperacao,
-                NumeroNota = notaFiscal.NumeroNota,
-                Serie = notaFiscal.Serie,
-                ValorTotal = notaFiscal.ValorTotal,
-                ValorPago = notaFiscal.ValorPago,
-                FormaPagamento = notaFiscal.FormaPagamento,
-                TipoNota = notaFiscal.TipoNota,
-                DataEmissao = notaFiscal.DataEmissao,
-                Emitente = new EmitenteResponse
+                Id = invoice.Id,
+                AccessKey = invoice.AccessKey,
+                OperationNature = invoice.OperationNature,
+                InvoiceNumber = invoice.InvoiceNumber,
+                Series = invoice.Series,
+                TotalAmount = invoice.TotalAmount,
+                PaidAmount = invoice.PaidAmount,
+                PaymentMethod = invoice.PaymentMethod,
+                InvoiceType = invoice.InvoiceType,
+                IssuedAt = invoice.IssuedAt,
+                Issuer = new IssuerResponse
                 {
-                    RazaoSocial = notaFiscal.Emitente.RazaoSocial,
-                    NomeFantasia = notaFiscal.Emitente.NomeFantasia,
-                    CNPJ = notaFiscal.Emitente.CNPJ,
-                    InscricaoEstadual = notaFiscal.Emitente.InscricaoEstadual,
-                    Municipio = notaFiscal.Emitente.Municipio,
-                    UF = notaFiscal.Emitente.UF,
-                    CEP = notaFiscal.Emitente.CEP
+                    LegalName = invoice.Issuer.LegalName,
+                    TradeName = invoice.Issuer.TradeName,
+                    CNPJ = invoice.Issuer.CNPJ,
+                    StateRegistration = invoice.Issuer.StateRegistration,
+                    City = invoice.Issuer.City,
+                    UF = invoice.Issuer.UF,
+                    ZipCode = invoice.Issuer.ZipCode
                 },
-                Destinatario = new DestinatarioResponse
+                Recipient = new RecipientResponse
                 {
-                    RazaoSocial = notaFiscal.Destinatario.RazaoSocial,
-                    CNPJ = notaFiscal.Destinatario.CNPJ,
-                    CPF = notaFiscal.Destinatario.CPF,
-                    InscricaoEstadual = notaFiscal.Destinatario.InscricaoEstadual,
-                    Municipio = notaFiscal.Destinatario.Municipio,
-                    CEP = notaFiscal.Destinatario.CEP
+                    LegalName = invoice.Recipient.LegalName,
+                    CNPJ = invoice.Recipient.CNPJ,
+                    CPF = invoice.Recipient.CPF,
+                    StateRegistration = invoice.Recipient.StateRegistration,
+                    City = invoice.Recipient.City,
+                    ZipCode = invoice.Recipient.ZipCode
                 },
-                Transportadora = notaFiscal.Transportadora == null
+                Carrier = invoice.Carrier == null
                     ? null
-                    : new TransportadoraResponse
+                    : new CarrierResponse
                     {
-                        Id = notaFiscal.Transportadora.Id,
-                        RazaoSocial = notaFiscal.Transportadora.RazaoSocial,
-                        CNPJ = notaFiscal.Transportadora.CNPJ,
-                        CPF = notaFiscal.Transportadora.CPF,
-                        InscricaoEstadual = notaFiscal.Transportadora.InscricaoEstadual,
-                        Municipio = notaFiscal.Transportadora.Municipio,
-                        UF = notaFiscal.Transportadora.UF,
-                        ModalidadeFrete = notaFiscal.Transportadora.ModalidadeFrete
+                        Id = invoice.Carrier.Id,
+                        LegalName = invoice.Carrier.LegalName,
+                        CNPJ = invoice.Carrier.CNPJ,
+                        CPF = invoice.Carrier.CPF,
+                        StateRegistration = invoice.Carrier.StateRegistration,
+                        City = invoice.Carrier.City,
+                        UF = invoice.Carrier.UF,
+                        FreightMode = invoice.Carrier.FreightMode
                     },
-                Impostos = new ImpostosNfeResponse
+                Taxes = new NfeTaxesResponse
                 {
-                    ValorProdutos = notaFiscal.ImpostosNfe.ValorProdutos,
-                    BaseCalculoICMS = notaFiscal.ImpostosNfe.BaseCalculoICMS,
-                    ValorICMS = notaFiscal.ImpostosNfe.ValorICMS,
-                    ValorPIS = notaFiscal.ImpostosNfe.ValorPIS,
-                    ValorCOFINS = notaFiscal.ImpostosNfe.ValorCOFINS,
-                    ValorTotalTributos = notaFiscal.ImpostosNfe.ValorTotalTributos,
-                    ValorNota = notaFiscal.ImpostosNfe.ValorNota,
-                    AliquotaIcms = notaFiscal.ImpostosNfe.AliquotaIcms
+                    ProductAmount = invoice.Taxes?.ProductAmount ?? 0,
+                    IcmsTaxBase = invoice.Taxes?.IcmsTaxBase ?? 0,
+                    IcmsAmount = invoice.Taxes?.IcmsAmount ?? 0,
+                    PisAmount = invoice.Taxes?.PisAmount ?? 0,
+                    CofinsAmount = invoice.Taxes?.CofinsAmount ?? 0,
+                    TotalTaxesAmount = invoice.Taxes?.TotalTaxesAmount ?? 0,
+                    InvoiceAmount = invoice.Taxes?.InvoiceAmount ?? invoice.TotalAmount,
+                    IcmsRate = invoice.Taxes?.IcmsRate ?? 0
                 },
-                Produtos = notaFiscal.Produtos.Select(produto => new ProdutoResponse
+                Products = invoice.Products.Select(product => new ProductResponse
                 {
-                    Id = produto.Id,
-                    Descricao = produto.Descricao,
-                    NCM = produto.NCM,
-                    Quantidade = produto.Quantidade,
-                    ValorUnitario = produto.ValorUnitario,
-                    ValorTotal = produto.ValorTotal
-                })
+                    Id = product.Id,
+                    Description = product.Description,
+                    NCM = product.NCM,
+                    Quantity = product.Quantity,
+                    UnitAmount = product.UnitAmount,
+                    TotalAmount = product.TotalAmount
+                }).ToList()
             }
         };
     }

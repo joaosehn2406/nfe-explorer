@@ -21,7 +21,7 @@ public class GlobalExceptionHandler
         }
         catch (System.Exception ex)
         {
-            _logger.LogError(ex, "Exceção não tratada na requisição {Method} {Path}: {Message}",
+            _logger.LogError(ex, "Unhandled exception for request {Method} {Path}: {Message}",
                 httpContext.Request.Method,
                 httpContext.Request.Path,
                 ex.Message);
@@ -33,7 +33,7 @@ public class GlobalExceptionHandler
 
             var (statusCode, message) = ex switch
             {
-                DuplicataNfeException => (409, ex.Message),
+                DuplicateNfeException => (409, ex.Message),
                 ArgumentException => (400, ex.Message),
                 KeyNotFoundException => (404, ex.Message),
                 UnauthorizedAccessException => (401, ex.Message),
