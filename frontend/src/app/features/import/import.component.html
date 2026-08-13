@@ -1,8 +1,8 @@
 <section class="import-container">
   <header class="page-head">
-    <span class="page-eyebrow">Entrada de documentos</span>
-    <h1 class="page-title">Importar NF-e</h1>
-    <p class="page-sub">Envie um arquivo XML ou cole o conteúdo para processar a nota fiscal.</p>
+    <span class="page-eyebrow">Document intake</span>
+    <h1 class="page-title">Import NFe</h1>
+    <p class="page-sub">Upload an XML file or paste its contents to process the invoice.</p>
   </header>
 
   <app-import-card (onClickAnalyse)="onXmlSubmitted($event)" />
@@ -14,16 +14,12 @@
   @if (errorMessage() === null && importResult() !== null) {
     <div class="result result--ok">
       <span class="result-msg">
-        <b>NF-e #{{ importResult()?.numeroNota }} importada.</b>
-        {{ importResult()?.emitente }} ·
-        {{ importResult()?.valorTotal?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}
+        <b>NFe #{{ importResult()?.invoiceNumber }} imported.</b>
+        {{ importResult()?.issuer }} ·
+        {{ importResult()?.totalAmount?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}
       </span>
       <button class="btn btn--primary btn--sm" (click)="goToDetails()">
-        Ver detalhes
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
-             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m9 18 6-6-6-6"/>
-        </svg>
+        View details
       </button>
     </div>
   } @else if (errorMessage() !== null) {

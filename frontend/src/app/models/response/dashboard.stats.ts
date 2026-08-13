@@ -1,19 +1,19 @@
-export interface TopEmitente {
-  nome: string;
-  valor: number;
+export interface TopIssuer {
+  name: string;
+  amount: number;
 }
 
-export interface NotasPorMes {
-  ano: number;
-  mes: number;
-  valor: number;
+export interface MonthlyInvoices {
+  year: number;
+  month: number;
+  amount: number;
 }
 
 export interface DashboardStats {
-  totalNotas: number;
-  valorTotal: number;
-  totalSaidas: number;
-  totalEntradas: number;
-  topEmitentes: TopEmitente[];
-  notasPorMes: NotasPorMes[];
+  totalInvoices: number;
+  totalAmount: number;
+  totalOutbound: number;
+  totalInbound: number;
+  topIssuers: TopIssuer[];
+  monthlyInvoices: MonthlyInvoices[];
 }

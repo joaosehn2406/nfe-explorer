@@ -17,7 +17,23 @@
   flex: 1;
   width: 100%;
   min-width: 0;
-  padding: 2rem 2.5rem 3rem;
+  padding: 1.25rem 1.5rem 2rem;
   background: var(--bg);
   overflow-y: auto;
+}
+
+@media (max-width: 760px) {
+  :host {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .main { overflow: visible; }
+
+  .content {
+    padding: 1.2rem;
+    overflow: visible;
+  }
 }

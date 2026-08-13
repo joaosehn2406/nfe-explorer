@@ -9,14 +9,14 @@ import { NfeService } from '../../services/nfe.service';
   styleUrl: './sidebar.component.css',
 })
 export class SidebarComponent implements OnInit {
-  totalNotas = signal<number | null>(null);
+  totalInvoices = signal<number | null>(null);
 
   constructor(private nfeService: NfeService) {}
 
   ngOnInit(): void {
-    this.nfeService.getNotas({ page: 1, pageSize: 1 }).subscribe({
-      next: (res) => this.totalNotas.set(res.total),
-      error: () => this.totalNotas.set(null),
+    this.nfeService.getInvoices({ page: 1, pageSize: 1 }).subscribe({
+      next: (res) => this.totalInvoices.set(res.total),
+      error: () => this.totalInvoices.set(null),
     });
   }
 }

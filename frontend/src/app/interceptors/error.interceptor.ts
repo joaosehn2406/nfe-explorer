@@ -13,12 +13,12 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
 function extractApiError(error: HttpErrorResponse): ApiErrorResponse {
   if (error.error instanceof ProgressEvent) {
-    return { code: 0, message: 'Sem conexão com o servidor. Verifique sua rede.' };
+    return { code: 0, message: 'No connection to the server. Check your network.' };
   }
 
   if (error.error && typeof error.error === 'object' && 'message' in error.error) {
     return error.error as ApiErrorResponse;
   }
 
-  return { code: error.status, message: `Erro ${error.status}: ${error.statusText || 'Erro inesperado.'}` };
+  return { code: error.status, message: `Error ${error.status}: ${error.statusText || 'Unexpected error.'}` };
 }

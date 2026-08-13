@@ -1,55 +1,39 @@
 <aside class="sidebar">
   <header class="sidebar-header">
-    <div class="logo-mark">NF</div>
-    <div class="logo-text">NFe<span>Explorer</span></div>
+    <div class="logo-mark">NF-e</div>
+    <div>
+      <div class="logo-text">NFeExplorer</div>
+      <div class="logo-sub">Tax archive</div>
+    </div>
   </header>
 
   <nav class="sidebar-nav">
-    <span class="nav-section">Principal</span>
+    <span class="nav-section">Work</span>
 
-    <a class="nav-item" routerLink="/dashboard" routerLinkActive="active">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-           stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/>
-        <rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/>
-      </svg>
-      <span>Visão geral</span>
+    <a class="nav-item" routerLink="/dashboard" routerLinkActive="active" data-code="OV">
+      <span>Overview</span>
     </a>
 
-    <a class="nav-item" routerLink="/importar" routerLinkActive="active">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-           stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
-        <path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M12 18v-6"/><path d="m9 15 3-3 3 3"/>
-      </svg>
-      <span>Importar NF-e</span>
+    <a class="nav-item" routerLink="/import" routerLinkActive="active" data-code="XML">
+      <span>Import NFe</span>
     </a>
 
-    <a class="nav-item" routerLink="/notas" routerLinkActive="active">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-           stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/>
-        <path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/>
-      </svg>
-      <span>Notas fiscais</span>
-      @if (totalNotas() !== null) {
-        <span class="nav-badge">{{ totalNotas() }}</span>
+    <a class="nav-item" routerLink="/invoices" routerLinkActive="active" data-code="NF">
+      <span>Invoices</span>
+      @if (totalInvoices() !== null) {
+        <span class="nav-badge">{{ totalInvoices() }}</span>
       }
     </a>
 
-    <span class="nav-section">Monitoramento</span>
+    <span class="nav-section">Control</span>
 
-    <a class="nav-item" routerLink="/historico" routerLinkActive="active">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-           stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><path d="M12 7v5l4 2"/>
-      </svg>
-      <span>Histórico</span>
+    <a class="nav-item" routerLink="/history" routerLinkActive="active" data-code="LOG">
+      <span>History</span>
     </a>
   </nav>
 
   <footer class="sidebar-footer">
-    <span class="footer-line">NFeExplorer <span class="footer-ver">v1.0</span></span>
-    <span class="footer-stack">.NET 8 · Angular · PostgreSQL</span>
+    <span class="footer-line">Local verification</span>
+    <span class="footer-stack">XML / DANFE / SEFAZ</span>
   </footer>
 </aside>

@@ -6,8 +6,8 @@ import { NfeService } from '../../services/nfe.service';
 import { DashboardStats } from '../../models/response/dashboard.stats';
 import { ApiErrorResponse } from '../../models/response/api.error.response';
 
-const MESES = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-const BAR_COLORS = ['var(--accent)', 'var(--entrada)', 'var(--saida)', 'var(--ok)', 'var(--warn)'];
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const BAR_COLORS = ['var(--accent)', 'var(--inbound)', 'var(--outbound)', 'var(--ok)', 'var(--warn)'];
 
 @Component({
   selector: 'app-dashboard',
@@ -20,37 +20,41 @@ export class DashboardComponent implements OnInit {
   loading = signal(false);
   error = signal<string | null>(null);
 
-  media = computed(() => {
-    const s = this.stats();
-    if (!s || s.totalNotas === 0) return 0;
-    return s.valorTotal / s.totalNotas;
+  average = computed(() => {
+    const stats = this.stats();
+    if (!stats || stats.totalInvoices === 0) return 0;
+    return stats.totalAmount / stats.totalInvoices;
   });
 
-  pctSaidas = computed(() => this.pct(this.stats()?.totalSaidas));
-  pctEntradas = computed(() => this.pct(this.stats()?.totalEntradas));
+  pctOutbound = computed(() => this.pct(this.stats()?.totalOutbound));
+  pctInbound = computed(() => this.pct(this.stats()?.totalInbound));
 
   donut = computed(() => {
-    const s = this.stats();
-    const totalTipos = (s?.totalSaidas ?? 0) + (s?.totalEntradas ?? 0);
-    const saida = totalTipos > 0 ? ((s?.totalSaidas ?? 0) / totalTipos) * 100 : 0;
-    return { saida, entrada: 100 - saida };
+    const stats = this.stats();
+    const totalTypes = (stats?.totalOutbound ?? 0) + (stats?.totalInbound ?? 0);
+    const outbound = totalTypes > 0 ? ((stats?.totalOutbound ?? 0) / totalTypes) * 100 : 0;
+    return { outbound, inbound: 100 - outbound };
   });
 
-  topEmitentes = computed(() => {
-    const list = this.stats()?.topEmitentes ?? [];
-    const max = list.length ? Math.max(...list.map((e) => e.valor)) : 1;
-    return list.map((e, i) => ({ ...e, pct: (e.valor / max) * 100, color: BAR_COLORS[i % BAR_COLORS.length] }));
+  topIssuers = computed(() => {
+    const list = this.stats()?.topIssuers ?? [];
+    const max = list.length ? Math.max(...list.map(issuer => issuer.amount)) : 1;
+    return list.map((issuer, i) => ({
+      ...issuer,
+      pct: (issuer.amount / max) * 100,
+      color: BAR_COLORS[i % BAR_COLORS.length],
+    }));
   });
 
-  meses = computed(() => {
-    const raw = this.stats()?.notasPorMes ?? [];
+  months = computed(() => {
+    const raw = this.stats()?.monthlyInvoices ?? [];
     const buckets = raw.slice(-12);
-    const max = buckets.length ? Math.max(...buckets.map((m) => m.valor)) : 1;
-    return buckets.map((m) => ({
-      label: MESES[m.mes - 1] ?? '—',
-      ano: String(m.ano).slice(2),
-      valor: m.valor,
-      heightPct: max > 0 ? Math.max((m.valor / max) * 100, 2) : 2,
+    const max = buckets.length ? Math.max(...buckets.map(month => month.amount)) : 1;
+    return buckets.map(month => ({
+      label: MONTHS[month.month - 1] ?? '-',
+      year: String(month.year).slice(2),
+      amount: month.amount,
+      heightPct: max > 0 ? Math.max((month.amount / max) * 100, 2) : 2,
     }));
   });
 
@@ -62,14 +66,14 @@ export class DashboardComponent implements OnInit {
       .getDashboard()
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
-        next: (res) => this.stats.set(res),
-        error: (err: ApiErrorResponse) => this.error.set(err.message ?? 'Não foi possível carregar o painel.'),
+        next: res => this.stats.set(res),
+        error: (err: ApiErrorResponse) => this.error.set(err.message ?? 'Could not load dashboard.'),
       });
   }
 
   private pct(value: number | undefined): string {
-    const s = this.stats();
-    if (!s || s.totalNotas === 0 || value === undefined) return '0';
-    return ((value / s.totalNotas) * 100).toFixed(1);
+    const stats = this.stats();
+    if (!stats || stats.totalInvoices === 0 || value === undefined) return '0';
+    return ((value / stats.totalInvoices) * 100).toFixed(1);
   }
 }

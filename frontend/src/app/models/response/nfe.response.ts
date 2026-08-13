@@ -1,25 +1,25 @@
-import {Emitente} from '../emitente';
-import {Destinatario} from '../destinatario';
-import {Produto} from '../produto';
-import {ImpostosNfe} from '../impostos.nfe';
-import {Transportadora} from '../transportadora';
-import {TipoNota} from '../enums/tipo.nota';
-import {FormaPagamento} from '../enums/forma.pagamento';
+import { Issuer } from '../issuer';
+import { Recipient } from '../recipient';
+import { Product } from '../product';
+import { NfeTaxes } from '../nfe-taxes';
+import { Carrier } from '../carrier';
+import { InvoiceType } from '../enums/invoice-type';
+import { PaymentMethod } from '../enums/payment-method';
 
 export interface NfeResponse {
   id: string;
-  chaveAcesso: string;
-  naturezaOperacao: string;
-  numeroNota: string;
-  serie: string;
-  valorTotal: number;
-  valorPago: number;
-  formaPagamento: FormaPagamento;
-  tipoNota: TipoNota;
-  dataEmissao: string;
-  emitente: Emitente;
-  destinatario: Destinatario;
-  produtos: Produto[];
-  impostos: ImpostosNfe;
-  transportadora: Transportadora;
+  accessKey: string;
+  operationNature: string;
+  invoiceNumber: string;
+  series: string;
+  totalAmount: number;
+  paidAmount: number;
+  paymentMethod: PaymentMethod;
+  invoiceType: InvoiceType;
+  issuedAt: string;
+  issuer: Issuer;
+  recipient: Recipient;
+  products: Product[];
+  taxes: NfeTaxes;
+  carrier: Carrier | null;
 }

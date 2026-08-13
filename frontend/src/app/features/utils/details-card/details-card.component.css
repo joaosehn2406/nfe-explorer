@@ -7,12 +7,12 @@
 }
 
 .details-card-header {
-  padding: 0.55rem 0.95rem;
+  padding: 0.55rem 0.8rem;
   background: var(--surface-2);
   border-bottom: 1px solid var(--border);
-  font-size: 0.68rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--ink-2);
 }

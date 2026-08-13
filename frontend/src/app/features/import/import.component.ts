@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { NfeService } from '../../services/nfe.service';
-import { ImportNfeResponse } from '../../models/response/import.nfe.response';
+import { ImportNfeResponse } from '../../models/response/import-nfe.response';
 import { ApiErrorResponse } from '../../models/response/api.error.response';
 import { finalize } from 'rxjs';
 import { ImportCardComponent } from './import-card/import.card.component';
@@ -17,7 +17,6 @@ import { MatProgressBar } from '@angular/material/progress-bar';
   styleUrl: './import.component.css'
 })
 export class ImportComponent {
-
   importResult = signal<ImportNfeResponse | null>(null);
   errorMessage = signal<string | null>(null);
   isLoading = signal<boolean>(false);
@@ -25,8 +24,7 @@ export class ImportComponent {
   constructor(
     private nfeService: NfeService,
     private router: Router
-  ) {
-  }
+  ) {}
 
   onXmlSubmitted(payload: string | File) {
     this.errorMessage.set(null);
@@ -36,11 +34,11 @@ export class ImportComponent {
     this.nfeService.importNfeRequest(payload).pipe(
       finalize(() => this.isLoading.set(false))
     ).subscribe({
-      next: (result) => {
+      next: result => {
         this.importResult.set(result);
       },
       error: (err: ApiErrorResponse) => {
-        this.errorMessage.set(err.message ?? 'Erro inesperado. Tente novamente.');
+        this.errorMessage.set(err.message ?? 'Unexpected error. Try again.');
       }
     });
   }
@@ -48,10 +46,8 @@ export class ImportComponent {
   goToDetails(): void {
     const id = this.importResult()?.id;
 
-    if (!id) {
-      return;
-    }
+    if (!id) return;
 
-    this.router.navigate(['/notas', id]);
+    this.router.navigate(['/invoices', id]);
   }
 }

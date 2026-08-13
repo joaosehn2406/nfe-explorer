@@ -1,35 +1,34 @@
-import { TipoNota } from '../models/enums/tipo.nota';
-import { StatusImportacao } from '../models/enums/status.importacao';
+import { InvoiceType } from '../models/enums/invoice-type';
+import { ImportStatus } from '../models/enums/import-status';
 
 export function formatCnpj(cnpj: string | null | undefined): string {
-  if (!cnpj) return '—';
+  if (!cnpj) return '-';
   return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
 }
 
 export function formatCpf(cpf: string | null | undefined): string {
-  if (!cpf) return '—';
+  if (!cpf) return '-';
   return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
 }
 
-/** Agrupa a chave de acesso (44 dígitos) em blocos de 4, como no DANFE. */
-export function groupChave(chave: string | null | undefined): string {
-  if (!chave) return '—';
-  return chave.replace(/\s+/g, '').replace(/(.{4})/g, '$1 ').trim();
+export function groupAccessKey(accessKey: string | null | undefined): string {
+  if (!accessKey) return '-';
+  return accessKey.replace(/\s+/g, '').replace(/(.{4})/g, '$1 ').trim();
 }
 
-export function isSaida(tipo: TipoNota | number | undefined | null): boolean {
-  return tipo === TipoNota.Saida;
+export function isOutbound(type: InvoiceType | number | undefined | null): boolean {
+  return type === InvoiceType.Outbound;
 }
 
-export function tipoNotaLabel(tipo: TipoNota | number | undefined | null): string {
-  return tipo === TipoNota.Saida ? 'Saída' : 'Entrada';
+export function invoiceTypeLabel(type: InvoiceType | number | undefined | null): string {
+  return type === InvoiceType.Outbound ? 'Outbound' : 'Inbound';
 }
 
-export function statusLabel(status: StatusImportacao): string {
+export function statusLabel(status: ImportStatus): string {
   switch (status) {
-    case StatusImportacao.Sucesso: return 'Importada';
-    case StatusImportacao.Erro: return 'Falha';
-    case StatusImportacao.Duplicada: return 'Duplicada';
-    default: return '—';
+    case ImportStatus.Success: return 'Imported';
+    case ImportStatus.Error: return 'Failed';
+    case ImportStatus.Duplicate: return 'Duplicate';
+    default: return '-';
   }
 }

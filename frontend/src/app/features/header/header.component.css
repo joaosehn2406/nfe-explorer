@@ -8,42 +8,32 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
-  padding: 0 2.5rem;
+  height: 44px;
+  padding: 0 1.5rem;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
 }
 
 .topbar-title {
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   font-weight: 600;
-  letter-spacing: -0.005em;
-  color: var(--ink);
+  letter-spacing: 0;
+  color: var(--ink-2);
+  text-transform: none;
 }
 
-.topbar-badges {
-  display: flex;
-  gap: 0.5rem;
-}
+.topbar-badges { display: none; }
 
 .topbar-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-family: var(--mono);
-  font-size: 0.62rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-  background: var(--surface-2);
+  letter-spacing: 0;
+  color: var(--ink-3);
+  background: transparent;
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
-  padding: 0.2rem 0.5rem;
-}
-
-.topbar-badge--db .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ok);
+  padding: 0.18rem 0.46rem;
 }
