@@ -1,6 +1,6 @@
 import { Component, OnInit, computed, signal } from '@angular/core';
 import { NfeDetailsResponse } from '../../models/response/nfe-details.response';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NfeService } from '../../services/nfe.service';
 import { ApiErrorResponse } from '../../models/response/api.error.response';
 import { finalize } from 'rxjs';
@@ -16,7 +16,7 @@ import { InvoiceType } from '../../models/enums/invoice-type';
 
 @Component({
   selector: 'app-invoice-details',
-  imports: [DatePipe, CurrencyPipe, DetailsCardComponent, MatTab, MatTabGroup, TranslatePipe],
+  imports: [DatePipe, CurrencyPipe, DetailsCardComponent, MatTab, MatTabGroup, TranslatePipe, RouterLink],
   templateUrl: './invoice-details.component.html',
   styleUrl: './invoice-details.component.css',
 })
@@ -110,10 +110,6 @@ export class InvoiceDetailsComponent implements OnInit {
     });
   }
 
-  goBack(): void {
-    void this.router.navigate(['/invoices']);
-  }
-
   invoiceTypeKey(type: InvoiceType | number | undefined | null): string {
     return isOutbound(type) ? 'invoiceType.outbound' : 'invoiceType.inbound';
   }
@@ -125,11 +121,15 @@ export class InvoiceDetailsComponent implements OnInit {
       3: 'payment.creditCard',
       4: 'payment.debitCard',
       5: 'payment.storeCredit',
-      10: 'payment.mealVoucher',
-      11: 'payment.foodVoucher',
+      10: 'payment.foodVoucher',
+      11: 'payment.mealVoucher',
       12: 'payment.giftVoucher',
       13: 'payment.fuelVoucher',
       15: 'payment.bankSlip',
+      16: 'payment.deposit',
+      17: 'payment.instantPayment',
+      18: 'payment.bankTransfer',
+      19: 'payment.loyaltyProgram',
       90: 'payment.noPayment',
       99: 'payment.other'
     };

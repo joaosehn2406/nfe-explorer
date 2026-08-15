@@ -11,10 +11,13 @@
       <div class="copy-toast" [class.leaving]="copySuccessLeaving()">{{ 'details.accessKeyCopied' | translate }}</div>
     }
 
-    <button class="btn--link details-back" (click)="goBack()">&larr; {{ 'actions.backToList' | translate }}</button>
-
     <header class="import-details-header">
       <div class="dt-title-group">
+        <nav class="details-breadcrumb" aria-label="Breadcrumb">
+          <a routerLink="/invoices">{{ 'nav.invoices' | translate }}</a>
+          <span>/</span>
+          <span>#{{ details.nfe.invoiceNumber }}</span>
+        </nav>
         <h1 class="dt-title">{{ 'details.invoice' | translate }} #{{ details.nfe.invoiceNumber }}</h1>
         <p class="dt-sub">
           {{ details.nfe.operationNature }} &middot; {{ 'details.series' | translate }} {{ details.nfe.series }} &middot;

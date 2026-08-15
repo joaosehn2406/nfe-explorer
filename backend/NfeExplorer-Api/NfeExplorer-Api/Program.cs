@@ -29,6 +29,21 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
+if (args.Contains("--seed-demo") || args.Contains("--reset-demo"))
+{
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+    if (args.Contains("--reset-demo"))
+    {
+        await db.Database.EnsureDeletedAsync();
+    }
+
+    await db.Database.MigrateAsync();
+    await DemoDataSeeder.SeedAsync(db);
+    return;
+}
+
 app.UseMiddleware<GlobalExceptionHandler>();
 
 if (app.Environment.IsDevelopment())
