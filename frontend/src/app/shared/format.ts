@@ -1,5 +1,4 @@
 import { InvoiceType } from '../models/enums/invoice-type';
-import { ImportStatus } from '../models/enums/import-status';
 
 export function formatCnpj(cnpj: string | null | undefined): string {
   if (!cnpj) return '-';
@@ -18,17 +17,4 @@ export function groupAccessKey(accessKey: string | null | undefined): string {
 
 export function isOutbound(type: InvoiceType | number | undefined | null): boolean {
   return type === InvoiceType.Outbound;
-}
-
-export function invoiceTypeLabel(type: InvoiceType | number | undefined | null): string {
-  return type === InvoiceType.Outbound ? 'Outbound' : 'Inbound';
-}
-
-export function statusLabel(status: ImportStatus): string {
-  switch (status) {
-    case ImportStatus.Success: return 'Imported';
-    case ImportStatus.Error: return 'Failed';
-    case ImportStatus.Duplicate: return 'Duplicate';
-    default: return '-';
-  }
 }

@@ -1,53 +1,53 @@
 <section class="dash">
   <div class="page-head">
-    <h1 class="page-title">Overview</h1>
-    <p class="page-sub">Summary of electronic invoices stored in the system.</p>
+    <h1 class="page-title">{{ 'dashboard.title' | translate }}</h1>
+    <p class="page-sub">{{ 'dashboard.subtitle' | translate }}</p>
   </div>
 
   @if (error()) {
     <div class="panel"><div class="empty">{{ error() }}</div></div>
   } @else if (loading() && !stats()) {
-    <div class="panel"><div class="empty">Loading dashboard...</div></div>
+    <div class="panel"><div class="empty">{{ 'dashboard.loading' | translate }}</div></div>
   } @else if (stats(); as s) {
 
     @if (s.totalInvoices === 0) {
       <div class="panel">
         <div class="empty">
-          No invoices imported yet.
+          {{ 'dashboard.empty' | translate }}
           <div style="margin-top:0.8rem">
-            <a class="btn btn--primary btn--sm" routerLink="/import">Import the first NFe</a>
+            <a class="btn btn--primary btn--sm" routerLink="/import">{{ 'actions.importFirstNfe' | translate }}</a>
           </div>
         </div>
       </div>
     } @else {
       <div class="stat-grid">
         <div class="stat">
-          <span class="stat-label">Total invoices</span>
+          <span class="stat-label">{{ 'dashboard.totalInvoices' | translate }}</span>
           <span class="stat-value">{{ s.totalInvoices }}</span>
-          <span class="stat-sub">avg. {{ average() | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}/invoice</span>
+          <span class="stat-sub">{{ average() | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }} {{ 'dashboard.averagePerInvoice' | translate }}</span>
         </div>
         <div class="stat">
-          <span class="stat-label">Accumulated amount</span>
+          <span class="stat-label">{{ 'dashboard.accumulatedAmount' | translate }}</span>
           <span class="stat-value stat-value--accent">{{ s.totalAmount | currency: 'BRL':'symbol':'1.0-0':'pt-BR' }}</span>
-          <span class="stat-sub">sum of all invoices</span>
+          <span class="stat-sub">{{ 'dashboard.sumOfInvoices' | translate }}</span>
         </div>
         <div class="stat">
-          <span class="stat-label">Outbound</span>
+          <span class="stat-label">{{ 'dashboard.outbound' | translate }}</span>
           <span class="stat-value">{{ s.totalOutbound }}</span>
-          <span class="stat-sub stat-sub--outbound">{{ pctOutbound() }}% of total</span>
+          <span class="stat-sub stat-sub--outbound">{{ pctOutbound() }}% {{ 'dashboard.ofTotal' | translate }}</span>
         </div>
         <div class="stat">
-          <span class="stat-label">Inbound</span>
+          <span class="stat-label">{{ 'dashboard.inbound' | translate }}</span>
           <span class="stat-value">{{ s.totalInbound }}</span>
-          <span class="stat-sub stat-sub--inbound">{{ pctInbound() }}% of total</span>
+          <span class="stat-sub stat-sub--inbound">{{ pctInbound() }}% {{ 'dashboard.ofTotal' | translate }}</span>
         </div>
       </div>
 
       <div class="dash-row">
         <div class="panel">
-          <div class="panel__head">Distribution by type</div>
+          <div class="panel__head">{{ 'dashboard.distributionByType' | translate }}</div>
           <div class="panel__body donut-body">
-            <svg class="donut" viewBox="0 0 36 36" role="img" aria-label="Outbound and inbound distribution">
+            <svg class="donut" viewBox="0 0 36 36" role="img" [attr.aria-label]="'dashboard.distributionAria' | translate">
               <circle class="donut-track" cx="18" cy="18" r="15.915" fill="none" stroke-width="3.4"/>
               <circle cx="18" cy="18" r="15.915" fill="none" stroke="var(--outbound)" stroke-width="3.4"
                       [attr.stroke-dasharray]="donut().outbound + ' ' + donut().inbound"
@@ -59,18 +59,18 @@
             <div class="donut-legend">
               <div class="legend-item">
                 <span class="legend-dot" style="background:var(--outbound)"></span>
-                Outbound <b>{{ s.totalOutbound }}</b>
+                {{ 'dashboard.outbound' | translate }} <b>{{ s.totalOutbound }}</b>
               </div>
               <div class="legend-item">
                 <span class="legend-dot" style="background:var(--inbound)"></span>
-                Inbound <b>{{ s.totalInbound }}</b>
+                {{ 'dashboard.inbound' | translate }} <b>{{ s.totalInbound }}</b>
               </div>
             </div>
           </div>
         </div>
 
         <div class="panel">
-          <div class="panel__head">Top issuers by amount</div>
+          <div class="panel__head">{{ 'dashboard.topIssuersByAmount' | translate }}</div>
           <div class="panel__body">
             <div class="emit-bars">
               @for (issuer of topIssuers(); track issuer.name) {
@@ -90,14 +90,14 @@
       </div>
 
       <div class="panel">
-        <div class="panel__head">Monthly issued amount</div>
+        <div class="panel__head">{{ 'dashboard.monthlyIssuedAmount' | translate }}</div>
         <div class="panel__body">
           <div class="bars">
             @for (month of months(); track $index) {
               <div class="bar-col">
                 <span class="bar-val">{{ month.amount > 0 ? (month.amount / 1000).toFixed(1) + 'k' : '' }}</span>
                 <div class="bar" [style.height.%]="month.heightPct"></div>
-                <span class="bar-label">{{ month.label }}<em>/{{ month.year }}</em></span>
+                <span class="bar-label">{{ month.labelKey | translate }}<em>/{{ month.year }}</em></span>
               </div>
             }
           </div>

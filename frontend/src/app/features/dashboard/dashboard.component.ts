@@ -5,13 +5,15 @@ import { finalize } from 'rxjs';
 import { NfeService } from '../../services/nfe.service';
 import { DashboardStats } from '../../models/response/dashboard.stats';
 import { ApiErrorResponse } from '../../models/response/api.error.response';
+import { LanguageService } from '../../services/language.service';
+import { TranslatePipe } from '../../shared/translate.pipe';
+import { translate } from '../../shared/translations';
 
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const BAR_COLORS = ['var(--accent)', 'var(--inbound)', 'var(--outbound)', 'var(--ok)', 'var(--warn)'];
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CurrencyPipe, RouterLink],
+  imports: [CurrencyPipe, RouterLink, TranslatePipe],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -51,14 +53,14 @@ export class DashboardComponent implements OnInit {
     const buckets = raw.slice(-12);
     const max = buckets.length ? Math.max(...buckets.map(month => month.amount)) : 1;
     return buckets.map(month => ({
-      label: MONTHS[month.month - 1] ?? '-',
+      labelKey: `calendar.months.short.${month.month}`,
       year: String(month.year).slice(2),
       amount: month.amount,
       heightPct: max > 0 ? Math.max((month.amount / max) * 100, 2) : 2,
     }));
   });
 
-  constructor(private nfeService: NfeService) {}
+  constructor(private nfeService: NfeService, private languageService: LanguageService) {}
 
   ngOnInit(): void {
     this.loading.set(true);
@@ -67,8 +69,12 @@ export class DashboardComponent implements OnInit {
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
         next: res => this.stats.set(res),
-        error: (err: ApiErrorResponse) => this.error.set(err.message ?? 'Could not load dashboard.'),
+        error: (err: ApiErrorResponse) => this.error.set(err.message ?? this.text('errors.dashboardLoad')),
       });
+  }
+
+  private text(key: string): string {
+    return translate(key, this.languageService.getLanguage());
   }
 
   private pct(value: number | undefined): string {

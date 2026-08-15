@@ -3,37 +3,37 @@
     <div class="logo-mark">NF-e</div>
     <div>
       <div class="logo-text">NFeExplorer</div>
-      <div class="logo-sub">Tax archive</div>
+      <div class="logo-sub">{{ 'app.taxArchive' | translate }}</div>
     </div>
   </header>
 
   <nav class="sidebar-nav">
-    <span class="nav-section">Work</span>
+    <span class="nav-section">{{ 'nav.work' | translate }}</span>
 
     <a class="nav-item" routerLink="/dashboard" routerLinkActive="active" data-code="OV">
-      <span>Overview</span>
+      <span>{{ 'nav.overview' | translate }}</span>
     </a>
 
     <a class="nav-item" routerLink="/import" routerLinkActive="active" data-code="XML">
-      <span>Import NFe</span>
+      <span>{{ 'nav.importNfe' | translate }}</span>
     </a>
 
     <a class="nav-item" routerLink="/invoices" routerLinkActive="active" data-code="NF">
-      <span>Invoices</span>
+      <span>{{ 'nav.invoices' | translate }}</span>
       @if (totalInvoices() !== null) {
         <span class="nav-badge">{{ totalInvoices() }}</span>
       }
     </a>
 
-    <span class="nav-section">Control</span>
+    <span class="nav-section">{{ 'nav.control' | translate }}</span>
 
     <a class="nav-item" routerLink="/history" routerLinkActive="active" data-code="LOG">
-      <span>History</span>
+      <span>{{ 'nav.history' | translate }}</span>
     </a>
   </nav>
 
   <footer class="sidebar-footer">
-    <span class="footer-line">Local verification</span>
+    <span class="footer-line">{{ 'nav.localVerification' | translate }}</span>
     <span class="footer-stack">XML / DANFE / SEFAZ</span>
   </footer>
 </aside>

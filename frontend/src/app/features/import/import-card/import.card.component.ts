@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import {SAMPLE_XML} from '../import-example';
 import {FormsModule} from '@angular/forms';
+import {TranslatePipe} from '../../../shared/translate.pipe';
 
 @Component({
   selector: 'app-import-card',
   imports: [
-    FormsModule
+    FormsModule,
+    TranslatePipe
   ],
   templateUrl: './import.card.component.html',
   styleUrl: './import.card.component.css',

@@ -1,10 +1,11 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NfeService } from '../../services/nfe.service';
+import { TranslatePipe } from '../../shared/translate.pipe';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, TranslatePipe],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })

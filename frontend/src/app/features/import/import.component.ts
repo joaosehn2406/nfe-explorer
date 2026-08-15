@@ -6,13 +6,17 @@ import { ApiErrorResponse } from '../../models/response/api.error.response';
 import { finalize } from 'rxjs';
 import { ImportCardComponent } from './import-card/import.card.component';
 import { MatProgressBar } from '@angular/material/progress-bar';
+import { TranslatePipe } from '../../shared/translate.pipe';
+import { LanguageService } from '../../services/language.service';
+import { translate } from '../../shared/translations';
 
 @Component({
   selector: 'app-import',
   templateUrl: './import.component.html',
   imports: [
     ImportCardComponent,
-    MatProgressBar
+    MatProgressBar,
+    TranslatePipe
   ],
   styleUrl: './import.component.css'
 })
@@ -23,7 +27,8 @@ export class ImportComponent {
 
   constructor(
     private nfeService: NfeService,
-    private router: Router
+    private router: Router,
+    private languageService: LanguageService
   ) {}
 
   onXmlSubmitted(payload: string | File) {
@@ -38,7 +43,7 @@ export class ImportComponent {
         this.importResult.set(result);
       },
       error: (err: ApiErrorResponse) => {
-        this.errorMessage.set(err.message ?? 'Unexpected error. Try again.');
+        this.errorMessage.set(err.message ?? this.text('errors.unexpectedTryAgain'));
       }
     });
   }
@@ -49,5 +54,9 @@ export class ImportComponent {
     if (!id) return;
 
     this.router.navigate(['/invoices', id]);
+  }
+
+  private text(key: string): string {
+    return translate(key, this.languageService.getLanguage());
   }
 }

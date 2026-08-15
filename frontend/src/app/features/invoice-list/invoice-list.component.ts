@@ -8,11 +8,14 @@ import { NfeListItem } from '../../models/response/nfe-list-item';
 import { NfeListFilter } from '../../models/nfe-list-filter';
 import { ApiErrorResponse } from '../../models/response/api.error.response';
 import { InvoiceType } from '../../models/enums/invoice-type';
-import { formatCnpj, invoiceTypeLabel, isOutbound } from '../../shared/format';
+import { formatCnpj, isOutbound } from '../../shared/format';
+import { TranslatePipe } from '../../shared/translate.pipe';
+import { LanguageService } from '../../services/language.service';
+import { translate } from '../../shared/translations';
 
 @Component({
   selector: 'app-invoice-list',
-  imports: [CurrencyPipe, DatePipe, FormsModule, RouterLink],
+  imports: [CurrencyPipe, DatePipe, FormsModule, RouterLink, TranslatePipe],
   templateUrl: './invoice-list.component.html',
   styleUrl: './invoice-list.component.css',
 })
@@ -49,7 +52,11 @@ export class InvoiceListComponent implements OnInit {
   rangeStart = computed(() => (this.total() === 0 ? 0 : (this.page() - 1) * this.pageSize + 1));
   rangeEnd = computed(() => Math.min(this.page() * this.pageSize, this.total()));
 
-  constructor(private nfeService: NfeService, private router: Router) {}
+  constructor(
+    private nfeService: NfeService,
+    private router: Router,
+    private languageService: LanguageService
+  ) {}
 
   ngOnInit(): void {
     this.nfeService.getIssuers().subscribe({
@@ -93,7 +100,7 @@ export class InvoiceListComponent implements OnInit {
           }
         },
         error: (err: ApiErrorResponse) => {
-          this.error.set(err.message ?? 'Could not load invoices.');
+          this.error.set(err.message ?? this.text('errors.invoicesLoad'));
           this.items.set([]);
         },
       });
@@ -128,7 +135,14 @@ export class InvoiceListComponent implements OnInit {
     void this.router.navigate(['/invoices', invoice.id]);
   }
 
+  invoiceTypeKey(type: InvoiceType | number | undefined | null): string {
+    return isOutbound(type) ? 'invoiceType.outbound' : 'invoiceType.inbound';
+  }
+
+  private text(key: string): string {
+    return translate(key, this.languageService.getLanguage());
+  }
+
   protected readonly formatCnpj = formatCnpj;
   protected readonly isOutbound = isOutbound;
-  protected readonly invoiceTypeLabel = invoiceTypeLabel;
 }

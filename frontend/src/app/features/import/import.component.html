@@ -1,8 +1,8 @@
 <section class="import-container">
   <header class="page-head">
-    <span class="page-eyebrow">Document intake</span>
-    <h1 class="page-title">Import NFe</h1>
-    <p class="page-sub">Upload an XML file or paste its contents to process the invoice.</p>
+    <span class="page-eyebrow">{{ 'import.eyebrow' | translate }}</span>
+    <h1 class="page-title">{{ 'import.title' | translate }}</h1>
+    <p class="page-sub">{{ 'import.subtitle' | translate }}</p>
   </header>
 
   <app-import-card (onClickAnalyse)="onXmlSubmitted($event)" />
@@ -14,12 +14,12 @@
   @if (errorMessage() === null && importResult() !== null) {
     <div class="result result--ok">
       <span class="result-msg">
-        <b>NFe #{{ importResult()?.invoiceNumber }} imported.</b>
-        {{ importResult()?.issuer }} ·
+        <b>NF-e #{{ importResult()?.invoiceNumber }} {{ 'import.resultImported' | translate }}</b>
+        {{ importResult()?.issuer }} &middot;
         {{ importResult()?.totalAmount?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}
       </span>
       <button class="btn btn--primary btn--sm" (click)="goToDetails()">
-        View details
+        {{ 'actions.viewDetails' | translate }}
       </button>
     </div>
   } @else if (errorMessage() !== null) {

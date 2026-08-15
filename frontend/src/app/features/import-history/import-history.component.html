@@ -1,27 +1,27 @@
 <section class="hist">
   <div class="page-head">
-    <span class="page-eyebrow">Audit</span>
-    <h1 class="page-title">Import history</h1>
-    <p class="page-sub">Every import attempt, including failures and duplicates.</p>
+    <span class="page-eyebrow">{{ 'history.eyebrow' | translate }}</span>
+    <h1 class="page-title">{{ 'history.title' | translate }}</h1>
+    <p class="page-sub">{{ 'history.subtitle' | translate }}</p>
   </div>
 
   <div class="toolbar">
     <select class="select" [(ngModel)]="statusFilter" (change)="load()">
-      <option value="">All statuses</option>
-      <option value="0">Success</option>
-      <option value="1">Failed</option>
-      <option value="2">Duplicate</option>
+      <option value="">{{ 'history.allStatuses' | translate }}</option>
+      <option value="0">{{ 'history.success' | translate }}</option>
+      <option value="1">{{ 'history.failed' | translate }}</option>
+      <option value="2">{{ 'history.duplicate' | translate }}</option>
     </select>
   </div>
 
   <div class="panel">
     <div class="panel__body">
       @if (loading()) {
-        <div class="empty">Loading...</div>
+        <div class="empty">{{ 'common.loading' | translate }}</div>
       } @else if (error()) {
         <div class="empty">{{ error() }}</div>
       } @else if (logs().length === 0) {
-        <div class="empty">No import records found.</div>
+        <div class="empty">{{ 'history.empty' | translate }}</div>
       } @else {
         <ol class="timeline">
           @for (log of logs(); track log.id) {
@@ -29,21 +29,21 @@
               <span class="tl-dot" [class]="'tl-dot--' + statusClass(log.status)"></span>
               <div class="tl-card">
                 <div class="tl-top">
-                  <span class="tag" [class]="'tag--' + statusClass(log.status)">{{ statusLabel(log.status) }}</span>
+                  <span class="tag" [class]="'tag--' + statusClass(log.status)">{{ statusKey(log.status) | translate }}</span>
                   <span class="tl-time">{{ log.timestamp | date: 'dd/MM/yyyy · HH:mm' }}</span>
                 </div>
                 <div class="tl-body">
                   <span class="tl-file">{{ log.fileName }}</span>
                   @if (log.status === Status.Success) {
-                    @if (log.invoiceNumber) { <span class="tl-sep">·</span> <span>Invoice <b>#{{ log.invoiceNumber }}</b></span> }
-                    @if (log.issuer) { <span class="tl-sep">·</span> <span>{{ log.issuer }}</span> }
+                    @if (log.invoiceNumber) { <span class="tl-sep">&middot;</span> <span>{{ 'history.invoice' | translate }} <b>#{{ log.invoiceNumber }}</b></span> }
+                    @if (log.issuer) { <span class="tl-sep">&middot;</span> <span>{{ log.issuer }}</span> }
                     @if (log.amount != null) {
-                      <span class="tl-sep">·</span>
+                      <span class="tl-sep">&middot;</span>
                       <b class="tl-val">{{ log.amount | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</b>
                     }
                   } @else {
-                    @if (log.invoiceNumber) { <span class="tl-sep">·</span> <span>Invoice <b>#{{ log.invoiceNumber }}</b></span> }
-                    @if (log.message) { <span class="tl-sep">·</span> <span class="tl-msg">{{ log.message }}</span> }
+                    @if (log.invoiceNumber) { <span class="tl-sep">&middot;</span> <span>{{ 'history.invoice' | translate }} <b>#{{ log.invoiceNumber }}</b></span> }
+                    @if (log.message) { <span class="tl-sep">&middot;</span> <span class="tl-msg">{{ log.message }}</span> }
                   }
                 </div>
               </div>

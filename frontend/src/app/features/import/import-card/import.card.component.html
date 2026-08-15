@@ -1,28 +1,28 @@
 <section class="upload-card">
-  <span class="card-label">Intake</span>
+  <span class="card-label">{{ 'import.intake' | translate }}</span>
 
   <div class="dropzone" (click)="fileInput.click()">
     <input #fileInput type="file" accept=".xml" hidden (change)="onFileChange($event)">
     <div class="dropzone-code">XML</div>
     @if (selectedFile) {
       <p>{{ selectedFile.name }}</p>
-      <small>file selected · click to replace</small>
+      <small>{{ 'import.fileSelected' | translate }}</small>
     } @else {
-      <p>Select XML file</p>
-      <small>click to choose · max. 5 MB · .xml</small>
+      <p>{{ 'import.selectXmlFile' | translate }}</p>
+      <small>{{ 'import.dropHint' | translate }}</small>
     }
   </div>
 
-  <span class="card-divider">or paste the XML</span>
+  <span class="card-divider">{{ 'import.orPasteXml' | translate }}</span>
 
   <textarea class="xml-textarea" placeholder='<?xml version="1.0" encoding="UTF-8"?>'
             [(ngModel)]="xmlTextAreaContent"></textarea>
 
   <div class="actions-row">
     <button class="btn btn--primary analyse" (click)="emitValue()">
-      Analyze and import
+      {{ 'actions.analyzeAndImport' | translate }}
     </button>
-    <button class="btn btn--ghost" (click)="fillTextAreaWithExample()">Example</button>
-    <button class="btn btn--ghost" (click)="removeTextFromTextArea()">Clear</button>
+    <button class="btn btn--ghost" (click)="fillTextAreaWithExample()">{{ 'actions.example' | translate }}</button>
+    <button class="btn btn--ghost" (click)="removeTextFromTextArea()">{{ 'actions.clear' | translate }}</button>
   </div>
 </section>

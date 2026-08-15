@@ -1,39 +1,39 @@
 <section class="invoice-list">
   <div class="page-head page-head--row">
     <div>
-      <span class="page-eyebrow">Tax records</span>
-      <h1 class="page-title">Invoices</h1>
-      <p class="page-sub">Imported electronic invoices persisted in the system.</p>
+      <span class="page-eyebrow">{{ 'invoiceList.eyebrow' | translate }}</span>
+      <h1 class="page-title">{{ 'invoiceList.title' | translate }}</h1>
+      <p class="page-sub">{{ 'invoiceList.subtitle' | translate }}</p>
     </div>
     <button class="btn btn--primary" routerLink="/import">
-      Import NFe
+      {{ 'actions.importNfe' | translate }}
     </button>
   </div>
 
   <div class="toolbar">
     <div class="search-field">
-      <input class="input search-input" type="text" aria-label="Search invoices"
-             placeholder="Search by number, issuer, or access key..."
+      <input class="input search-input" type="text" [attr.aria-label]="'invoiceList.searchAria' | translate"
+             [placeholder]="'invoiceList.searchPlaceholder' | translate"
              [(ngModel)]="search" (input)="onSearchInput()"/>
     </div>
 
     <select class="select" [(ngModel)]="typeFilter" (change)="applyFilters()">
-      <option value="">All types</option>
-      <option value="outbound">Outbound</option>
-      <option value="inbound">Inbound</option>
+      <option value="">{{ 'invoiceList.allTypes' | translate }}</option>
+      <option value="outbound">{{ 'invoiceType.outbound' | translate }}</option>
+      <option value="inbound">{{ 'invoiceType.inbound' | translate }}</option>
     </select>
 
     <select class="select" [(ngModel)]="issuerFilter" (change)="applyFilters()">
-      <option value="">All issuers</option>
+      <option value="">{{ 'invoiceList.allIssuers' | translate }}</option>
       @for (issuer of issuers(); track issuer) {
         <option [value]="issuer">{{ issuer }}</option>
       }
     </select>
 
-    <input class="input" type="date" [(ngModel)]="issuedFrom" (change)="applyFilters()" title="Issued from"/>
-    <input class="input" type="date" [(ngModel)]="issuedTo" (change)="applyFilters()" title="Issued to"/>
+    <input class="input" type="date" [(ngModel)]="issuedFrom" (change)="applyFilters()" [title]="'invoiceList.issuedFrom' | translate"/>
+    <input class="input" type="date" [(ngModel)]="issuedTo" (change)="applyFilters()" [title]="'invoiceList.issuedTo' | translate"/>
 
-    <button class="btn--link" (click)="clearFilters()">Clear filters</button>
+    <button class="btn--link" (click)="clearFilters()">{{ 'actions.clearFilters' | translate }}</button>
   </div>
 
   <div class="panel">
@@ -41,22 +41,22 @@
       <table class="data-table invoice-list-table">
         <thead>
           <tr>
-            <th>Number</th>
-            <th>Issuer</th>
-            <th>Recipient</th>
-            <th>Type</th>
-            <th>Issued</th>
-            <th class="num">Total amount</th>
-            <th aria-label="Open"></th>
+            <th>{{ 'invoiceList.number' | translate }}</th>
+            <th>{{ 'invoiceList.issuer' | translate }}</th>
+            <th>{{ 'invoiceList.recipient' | translate }}</th>
+            <th>{{ 'invoiceList.type' | translate }}</th>
+            <th>{{ 'invoiceList.issued' | translate }}</th>
+            <th class="num">{{ 'invoiceList.totalAmount' | translate }}</th>
+            <th [attr.aria-label]="'invoiceList.open' | translate"></th>
           </tr>
         </thead>
         <tbody>
           @if (loading()) {
-            <tr><td colspan="7" class="empty">Loading...</td></tr>
+            <tr><td colspan="7" class="empty">{{ 'invoiceList.loading' | translate }}</td></tr>
           } @else if (error()) {
             <tr><td colspan="7" class="empty">{{ error() }}</td></tr>
           } @else if (items().length === 0) {
-            <tr><td colspan="7" class="empty">No invoices match the current filters.</td></tr>
+            <tr><td colspan="7" class="empty">{{ 'invoiceList.empty' | translate }}</td></tr>
           } @else {
             @for (invoice of items(); track invoice.id) {
               <tr class="is-clickable" (click)="open(invoice)">
@@ -69,12 +69,12 @@
                 <td>
                   <span class="tag" [class.tag--outbound]="isOutbound(invoice.invoiceType)"
                         [class.tag--inbound]="!isOutbound(invoice.invoiceType)">
-                    {{ invoiceTypeLabel(invoice.invoiceType) }}
+                    {{ invoiceTypeKey(invoice.invoiceType) | translate }}
                   </span>
                 </td>
                 <td class="mono">{{ invoice.issuedAt | date: 'dd/MM/yyyy' }}</td>
                 <td class="num strong">{{ invoice.totalAmount | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
-                <td class="chevron">›</td>
+                <td class="chevron">&rsaquo;</td>
               </tr>
             }
           }
@@ -86,16 +86,17 @@
   @if (!loading() && !error() && total() > 0) {
     <div class="pager">
       <span class="pager__info">
-        {{ rangeStart() }}-{{ rangeEnd() }} of {{ total() }} invoice{{ total() === 1 ? '' : 's' }}
+        {{ rangeStart() }}-{{ rangeEnd() }} {{ 'common.of' | translate }} {{ total() }}
+        {{ (total() === 1 ? 'common.invoice' : 'common.invoices') | translate }}
       </span>
       <div class="pager__btns">
-        <button class="pager__btn" (click)="goToPage(1)" [disabled]="page() === 1" title="First">«</button>
-        <button class="pager__btn" (click)="goToPage(page() - 1)" [disabled]="page() === 1" title="Previous">‹</button>
+        <button class="pager__btn" (click)="goToPage(1)" [disabled]="page() === 1" [title]="'pager.first' | translate">&laquo;</button>
+        <button class="pager__btn" (click)="goToPage(page() - 1)" [disabled]="page() === 1" [title]="'pager.previous' | translate">&lsaquo;</button>
         @for (p of pageWindow(); track p) {
           <button class="pager__btn" [class.is-active]="p === page()" (click)="goToPage(p)">{{ p }}</button>
         }
-        <button class="pager__btn" (click)="goToPage(page() + 1)" [disabled]="page() === totalPages()" title="Next">›</button>
-        <button class="pager__btn" (click)="goToPage(totalPages())" [disabled]="page() === totalPages()" title="Last">»</button>
+        <button class="pager__btn" (click)="goToPage(page() + 1)" [disabled]="page() === totalPages()" [title]="'pager.next' | translate">&rsaquo;</button>
+        <button class="pager__btn" (click)="goToPage(totalPages())" [disabled]="page() === totalPages()" [title]="'pager.last' | translate">&raquo;</button>
       </div>
     </div>
   }

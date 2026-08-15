@@ -1,5 +1,5 @@
 @if (isLoading()) {
-  <div class="panel"><div class="empty">Loading invoice...</div></div>
+  <div class="panel"><div class="empty">{{ 'details.loading' | translate }}</div></div>
 } @else if (errorMessage() && !invoiceDetails()) {
   <div class="panel"><div class="empty">{{ errorMessage() }}</div></div>
 }
@@ -8,70 +8,70 @@
   <section class="import-details-container">
 
     @if (copySuccess()) {
-      <div class="copy-toast" [class.leaving]="copySuccessLeaving()">Access key copied</div>
+      <div class="copy-toast" [class.leaving]="copySuccessLeaving()">{{ 'details.accessKeyCopied' | translate }}</div>
     }
 
-    <button class="btn--link details-back" (click)="goBack()">← Back to list</button>
+    <button class="btn--link details-back" (click)="goBack()">&larr; {{ 'actions.backToList' | translate }}</button>
 
     <header class="import-details-header">
       <div class="dt-title-group">
-        <h1 class="dt-title">Invoice #{{ details.nfe.invoiceNumber }}</h1>
+        <h1 class="dt-title">{{ 'details.invoice' | translate }} #{{ details.nfe.invoiceNumber }}</h1>
         <p class="dt-sub">
-          {{ details.nfe.operationNature }} · series {{ details.nfe.series }} ·
+          {{ details.nfe.operationNature }} &middot; {{ 'details.series' | translate }} {{ details.nfe.series }} &middot;
           {{ details.nfe.issuedAt | date: 'dd/MM/yyyy' }}
         </p>
       </div>
       <div class="dt-actions">
-        <span class="tag tag--ok">Authorized</span>
+        <span class="tag tag--ok">{{ 'details.authorized' | translate }}</span>
         <span class="tag" [class.tag--outbound]="isOutbound(details.nfe.invoiceType)"
               [class.tag--inbound]="!isOutbound(details.nfe.invoiceType)">
-          {{ invoiceTypeLabel(details.nfe.invoiceType) }}
+          {{ invoiceTypeKey(details.nfe.invoiceType) | translate }}
         </span>
         <button class="btn btn--danger btn--sm" (click)="showDeleteModal.set(true)">
-          Delete
+          {{ 'actions.delete' | translate }}
         </button>
       </div>
     </header>
 
     <div class="access-key">
       <div>
-        <div class="access-key__label">Access key</div>
+        <div class="access-key__label">{{ 'details.accessKey' | translate }}</div>
         <div class="access-key__value">{{ groupAccessKey(details.nfe.accessKey) }}</div>
       </div>
-      <button class="btn btn--sm access-key__copy" (click)="copyAccessKey()">Copy</button>
+      <button class="btn btn--sm access-key__copy" (click)="copyAccessKey()">{{ 'actions.copy' | translate }}</button>
     </div>
 
     <mat-tab-group class="details-tabs">
 
-      <mat-tab label="General">
+      <mat-tab [label]="'details.general' | translate">
         <div class="tab-content">
           <div class="details-grid">
-            <app-details-card title="Issuer">
+            <app-details-card [title]="'details.issuer' | translate">
               <div class="details-card-body">
                 <div class="field-row">
                   <span class="field-label">CNPJ</span>
                   <span class="field-value mono">{{ formatCnpj(details.nfe.issuer.cnpj) }}</span>
                 </div>
                 <div class="field-row">
-                  <span class="field-label">Legal name</span>
+                  <span class="field-label">{{ 'details.legalName' | translate }}</span>
                   <span class="field-value">{{ details.nfe.issuer.legalName }}</span>
                 </div>
                 <div class="field-row">
-                  <span class="field-label">Trade name</span>
+                  <span class="field-label">{{ 'details.tradeName' | translate }}</span>
                   <span class="field-value">{{ details.nfe.issuer.tradeName || '-' }}</span>
                 </div>
                 <div class="field-row">
-                  <span class="field-label">State registration</span>
+                  <span class="field-label">{{ 'details.stateRegistration' | translate }}</span>
                   <span class="field-value mono">{{ details.nfe.issuer.stateRegistration || '-' }}</span>
                 </div>
                 <div class="field-row">
-                  <span class="field-label">City/UF</span>
+                  <span class="field-label">{{ 'details.cityUf' | translate }}</span>
                   <span class="field-value">{{ details.nfe.issuer.city }}/{{ details.nfe.issuer.uf }}</span>
                 </div>
               </div>
             </app-details-card>
 
-            <app-details-card title="Recipient">
+            <app-details-card [title]="'details.recipient' | translate">
               <div class="details-card-body">
                 <div class="field-row">
                   <span class="field-label">{{ details.nfe.recipient.cnpj ? 'CNPJ' : 'CPF' }}</span>
@@ -82,63 +82,63 @@
                   </span>
                 </div>
                 <div class="field-row">
-                  <span class="field-label">Name</span>
+                  <span class="field-label">{{ 'details.name' | translate }}</span>
                   <span class="field-value">{{ details.nfe.recipient.legalName }}</span>
                 </div>
                 <div class="field-row">
-                  <span class="field-label">State registration</span>
+                  <span class="field-label">{{ 'details.stateRegistration' | translate }}</span>
                   <span class="field-value">{{ details.nfe.recipient.stateRegistration || '-' }}</span>
                 </div>
                 <div class="field-row">
-                  <span class="field-label">City</span>
+                  <span class="field-label">{{ 'details.city' | translate }}</span>
                   <span class="field-value">{{ details.nfe.recipient.city }}</span>
                 </div>
                 <div class="field-row">
-                  <span class="field-label">ZIP code</span>
+                  <span class="field-label">{{ 'details.zipCode' | translate }}</span>
                   <span class="field-value mono">{{ details.nfe.recipient.zipCode }}</span>
                 </div>
               </div>
             </app-details-card>
           </div>
 
-          <app-details-card title="Identification">
+          <app-details-card [title]="'details.identification' | translate">
             <div class="details-card-body details-card-body-2col">
               <div class="field-row">
-                <span class="field-label">Invoice no.</span>
+                <span class="field-label">{{ 'details.invoiceNumber' | translate }}</span>
                 <span class="field-value mono">{{ details.nfe.invoiceNumber }}</span>
               </div>
               <div class="field-row">
-                <span class="field-label">Series</span>
+                <span class="field-label">{{ 'details.series' | translate }}</span>
                 <span class="field-value mono">{{ details.nfe.series }}</span>
               </div>
               <div class="field-row">
-                <span class="field-label">Operation</span>
+                <span class="field-label">{{ 'details.operation' | translate }}</span>
                 <span class="field-value">{{ details.nfe.operationNature }}</span>
               </div>
               <div class="field-row">
-                <span class="field-label">Issued</span>
+                <span class="field-label">{{ 'details.issued' | translate }}</span>
                 <span class="field-value mono">{{ details.nfe.issuedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
               </div>
               <div class="field-row">
-                <span class="field-label">Type</span>
-                <span class="field-value">{{ invoiceTypeLabel(details.nfe.invoiceType) }}</span>
+                <span class="field-label">{{ 'details.type' | translate }}</span>
+                <span class="field-value">{{ invoiceTypeKey(details.nfe.invoiceType) | translate }}</span>
               </div>
               <div class="field-row">
-                <span class="field-label">Payment</span>
-                <span class="field-value">{{ formatPaymentMethod(details.nfe.paymentMethod) }}</span>
+                <span class="field-label">{{ 'details.payment' | translate }}</span>
+                <span class="field-value">{{ paymentMethodKey(details.nfe.paymentMethod) | translate }}</span>
               </div>
               <div class="field-row">
-                <span class="field-label">Paid amount</span>
+                <span class="field-label">{{ 'details.paidAmount' | translate }}</span>
                 <span class="field-value mono">{{ details.nfe.paidAmount | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
               </div>
             </div>
           </app-details-card>
 
-          <app-details-card title="Totals">
+          <app-details-card [title]="'details.totals' | translate">
             <div class="totais-grid">
               <div class="total-item">
                 <span class="total-num">{{ details.nfe.taxes.productAmount | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
-                <span class="total-label">Products</span>
+                <span class="total-label">{{ 'details.products' | translate }}</span>
               </div>
               <div class="total-item">
                 <span class="total-num">{{ details.nfe.taxes.icmsAmount | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
@@ -146,30 +146,30 @@
               </div>
               <div class="total-item">
                 <span class="total-num">{{ details.nfe.taxes.totalTaxesAmount | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
-                <span class="total-label">Taxes</span>
+                <span class="total-label">{{ 'details.taxes' | translate }}</span>
               </div>
               <div class="total-item">
                 <span class="total-num total-num-accent">{{ details.nfe.taxes.invoiceAmount | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
-                <span class="total-label">NFe total</span>
+                <span class="total-label">{{ 'details.nfeTotal' | translate }}</span>
               </div>
             </div>
           </app-details-card>
         </div>
       </mat-tab>
 
-      <mat-tab label="Products">
+      <mat-tab [label]="'details.productsTab' | translate">
         <div class="tab-content">
-          <app-details-card [title]="'Items (' + details.nfe.products.length + ')'">
+          <app-details-card [title]="('details.items' | translate) + ' (' + details.nfe.products.length + ')'">
             <div class="table-scroll">
               <table class="data-table">
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Description</th>
+                    <th>{{ 'details.description' | translate }}</th>
                     <th>NCM</th>
-                    <th class="num">Qty.</th>
-                    <th class="num">Unit amount</th>
-                    <th class="num">Total</th>
+                    <th class="num">{{ 'details.quantity' | translate }}</th>
+                    <th class="num">{{ 'details.unitAmount' | translate }}</th>
+                    <th class="num">{{ 'details.total' | translate }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -190,10 +190,10 @@
         </div>
       </mat-tab>
 
-      <mat-tab label="Taxes">
+      <mat-tab [label]="'details.taxesTab' | translate">
         <div class="tab-content">
           <div class="details-grid">
-            <app-details-card title="Taxes">
+            <app-details-card [title]="'details.taxes' | translate">
               <div class="details-card-body">
                 @for (item of taxRows(); track item.label) {
                   <div class="tax-row">
@@ -210,30 +210,30 @@
               </div>
             </app-details-card>
 
-            <app-details-card title="Tax burden">
+            <app-details-card [title]="'details.taxBurdenCard' | translate">
               <div class="details-card-body">
                 <div class="field-row">
-                  <span class="field-label">ICMS tax base</span>
+                  <span class="field-label">{{ 'details.icmsTaxBase' | translate }}</span>
                   <span class="field-value mono">{{ details.nfe.taxes.icmsTaxBase | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
                 </div>
                 <div class="field-row">
-                  <span class="field-label">ICMS total</span>
+                  <span class="field-label">{{ 'details.icmsTotal' | translate }}</span>
                   <span class="field-value mono">{{ details.nfe.taxes.icmsAmount | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
                 </div>
                 <div class="field-row">
-                  <span class="field-label">PIS total</span>
+                  <span class="field-label">{{ 'details.pisTotal' | translate }}</span>
                   <span class="field-value mono">{{ details.nfe.taxes.pisAmount | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
                 </div>
                 <div class="field-row">
-                  <span class="field-label">COFINS total</span>
+                  <span class="field-label">{{ 'details.cofinsTotal' | translate }}</span>
                   <span class="field-value mono">{{ details.nfe.taxes.cofinsAmount | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
                 </div>
                 <div class="field-row">
-                  <span class="field-label">Total taxes</span>
+                  <span class="field-label">{{ 'details.totalTaxes' | translate }}</span>
                   <span class="field-value mono">{{ details.nfe.taxes.totalTaxesAmount | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
                 </div>
                 <div class="field-row field-row-highlight">
-                  <span class="field-label">Tax burden</span>
+                  <span class="field-label">{{ 'details.taxBurden' | translate }}</span>
                   <span class="field-value field-value-accent">{{ taxBurden() }}%</span>
                 </div>
               </div>
@@ -248,15 +248,16 @@
 @if (showDeleteModal()) {
   <div class="modal-overlay" (click)="showDeleteModal.set(false)">
     <div class="modal" (click)="$event.stopPropagation()">
-      <h3 class="modal-title">Delete invoice?</h3>
+      <h3 class="modal-title">{{ 'details.deleteTitle' | translate }}</h3>
       <p class="modal-text">
-        Invoice <b>#{{ invoiceDetails()?.nfe?.invoiceNumber }}</b> will be permanently removed.
-        This action cannot be undone.
+        {{ 'details.deletePrefix' | translate }} <b>#{{ invoiceDetails()?.nfe?.invoiceNumber }}</b>
+        {{ 'details.deleteSuffix' | translate }}
+        {{ 'details.deleteWarning' | translate }}
       </p>
       <div class="modal-actions">
-        <button class="btn btn--ghost" (click)="showDeleteModal.set(false)" [disabled]="deleting()">Cancel</button>
+        <button class="btn btn--ghost" (click)="showDeleteModal.set(false)" [disabled]="deleting()">{{ 'actions.cancel' | translate }}</button>
         <button class="btn btn--danger" (click)="confirmDelete()" [disabled]="deleting()">
-          {{ deleting() ? 'Deleting...' : 'Delete invoice' }}
+          {{ (deleting() ? 'actions.deleting' : 'actions.deleteInvoice') | translate }}
         </button>
       </div>
     </div>

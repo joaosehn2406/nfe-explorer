@@ -8,11 +8,15 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { PaymentMethod } from '../../models/enums/payment-method';
 import { DetailsCardComponent } from '../utils/details-card/details-card.component';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
-import { formatCnpj, formatCpf, groupAccessKey, invoiceTypeLabel, isOutbound } from '../../shared/format';
+import { formatCnpj, formatCpf, groupAccessKey, isOutbound } from '../../shared/format';
+import { TranslatePipe } from '../../shared/translate.pipe';
+import { LanguageService } from '../../services/language.service';
+import { translate } from '../../shared/translations';
+import { InvoiceType } from '../../models/enums/invoice-type';
 
 @Component({
   selector: 'app-invoice-details',
-  imports: [DatePipe, CurrencyPipe, DetailsCardComponent, MatTab, MatTabGroup],
+  imports: [DatePipe, CurrencyPipe, DetailsCardComponent, MatTab, MatTabGroup, TranslatePipe],
   templateUrl: './invoice-details.component.html',
   styleUrl: './invoice-details.component.css',
 })
@@ -45,13 +49,14 @@ export class InvoiceDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private nfeService: NfeService
+    private nfeService: NfeService,
+    private languageService: LanguageService
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) {
-      this.errorMessage.set('NFe ID was not found.');
+      this.errorMessage.set(this.text('errors.detailsIdMissing'));
       return;
     }
     this.loadDetails(id);
@@ -66,7 +71,7 @@ export class InvoiceDetailsComponent implements OnInit {
     ).subscribe({
       next: response => this.invoiceDetails.set(response),
       error: (err: ApiErrorResponse) => {
-        this.errorMessage.set(err.message ?? 'Could not load NFe details.');
+        this.errorMessage.set(err.message ?? this.text('errors.detailsLoad'));
       }
     });
   }
@@ -100,7 +105,7 @@ export class InvoiceDetailsComponent implements OnInit {
       },
       error: (err: ApiErrorResponse) => {
         this.showDeleteModal.set(false);
-        this.errorMessage.set(err.message ?? 'Could not delete the invoice.');
+        this.errorMessage.set(err.message ?? this.text('errors.deleteInvoice'));
       }
     });
   }
@@ -109,19 +114,34 @@ export class InvoiceDetailsComponent implements OnInit {
     void this.router.navigate(['/invoices']);
   }
 
-  formatPaymentMethod(method: PaymentMethod | undefined): string {
+  invoiceTypeKey(type: InvoiceType | number | undefined | null): string {
+    return isOutbound(type) ? 'invoiceType.outbound' : 'invoiceType.inbound';
+  }
+
+  paymentMethodKey(method: PaymentMethod | undefined): string {
     const map: Record<number, string> = {
-      1: 'Cash', 2: 'Check', 3: 'Credit card', 4: 'Debit card',
-      5: 'Store credit', 10: 'Meal voucher', 11: 'Food voucher',
-      12: 'Gift voucher', 13: 'Fuel voucher', 15: 'Bank slip',
-      90: 'No payment', 99: 'Other'
+      1: 'payment.cash',
+      2: 'payment.check',
+      3: 'payment.creditCard',
+      4: 'payment.debitCard',
+      5: 'payment.storeCredit',
+      10: 'payment.mealVoucher',
+      11: 'payment.foodVoucher',
+      12: 'payment.giftVoucher',
+      13: 'payment.fuelVoucher',
+      15: 'payment.bankSlip',
+      90: 'payment.noPayment',
+      99: 'payment.other'
     };
-    return method !== undefined ? (map[method] ?? 'Other') : '-';
+    return method !== undefined ? (map[method] ?? 'payment.other') : '';
+  }
+
+  private text(key: string): string {
+    return translate(key, this.languageService.getLanguage());
   }
 
   protected readonly formatCnpj = formatCnpj;
   protected readonly formatCpf = formatCpf;
   protected readonly groupAccessKey = groupAccessKey;
   protected readonly isOutbound = isOutbound;
-  protected readonly invoiceTypeLabel = invoiceTypeLabel;
 }
